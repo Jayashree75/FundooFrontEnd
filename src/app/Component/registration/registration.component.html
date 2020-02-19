@@ -1,0 +1,59 @@
+<div fxLayout="row" fxLayoutAlign="center center" fxLayout.xs="column" display=flex>
+  <mat-card fxFlexAlign="stretch" fxFlex="40%" flex-wrap: wrap fxFlex.xs="100%"
+    style="margin-top: 5%; font-size: 40px;">
+    <div class="maindiv">
+      <div fxLayout="column">
+        <mat-card-title>
+          <span class="blue">F</span>
+          <span class="red">u</span>
+          <span class="gold">n</span>
+          <span class="blue">d</span>
+          <span class="green">o</span>
+          <span class="red">o</span>
+        </mat-card-title>
+        <mat-card-content style="font-size: 22px;">Create Your Fundoo Account</mat-card-content>
+      </div>
+      <br>
+      <form [formGroup]="registration">
+        <div class="header" fxLayout="row" fxLayoutGap="20px">
+          <mat-form-field fxFlex=45 appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="First Name" formControlName="firstName">
+          </mat-form-field>
+          <mat-form-field fxFlex=45 appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Last Name" formControlName="lastName">
+          </mat-form-field>
+        </div>
+        <div class="section">
+          <mat-form-field appearance="outline" style="width: 95%;">
+            <mat-label>Your email address</mat-label>
+            <input matInput formControlName="email">
+            <mat-hint style="font-size: 12px;"><strong>You'll need to confirm that this email belongs to you</strong>
+            </mat-hint>
+          </mat-form-field>
+          <br>
+          <br>
+          <mat-form-field appearance="outline" style="width:95%;">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password"
+              class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </mat-form-field>
+          <br>
+          <br>
+          <mat-button-toggle-group name="Type" appearance="legacy" aria-label="Font Style" >
+            <mat-button-toggle value="Basic">Basic</mat-button-toggle>
+            <mat-button-toggle value="Advance">Advance</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <br>
+        <br>
+        <div fxLayout="row" fxLayoutAlign="space-between center" style="margin-right: 25%;">
+          <button mat-button style="color:steelblue;"(click)=navigate()>Sign In Instead</button>
+          <button mat-raised-button color="primary" style="width: 20%;" (click)=registrationForm()>Next</button>
+        </div>
+      </form>
+    </div>
+  </mat-card>
+</div>

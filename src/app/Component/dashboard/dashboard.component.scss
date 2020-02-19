@@ -1,0 +1,54 @@
+.example-container {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  
+  .example-is-mobile .example-toolbar {
+ 
+    z-index: 4;
+   
+  }
+  
+  h1.example-app-name {
+    margin-left: 8px;
+  }
+  
+  .example-sidenav-container {
+    flex: 1;
+    
+  
+  }
+  .sidenav{
+    width:250px;
+    
+  }
+  .example-is-mobile .example-sidenav-container {
+    flex: 1 1 auto;
+
+  }
+ 
+  .header{
+    height:80px
+  }
+  .spacer{
+    flex:2 2 auto;
+  
+  }
+  .icon{
+    width: 200px;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .search{
+    margin-top: 20px;
+    
+  }
+  .isActive{
+    background-color:#feefc3;
+    border-radius: 0px 25px 25px 0px;
+  }

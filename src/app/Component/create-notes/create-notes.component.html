@@ -1,0 +1,16 @@
+<div fxLayout="row" fxLayoutAlign="center center" fxLayout.xs="column" display=flex>
+  <mat-card style="margin-top: 5%; font-size: 40px; width: 395px; height: 170px;" fxFlexAlign="stretch" fxFlex="40%"
+    flex-wrap: wrap>
+    <form [formGroup]="notes">
+      <div>
+        <div class="header" fxLayout="row" style="font-size: medium;" appearance="none">
+          <input matInput placeholder="Title" formControlName="Title">
+        </div>
+        <br>
+        <div class="header" fxLayout="row" style="font-size: medium;" appearance="none">
+          <input matInput placeholder="Take a note..." formControlName="takenote">
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>

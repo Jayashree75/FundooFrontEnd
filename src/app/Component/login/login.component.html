@@ -1,0 +1,50 @@
+<div class="login" fxLayout="row" fxLayoutAlign="center center" display="flex" fxFlex.sm="100%" fsFlex.md="100%">
+  <mat-card class="container" fxFlexAlign="stretch" fxFlex="30%" flex-wrap: wrap fxFlex.xs="100%">
+    <div fxLayout="column">
+      <mat-card-title>
+        <span class="blue">F</span>
+        <span class="red">u</span>
+        <span class="gold">n</span>
+        <span class="blue">d</span>
+        <span class="green">o</span>
+        <span class="red">o</span>
+      </mat-card-title>
+      <mat-card-content fxLayoutAlign="center center" style="font-size: 22px;">Sign in</mat-card-content>
+      <mat-card-content style="font-size: 18px;">Use your fundoo account</mat-card-content>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="logo">
+      <img class="logo" src="/assets/Image/user.jpg">
+    </div>
+    <br>
+    <form [formGroup]="login">
+      <div class="form-group">
+        <mat-form-field appearance="outline" fxFlext=90 style="width: 80%;">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" formControlName="email" class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-error *ngIf="login.hasError('required', 'email')">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="login.hasError('email', 'email')">
+            Enter valid email
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field  appearance="outline" fxFlext=90 style="width: 80%;" >
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password"
+            class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </mat-form-field>
+      </div>
+      <button mat-button (click)=navigatepage()>forget password</button>
+      <br>
+      <div fxLayoutAlign="space-around center">
+        <button mat-button (click)=navigate()>Create Account</button>
+        <button mat-raised-button color="primary" (click)=loginForm()>Login</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

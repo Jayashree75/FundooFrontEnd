@@ -1,0 +1,72 @@
+<div class="example-container"  fxLayout="column"  fxFlex="100%"  [class.example-is-mobile]="mobileQuery.matches" >
+  <div fxLayout="column" >
+  <mat-toolbar class="example-toolbar" style="height: 90px;">
+    <button mat-icon-button (click)="snav.toggle()"  fxLayout="column" >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div fxLayoutAlign="center center" class="keep">
+      <img class="keep" src="/assets/Image/keep.png">
+    </div>
+    <h1 class="example-app-name">Fundoo</h1>
+    <div class="search" fxFlex="100%" fxLayoutAlign="end center" fxFlex.gt-xs="25%" fxHide.xs="true">
+      <mat-form-field [style.fontSize.px]="12" appearance=none class="searchInput" style="width:90%">
+        <mat-icon matPrefix>search</mat-icon>
+        <input matInput type="text" #val placeholder="search" style="font-size: 18px;">
+      </mat-form-field>
+    </div>
+    <div class="spacer"></div>
+      <div class="icon" fxLayout="row"fxLayoutAlign="space-around center">
+        <div>
+          <mat-icon  fxLayoutAlign="center center">refresh</mat-icon>
+        </div>
+        <div>
+          <mat-icon  fxLayoutAlign="center center">view_stream</mat-icon>
+        </div>
+        <div>
+          <mat-icon fxLayoutAlign="end center">settings</mat-icon>
+        </div>     
+          <div class="example-button-row">
+            <button mat-mini-fab color="primary">{{Email[0] | uppercase}}</button>
+          </div>
+      </div>    
+  </mat-toolbar>
+</div>
+  <mat-divider></mat-divider>
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav class="sidenav"  #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <mat-nav-list>
+        <mat-list-item disableRipple="true" [class.isActive]="Active=='notes'" (click)="navigate('notes')">
+            <mat-icon matListIcon>lightbulb_outline</mat-icon>
+            <span matLine>Notes</span>
+          </mat-list-item>
+          <mat-list-item disableRipple="true"  [class.isActive]="Active=='remainders'" (click)="navigate('remainders')">
+            <mat-icon matListIcon>notifications_none</mat-icon>
+            <span matLine>Reminders</span>
+          </mat-list-item>
+      <mat-divider></mat-divider> 
+      <mat-label style="font-size: medium;" fxLayout="row" fxLayoutAlign="start center">LABELS</mat-label>
+          <mat-list-item>
+            <mat-icon matListIcon>editoutlinedicon</mat-icon>
+            <span matLine>Edit Labels</span>
+          </mat-list-item>
+          <mat-divider></mat-divider> 
+          <mat-list-item>
+            <mat-icon matListIcon>archive</mat-icon>
+            <span matLine>Archive</span>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon matListIcon>delete</mat-icon>
+            <span matLine>Bin</span>
+          </mat-list-item>
+            <mat-divider></mat-divider>
+          <mat-list-item >
+            <span matLine (click)=logout()>Logout</span>
+          </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+     <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
