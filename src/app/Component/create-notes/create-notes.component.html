@@ -1,16 +1,48 @@
 <div fxLayout="row" fxLayoutAlign="center center" fxLayout.xs="column" display=flex>
-  <mat-card style="margin-top: 5%; font-size: 40px; width: 395px; height: 170px;" fxFlexAlign="stretch" fxFlex="40%"
-    flex-wrap: wrap>
-    <form [formGroup]="notes">
-      <div>
-        <div class="header" fxLayout="row" style="font-size: medium;" appearance="none">
-          <input matInput placeholder="Title" formControlName="Title">
+  <mat-card class="card" fxFlexAlign="stretch" fxFlex="40%" flex-wrap: wrap>
+    <div *ngIf="!status" (click)="status=!status" style="margin: 0px; padding: 0px; height: 15px;">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div class="header" appearance="none">
+            <p>
+              Take a note...
+            </p>
+          </div>
+          <div fxLayoutAlign="space-around center" display="flex">
+            <div class="example-button-row1">
+              <button mat-icon-button>
+                <mat-icon aria-label="Example icon button">check_box</mat-icon>
+              </button>
+            </div>
+            <div class="example-button-row5">
+              <button mat-icon-button>
+                <mat-icon aria-label="Example icon button">brush</mat-icon>
+              </button>
+            </div>
+            <div class="example-button-row2">
+              <button mat-icon-button>
+                <mat-icon aria-label="Example icon button">insert_photo</mat-icon>
+              </button>
+            </div>
+          </div>
         </div>
-        <br>
-        <div class="header" fxLayout="row" style="font-size: medium;" appearance="none">
-          <input matInput placeholder="Take a note..." formControlName="takenote">
+    </div>
+    <div *ngIf="status">
+      <form [formGroup]="notes" >
+        <div>
+          <div class="header" fxLayout="row" appearance="none">
+            <input matInput placeholder="Title" formControlName="title">
+          </div>
+          <br>
+          <div class="header" fxLayout="row" appearance="none">
+            <input matInput placeholder="Take a note..." formControlName="description">
+          </div>
         </div>
-      </div>
-    </form>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <app-icon></app-icon>
+
+          <button mat-button (click)="createNote()">Close</button>
+        </div>
+      </form>
+    </div>
   </mat-card>
 </div>

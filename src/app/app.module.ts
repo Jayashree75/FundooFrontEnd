@@ -14,7 +14,8 @@ import{AuthGuard} from './Services/auth.guard';
 import { NotesComponent } from './Component/notes/notes.component';
 import { CreateNotesComponent } from './Component/create-notes/create-notes.component';
 import { DisplayNotesComponent } from './Component/display-notes/display-notes.component';
-import { IconComponent } from './Component/icon/icon.component'
+import { IconComponent } from './Component/icon/icon.component';
+import { TrashComponent } from './Component/trash/trash.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +28,7 @@ import { IconComponent } from './Component/icon/icon.component'
     CreateNotesComponent,
     DisplayNotesComponent,
     IconComponent,
+    TrashComponent,
   ],
   imports: [
     BrowserModule,

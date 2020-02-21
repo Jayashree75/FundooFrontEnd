@@ -7,7 +7,11 @@ import{ForgetPasswordComponent} from './Component/forget-password/forget-passwor
 import{ResetpasswordComponent} from './Component/resetpassword/resetpassword.component';
 import{DashboardComponent} from './Component/dashboard/dashboard.component';
 import{NotesComponent} from './Component/notes/notes.component';
+import{TrashComponent} from './Component/trash/trash.component';
+import{CreateNotesComponent} from './Component/create-notes/create-notes.component';
+import{DisplayNotesComponent} from './Component/display-notes/display-notes.component';
 import{AuthGuard} from './Services/auth.guard'
+import { from } from 'rxjs';
 const route:Routes=[
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -17,7 +21,9 @@ const route:Routes=[
   { path:'dashboard', canActivate: [AuthGuard],component: DashboardComponent,children: [
     { path: '', redirectTo: 'notes', pathMatch: 'full' },
     { path: 'notes', component: NotesComponent },
+    { path: 'Trash', component: TrashComponent }
   ]},
+  
 ]
 
 @NgModule({

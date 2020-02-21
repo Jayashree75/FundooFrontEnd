@@ -10,7 +10,8 @@ import{Router} from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  mobileQuery: MediaQueryList;
+ mobileQuery: MediaQueryList;
+ title:string='Notes'
  Active:string;
  UserId:number;
  Email:string;
@@ -25,7 +26,6 @@ export class DashboardComponent implements OnInit {
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
   logout() {
-    
     localStorage.removeItem("token");
     this.route.navigate(["login"]);
   }
@@ -48,5 +48,14 @@ export class DashboardComponent implements OnInit {
   navigate(value)
   {
     this.Active=value;  
+    this.title=value;
+  }
+  navigateNotes()
+  {
+    this.route.navigate(['/dashboard/notes'])
+  }
+  navigateTrash()
+  {
+    this.route.navigate(['/dashboard/Trash'])
   }
 }
