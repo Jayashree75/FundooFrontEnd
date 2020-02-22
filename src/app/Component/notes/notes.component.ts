@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Host } from '@angular/core';
 import{NotesService} from '../../Services/noteService/notes.service';
+
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.scss']
+  styleUrls: ['./notes.component.scss'],
+  styles:[':host{ width:100%}']
 })
 export class NotesComponent implements OnInit {
 token:string;

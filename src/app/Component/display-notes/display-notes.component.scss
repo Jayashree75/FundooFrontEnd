@@ -1,12 +1,17 @@
 .displaycard{
     padding: 50px;
     width: 74%;
-    margin-left: 20%;
+    margin-left: 10%;
     display: flex;
     flex-flow: wrap;
-    flex-direction: row;
-  
+    flex-direction: row;  
 }
 .card{
     margin: 10px;
+}
+.card:hover{
+    box-shadow: 0px 10px 5px 0 gray;
+    transform: translateY(-10px);
+    transition: box-shadow 0.5s ease-in-out;
+    transition: transform 0.5s ease-in-out;
 }

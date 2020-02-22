@@ -17,9 +17,10 @@ export class NotesService {
     };
     return this.httpservice.post('api/Notes', data, true, options)
   }
-   TrashNote(noteid) {
-     console.log(noteid,"notes id response")
-    var token=localStorage.getItem("token")
+  
+  TrashNote(noteid) {
+    console.log(noteid, "notes id response")
+    var token = localStorage.getItem("token")
     console.log(token);
     const options = {
       headers: new HttpHeaders({
@@ -27,8 +28,21 @@ export class NotesService {
         'Content-Type': 'application/json'
       })
     };
-    console.log("options data",options)
-    return this.httpservice.put('api/Notes/'+noteid+'/Trash', true, options)
+    console.log("options data", options)
+    return this.httpservice.put('api/Notes/' + noteid + '/Trash',{value:true}, true, options)
+  }
+  ArchiveNote(noteid) {
+    console.log(noteid, "notes id response")
+    var token = localStorage.getItem("token")
+    console.log(token);
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      })
+    };
+    console.log("options data", options)
+    return this.httpservice.put('api/Notes/' + noteid + '/Archive',{value:true}, true, options)
   }
   getAllNotes(token: string) {
     console.log(token);
@@ -50,5 +64,40 @@ export class NotesService {
       })
     };
     return this.httpservice.get('api/Notes/Trash', true, options)
+  }
+  getAllArchive(token: string) {
+    console.log(token)
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'content-Type': 'application/json',
+        'Accept': '*'
+      })
+    };
+    return this.httpservice.get('api/Notes/Archive', true, options)
+  }
+  deleteNote(noteid) {
+    console.log(noteid, "notes id response")
+    var token = localStorage.getItem("token")
+    console.log(token);
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+      })
+    };
+    console.log("options data", options)
+    return this.httpservice.delete('api/Notes/' + noteid, true, options)
+  }
+  getAllRemainder(token: string) {
+    console.log(token)
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'content-Type': 'application/json',
+        'Accept': '*'
+      })
+    };
+    return this.httpservice.get('api/Notes/Remainder', true, options)
   }
 }

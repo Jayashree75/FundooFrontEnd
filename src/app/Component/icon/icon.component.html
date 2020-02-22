@@ -1,13 +1,11 @@
 <div fxLayout="row" *ngIf="!isTrash" fxLayoutAlign="space-around center" display="flex" fxFlex.gt-sm="100%"
-    fxFlex="100%">
-  
-    <div class="example-button-row1" >
-      
+    fxFlex="100%">  
+    <div class="example-button-row1" >     
         <button mat-icon-button>
-
             <mat-icon aria-label="Example icon button">add_alert_outline</mat-icon>
         </button>
     </div>
+    
     <div class="example-button-row5">
         <button mat-icon-button>
             <mat-icon aria-label="Example icon button">person_add</mat-icon>
@@ -18,9 +16,14 @@
             <mat-icon aria-label="Example icon button">color_lens</mat-icon>
         </button>
     </div>
-    <div class="example-button-row3">
+     <div class="example-button" *ngIf="isArchive">
         <button mat-icon-button>
-            <mat-icon aria-label="Example icon button">archive</mat-icon>
+            <mat-icon aria-label="Example icon button" (click)="ArchiveNote()">unarchive</mat-icon>
+        </button>
+     </div>
+    <div class="example-button-row3" *ngIf="!isArchive">
+        <button mat-icon-button>
+            <mat-icon aria-label="Example icon button" (click)="ArchiveNote()">archive</mat-icon>
         </button>
     </div>
     <div class="example-button-row4">
@@ -36,7 +39,6 @@
                 <button mat-menu-item  (click)="TrashNote()">Delete Note</button>
                 <button mat-menu-item>Add label</button>
             </mat-menu>
-
         </button>
     </div>
 </div>
@@ -44,12 +46,12 @@
     fxFlex="100%">
     <div class="example-button-row1">
         <button mat-icon-button>
-            <mat-icon aria-label="Example icon button">delete_forever</mat-icon>
+            <mat-icon aria-label="Example icon button" (click)="DeleteNote()">delete_forever</mat-icon>
         </button>
     </div>
     <div class="example-button-row5">
         <button mat-icon-button>
-            <mat-icon aria-label="Example icon button">restore_from_trash</mat-icon>
+            <mat-icon aria-label="Example icon button" (click)="TrashNote()" >restore_from_trash</mat-icon>
         </button>
     </div>
 </div>

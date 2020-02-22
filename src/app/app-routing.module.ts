@@ -10,6 +10,8 @@ import{NotesComponent} from './Component/notes/notes.component';
 import{TrashComponent} from './Component/trash/trash.component';
 import{CreateNotesComponent} from './Component/create-notes/create-notes.component';
 import{DisplayNotesComponent} from './Component/display-notes/display-notes.component';
+import{ArchiveComponent} from './Component/archive/archive.component';
+import{RemainderComponent} from './Component/remainder/remainder.component';
 import{AuthGuard} from './Services/auth.guard'
 import { from } from 'rxjs';
 const route:Routes=[
@@ -21,7 +23,9 @@ const route:Routes=[
   { path:'dashboard', canActivate: [AuthGuard],component: DashboardComponent,children: [
     { path: '', redirectTo: 'notes', pathMatch: 'full' },
     { path: 'notes', component: NotesComponent },
-    { path: 'Trash', component: TrashComponent }
+    { path: 'Trash', component: TrashComponent },
+    { path:'Archive',component:ArchiveComponent},
+    { path:'Remainder',component:RemainderComponent},
   ]},
   
 ]

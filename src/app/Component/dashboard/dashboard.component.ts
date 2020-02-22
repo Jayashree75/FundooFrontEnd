@@ -58,4 +58,12 @@ export class DashboardComponent implements OnInit {
   {
     this.route.navigate(['/dashboard/Trash'])
   }
+  navigateArchive()
+  {
+    this.route.navigate(['/dashboard/Archive'])
+  }
+  navigateRemainder()
+  {
+    this.route.navigate(['/dashboard/Remainder'])
+  }
 }

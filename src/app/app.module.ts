@@ -10,12 +10,15 @@ import { ResetpasswordComponent } from './Component/resetpassword/resetpassword.
 import { DashboardComponent } from './Component/dashboard/dashboard.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
-import{AuthGuard} from './Services/auth.guard';
+import { AuthGuard} from './Services/auth.guard';
 import { NotesComponent } from './Component/notes/notes.component';
 import { CreateNotesComponent } from './Component/create-notes/create-notes.component';
 import { DisplayNotesComponent } from './Component/display-notes/display-notes.component';
+import { from } from 'rxjs';
+import { TrashComponent } from './Component/trash/trash.component';
 import { IconComponent } from './Component/icon/icon.component';
-import { TrashComponent } from './Component/trash/trash.component'
+import{ArchiveComponent} from './Component/archive/archive.component';
+import { RemainderComponent } from './Component/remainder/remainder.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,8 +30,10 @@ import { TrashComponent } from './Component/trash/trash.component'
     NotesComponent,
     CreateNotesComponent,
     DisplayNotesComponent,
-    IconComponent,
     TrashComponent,
+    IconComponent,
+    ArchiveComponent,
+    RemainderComponent
   ],
   imports: [
     BrowserModule,

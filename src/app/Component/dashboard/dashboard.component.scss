@@ -7,11 +7,13 @@
     left: 0;
     right: 0;
   }
-  
-  .example-is-mobile .example-toolbar {
+  .example-toolbar {
+    background-color: #fafafa;
  
-    z-index: 4;
-   
+  }
+  .example-is-mobile .example-toolbar {
+    z-index: 4;  
+    
   }
   
   h1.example-app-name {
@@ -19,17 +21,19 @@
   }
   
   .example-sidenav-container {
-    flex: 1;
+     flex: 1;
     
   
   }
   .sidenav{
-    width:250px;
+    width:260px;
+    border-right: solid 0px rgba(0,0,0,0.12);
+    background-color: #fafafa;
     
   }
   .example-is-mobile .example-sidenav-container {
     flex: 1 1 auto;
-
+    
   }
  
   .header{
@@ -45,10 +49,34 @@
     justify-content: space-evenly;
   }
   .search{
-    margin-top: 20px;
-    
+    background: #f1f3f4;
+    border: 1px solid transparent;
+    margin-left: 80px;
+    margin-right: 50px;
+    border-radius: 8px;
+    height: 50px;
   }
   .isActive{
     background-color:#feefc3;
     border-radius: 0px 25px 25px 0px;
+    
   }
+  .card1{
+    font-size: 15px;
+  }
+  .card1:hover{
+    background-color:rgba(163, 159, 159, 0.2);;
+    border-radius: 0px 25px 25px 0px;
+  
+  }
+  .label{
+    font-family: Roboto,Arial,sans-serif;
+    font-size: .6875rem;
+    font-weight: 500;
+    line-height: 1rem;
+    text-transform: uppercase;
+    padding: 15px 24px 10px;
+  }
+ .mat-form-field{
+   margin-top: 10px;
+ }

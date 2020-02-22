@@ -21,9 +21,9 @@ export class HttpService {
     console.log(tokenRequired && headerOption);
     return this.httpClient.get(this.baseUrl+url,tokenRequired && headerOption)
   }
-  put(url,tokenRequired:boolean=false,headerOption=null):Observable<any>{
+  put(url,data,tokenRequired:boolean=false,headerOption=null):Observable<any>{
     console.log(tokenRequired && headerOption);
-    return this.httpClient.put(this.baseUrl+url,tokenRequired && headerOption)
+    return this.httpClient.put(this.baseUrl+url,data,tokenRequired && headerOption)
   }
   delete(url,tokenRequired:boolean=false,headerOption=null):Observable<any>{
     console.log(tokenRequired && headerOption);

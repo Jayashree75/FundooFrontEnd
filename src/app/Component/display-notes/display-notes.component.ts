@@ -10,7 +10,7 @@ import{NotesService} from '../../Services/noteService/notes.service';
 export class DisplayNotesComponent implements OnInit {
 @Input() notes;
 @Input() isTrash;
-
+@Input() isArchive;
   constructor(private noteservice:NotesService) { }
 
   ngOnInit() {
