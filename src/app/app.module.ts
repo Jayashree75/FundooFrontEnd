@@ -10,7 +10,7 @@ import { ResetpasswordComponent } from './Component/resetpassword/resetpassword.
 import { DashboardComponent } from './Component/dashboard/dashboard.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
-import { AuthGuard} from './Services/auth.guard';
+import { AuthGuard} from './Services/AuthGuard/auth.guard';
 import { NotesComponent } from './Component/notes/notes.component';
 import { CreateNotesComponent } from './Component/create-notes/create-notes.component';
 import { DisplayNotesComponent } from './Component/display-notes/display-notes.component';
@@ -18,7 +18,9 @@ import { from } from 'rxjs';
 import { TrashComponent } from './Component/trash/trash.component';
 import { IconComponent } from './Component/icon/icon.component';
 import{ArchiveComponent} from './Component/archive/archive.component';
-import { RemainderComponent } from './Component/remainder/remainder.component'
+import { RemainderComponent } from './Component/remainder/remainder.component';
+import { LabelComponent } from './Component/label/label.component';
+import { EditNoteComponent } from './Component/edit-note/edit-note.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +35,9 @@ import { RemainderComponent } from './Component/remainder/remainder.component'
     TrashComponent,
     IconComponent,
     ArchiveComponent,
-    RemainderComponent
+    RemainderComponent,
+    LabelComponent,
+    EditNoteComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +50,7 @@ import { RemainderComponent } from './Component/remainder/remainder.component'
     MatIconModule,
     MatListModule,
   ],
+  entryComponents: [EditNoteComponent],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
 })

@@ -12,7 +12,9 @@ import{CreateNotesComponent} from './Component/create-notes/create-notes.compone
 import{DisplayNotesComponent} from './Component/display-notes/display-notes.component';
 import{ArchiveComponent} from './Component/archive/archive.component';
 import{RemainderComponent} from './Component/remainder/remainder.component';
-import{AuthGuard} from './Services/auth.guard'
+import{LabelComponent} from './Component/label/label.component';
+import{AuthGuard} from './Services/AuthGuard/auth.guard'
+import{NotesService} from './Services/noteService/notes.service';
 import { from } from 'rxjs';
 const route:Routes=[
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -26,6 +28,8 @@ const route:Routes=[
     { path: 'Trash', component: TrashComponent },
     { path:'Archive',component:ArchiveComponent},
     { path:'Remainder',component:RemainderComponent},
+    { path:'Label/:LabelID',component:LabelComponent},
+    {path:'Notes/:NoteID',component:NotesService}
   ]},
   
 ]

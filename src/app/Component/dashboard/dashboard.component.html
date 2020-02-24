@@ -9,7 +9,7 @@
       </div>
       <h1 class="example-app-name">{{title}}</h1>
       <div class="search" fxLayoutAlign="start center" fxFlex="60%" fxHide.xs="true">
-        <mat-form-field [style.fontSize.px]="12"  appearance=none class="searchInput">
+        <mat-form-field [style.fontSize.px]="12" appearance=none class="searchInput">
           <mat-icon matPrefix style="margin-left: 10px;">search</mat-icon>
           <input matInput type="text" #val placeholder="search" style="font-size: 18px;">
         </mat-form-field>
@@ -41,13 +41,19 @@
           <mat-icon matListIcon>lightbulb_outline</mat-icon>
           <span matLine>Notes</span>
         </mat-list-item>
-        <mat-list-item class="card1" disableRipple="true" [class.isActive]="Active=='remainders'" (click)="navigateRemainder()"
-          (click)="navigate('remainders')">
+        <mat-list-item class="card1" disableRipple="true" [class.isActive]="Active=='remainders'"
+          (click)="navigateRemainder()" (click)="navigate('remainders')">
           <mat-icon matListIcon>notifications_none</mat-icon>
           <span matLine>Reminders</span>
         </mat-list-item>
         <mat-divider></mat-divider>
+
         <mat-label class="label" fxLayout="row" fxLayoutAlign="start center">LABELS</mat-label>
+        <mat-list-item class="card1" *ngFor="let data of labels"  disableRipple="true"  [class.isActive]="Active=='data.labelName'"
+         (click)="navigate(data.labelName)">
+          <mat-icon matListIcon>label_outline</mat-icon>
+          <span matLine (click)="navigatenotebylabel(data.labelID)">{{data.labelName}}</span>
+        </mat-list-item>
         <mat-list-item class="card1" disableRipple="true" [class.isActive]="Active=='labels'"
           (click)="navigate('labels')">
           <mat-icon matListIcon>editoutlinedicon</mat-icon>

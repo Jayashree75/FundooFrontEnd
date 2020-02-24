@@ -29,4 +29,14 @@ export class HttpService {
     console.log(tokenRequired && headerOption);
     return this.httpClient.delete(this.baseUrl+url,tokenRequired && headerOption)
   }
+httpheader(token:string)
+{
+  const options = {
+    headers: new HttpHeaders({
+      'Authorization': 'Bearer ' + token,
+      'content-Type': 'application/json'
+    })
+  };
+return options;
+}
 }

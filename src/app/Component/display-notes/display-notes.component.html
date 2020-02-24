@@ -1,17 +1,18 @@
-<div class="displaycard"   fxLayout="row wrap" fxFlex="100" style="margin-bottom: 10px;"  fxLayout.xs="column" display="flex">
-  <mat-card class="card" *ngFor="let notes of notes" fxLayoutAlign="start center" fxFlex=30 flex-wrap: wrap>
-    <form >
+<div class="displaycard" fxLayout="row wrap" fxFlex="100" style="margin-bottom: 10px;" fxLayout.xs="column"
+  display="flex">
+  <mat-card class="card"  (click)="openDialog()" *ngFor="let notes of notes" fxLayoutAlign="start center" fxFlex=30 flex-wrap: wrap>
+    <form>
       <div>
         <div class="header" appearance="none">
           <p>{{notes.title}}</p>
         </div>
         <br>
-        <div class="header"  appearance="none">
+        <div class="header" appearance="none">
           <p>{{notes.description}}</p>
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="space-between center">
-        <app-icon [isTrash]="isTrash" [isArchive]="isArchive" [note]="notes" ></app-icon>
+        <app-icon [isTrash]="isTrash" [isArchive]="isArchive" [note]="notes"></app-icon>
       </div>
     </form>
   </mat-card>
