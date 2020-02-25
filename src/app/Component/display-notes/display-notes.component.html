@@ -1,18 +1,16 @@
-<div class="displaycard" fxLayout="row wrap" fxFlex="100" style="margin-bottom: 10px;" fxLayout.xs="column"
-  display="flex">
-  <mat-card class="card"  (click)="openDialog()" *ngFor="let notes of notes" fxLayoutAlign="start center" fxFlex=30 flex-wrap: wrap>
+<div class="displaycard" fxFlex=100 fxLayout="row wrap" style="margin-bottom: 10px;">
+  <mat-card class="card" *ngFor="let notes of notes" fxFlex.xs="100" fxLayoutAlign="start center" fxFlex=30>
     <form>
-      <div>
-        <div class="header" appearance="none">
-          <p>{{notes.title}}</p>
-        </div>
-        <br>
-        <div class="header" appearance="none">
-          <p>{{notes.description}}</p>
-        </div>
+      <div class="header" (click)="openDialog()" appearance="none">
+        <p>{{notes.title}}</p>
       </div>
-      <div fxLayout="row" fxLayoutAlign="space-between center">
-        <app-icon [isTrash]="isTrash" [isArchive]="isArchive" [note]="notes"></app-icon>
+      <br>
+      <div class="header" (click)="openDialog()" appearance="none">
+        <p>{{notes.description}}</p>
+      </div>
+      <div>
+        <app-icon [isTrash]="isTrash" (NoteTrashEvent)="noteTrashed()" (DeleteNoteEvent)="deleteNote()" (NoteArchiveEvent)="noteArchive()"
+          [isArchive]="isArchive" [note]="notes"></app-icon>
       </div>
     </form>
   </mat-card>

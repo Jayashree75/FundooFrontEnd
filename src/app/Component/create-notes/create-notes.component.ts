@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,EventEmitter, Output} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
@@ -12,6 +12,7 @@ export class CreateNotesComponent implements OnInit {
   notes: FormGroup;
   status = false;
   token:string;
+  @Output() addNoteEvent=new EventEmitter<any>();
   constructor(private noteservice: NotesService,
     private router: Router,
     private route:ActivatedRoute,
@@ -28,12 +29,13 @@ export class CreateNotesComponent implements OnInit {
   get f() {
     return this.notes.controls;
   }
-  createNote() {
+  createNote() { 
     this.status=false;
     var token=localStorage.getItem("token")
     console.log('values in notes', this.notes.value);
     this.noteservice.createnote(this.notes.value,token).subscribe(Response => {
       console.log("note response", Response);
+      this.addNoteEvent.emit();
     }, error => { console.log("notes response", error) })
   }
 }

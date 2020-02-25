@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
 import { UserService } from '../../Services/userservice/user.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-forget-password',
@@ -19,7 +19,7 @@ export class ForgetPasswordComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private forgetpasswordservice: UserService,
-    private snackbar:MatSnackBar
+    private snackbar: MatSnackBar
   ) { }
 
   gotoLogin() {
@@ -34,18 +34,18 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   get f() { return this.forgetForm.controls; }
- 
+
   forget() {
     console.log('values in login form', this.forgetForm.value);
     this.forgetpasswordservice.ForgetPassword(this.forgetForm.value).subscribe(response => {
       console.log("forget response", response);
-      this.snackbar.open("Password Link has been sent to the registered Email",'',{
-        duration:2000,
+      this.snackbar.open("Password Link has been sent to the registered Email", '', {
+        duration: 2000,
       });
     }, error => {
       console.log("forget response", error);
     })
-  }  
   }
+}
 
 

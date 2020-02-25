@@ -15,6 +15,7 @@ import{RemainderComponent} from './Component/remainder/remainder.component';
 import{LabelComponent} from './Component/label/label.component';
 import{AuthGuard} from './Services/AuthGuard/auth.guard'
 import{NotesService} from './Services/noteService/notes.service';
+import{EditNoteComponent} from './Component/edit-note/edit-note.component';
 import { from } from 'rxjs';
 const route:Routes=[
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -29,7 +30,7 @@ const route:Routes=[
     { path:'Archive',component:ArchiveComponent},
     { path:'Remainder',component:RemainderComponent},
     { path:'Label/:LabelID',component:LabelComponent},
-    {path:'Notes/:NoteID',component:NotesService}
+    { path:'EditNote/:noteid',component:EditNoteComponent}
   ]},
   
 ]
