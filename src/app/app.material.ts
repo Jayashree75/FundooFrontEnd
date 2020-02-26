@@ -14,6 +14,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
     declarations: [
      
@@ -29,7 +30,8 @@ import {MatDialogModule} from '@angular/material/dialog';
         FlexLayoutModule,
         BrowserAnimationsModule,
         MatFormFieldModule,MatInputModule,MatIconModule,MatButtonToggleModule,MatSidenavModule,MatSnackBarModule,MatMenuModule
-        ,MatDialogModule
+        ,MatDialogModule,
+        MatTooltipModule
     ],
     exports: [
         BrowserModule,
@@ -41,7 +43,7 @@ import {MatDialogModule} from '@angular/material/dialog';
         MatButtonModule,
         FlexLayoutModule,
         BrowserAnimationsModule,MatFormFieldModule,MatInputModule,MatIconModule,MatButtonToggleModule,MatSidenavModule,MatSnackBarModule,MatMenuModule,
-        MatDialogModule
+        MatDialogModule,MatTooltipModule
     ],
 })
 export class materialModule { }

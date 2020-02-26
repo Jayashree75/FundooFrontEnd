@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       this.snackbar.open("User Logged in Successfully", '', {
         duration: 2000,
       });
-      this.router.navigate(['/dashboard'])
+      this.router.navigate([''])
 
     }, error => {
       console.log("login response", error);

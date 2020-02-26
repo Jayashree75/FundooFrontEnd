@@ -59,7 +59,10 @@ export class NotesService {
   UpdateNote(data,noteid)
   {
     var token = localStorage.getItem("token");
+    console.log(token);
     let httpoption=this.httpservice.httpheader(token);
+    console.log("options data", httpoption);
     return this.httpservice.put('api/Notes/' + noteid,data,true, httpoption)
   }
+  
 }

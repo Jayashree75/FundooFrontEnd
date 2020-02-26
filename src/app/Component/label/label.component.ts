@@ -9,18 +9,20 @@ import { Router } from '@angular/router';
 })
 export class LabelComponent implements OnInit {
   token: string;
-  notes = [];
+  labels = [];
+  id:string;
   constructor(private labelservice: LabelService, private route: Router, private activateroute: ActivatedRoute) { }
 
   ngOnInit() {
+    // let labelid = this.activateroute.snapshot.params.get('labelID')
     this.GetNoteByLabelId();
   }
-  GetNoteByLabelId() {
-    let labelid = this.activateroute.snapshot.params.get('labelID')
-    this.labelservice.GetNoteByLabelid(labelid, this.token).subscribe(Response => {
-      console.log("note response", Response);
-      this.notes = Response['noteResponseModels'];
-      console.log("response trash", this.notes)
-    }, error => { console.log("notes response", error) })
-  }
+   GetNoteByLabelId() {   
+    this.id = this.activateroute.snapshot.paramMap.get('LabelID')
+   this.labelservice.GetNoteByLabelid(this.id).subscribe(Response => {
+   console.log("note response", Response);
+     this.labels = Response['noteResponseModels'];
+      console.log("response trash", this.labels)
+   }, error => { console.log("notes response", error) })
+   }
 }

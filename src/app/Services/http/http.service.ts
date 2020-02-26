@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
-import{environment} from '../../../environments/environment'
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment'
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,35 +8,34 @@ import { Observable } from 'rxjs';
 })
 export class HttpService {
 
-  baseUrl=environment.BaseUrl;
-  constructor(private httpClient:HttpClient) { }
+  baseUrl = environment.BaseUrl;
+  constructor(private httpClient: HttpClient) { }
 
-  post(url,data,tokenRequired:boolean=false,headerOption=null):Observable<any>{
-  
+  post(url, data, tokenRequired: boolean = false, headerOption = null): Observable<any> {
+
     console.log(tokenRequired && headerOption);
-    return this.httpClient.post(this.baseUrl+url, data,tokenRequired && headerOption);
+    return this.httpClient.post(this.baseUrl + url, data, tokenRequired && headerOption);
   }
-  get(url,tokenRequired:boolean=false,headerOption=null):Observable<any>{
-    
+  get(url, tokenRequired: boolean = false, headerOption = null): Observable<any> {
+
     console.log(tokenRequired && headerOption);
-    return this.httpClient.get(this.baseUrl+url,tokenRequired && headerOption)
+    return this.httpClient.get(this.baseUrl + url, tokenRequired && headerOption)
   }
-  put(url,data,tokenRequired:boolean=false,headerOption=null):Observable<any>{
+  put(url, data, tokenRequired: boolean = false, headerOption = null): Observable<any> {
     console.log(tokenRequired && headerOption);
-    return this.httpClient.put(this.baseUrl+url,data,tokenRequired && headerOption)
+    return this.httpClient.put(this.baseUrl + url, data, tokenRequired && headerOption)
   }
-  delete(url,tokenRequired:boolean=false,headerOption=null):Observable<any>{
+  delete(url, tokenRequired: boolean = false, headerOption = null): Observable<any> {
     console.log(tokenRequired && headerOption);
-    return this.httpClient.delete(this.baseUrl+url,tokenRequired && headerOption)
+    return this.httpClient.delete(this.baseUrl + url, tokenRequired && headerOption)
   }
-httpheader(token:string)
-{
-  const options = {
-    headers: new HttpHeaders({
-      'Authorization': 'Bearer ' + token,
-      'content-Type': 'application/json'
-    })
-  };
-return options;
-}
+  httpheader(token: string) {
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        'content-Type': 'application/json'
+      })
+    };
+    return options;
+  }
 }

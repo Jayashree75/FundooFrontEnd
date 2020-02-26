@@ -18,21 +18,18 @@ import{NotesService} from './Services/noteService/notes.service';
 import{EditNoteComponent} from './Component/edit-note/edit-note.component';
 import { from } from 'rxjs';
 const route:Routes=[
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'Registration', component: RegistrationComponent},
   { path:'ForgetPassword',component:ForgetPasswordComponent },
   { path:'ResetPassword/:token',component: ResetpasswordComponent},
-  { path:'dashboard', canActivate: [AuthGuard],component: DashboardComponent,children: [
+  { path:'', canActivate: [AuthGuard],component: DashboardComponent,children: [
     { path: '', redirectTo: 'notes', pathMatch: 'full' },
     { path: 'notes', component: NotesComponent },
     { path: 'Trash', component: TrashComponent },
     { path:'Archive',component:ArchiveComponent},
     { path:'Remainder',component:RemainderComponent},
     { path:'Label/:LabelID',component:LabelComponent},
-    { path:'EditNote/:noteid',component:EditNoteComponent}
-  ]},
-  
+  ]}, 
 ]
 
 @NgModule({

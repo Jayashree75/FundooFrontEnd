@@ -4,7 +4,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { LabelService } from '../../Services/Label/label.service'
 import { ActivatedRoute } from '@angular/router'
-import { t } from '@angular/core/src/render3';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   fillerNav = Array.from({ length: 50 }, (_, i) => `Nav Item ${i + 1}`);
 
   private _mobileQueryListener: () => void;
-
+  
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
     private route: Router,
     private labelservice: LabelService,
@@ -41,10 +41,6 @@ export class DashboardComponent implements OnInit {
     let loggeUserjsondata = window.atob(loggedinUserData);
     let loggedUserdecodedata = JSON.parse(loggeUserjsondata);
     let isAdmin = loggedUserdecodedata.userClaims;
-    // console.log(loggetUserToken);
-    // console.log(loggedinUserData);
-    // console.log(loggeUserjsondata);
-    // console.log(loggedUserdecodedata);
     this.UserId = loggedUserdecodedata.UserId;
     this.Email = loggedUserdecodedata.Email;
     console.log(this.Email[0]);
@@ -58,20 +54,20 @@ export class DashboardComponent implements OnInit {
     this.title = value;
   }
   navigateNotes() {
-    this.route.navigate(['/dashboard/notes'])
+    this.route.navigate(['/notes'])
   }
   navigateTrash() {
-    this.route.navigate(['/dashboard/Trash'])
+    this.route.navigate(['/Trash'])
   }
   navigateArchive() {
-    this.route.navigate(['/dashboard/Archive'])
+    this.route.navigate(['/Archive'])
   }
   navigateRemainder() {
-    this.route.navigate(['/dashboard/Remainder'])
+    this.route.navigate(['/Remainder'])
   }
   navigatenotebylabel(LabelID) {
     console.log(LabelID)
-    this.route.navigate(['/dashboard/Label/' + LabelID])
+    this.route.navigate(['/Label/' + LabelID])
   }
   getAllLabel() {
     console.log()

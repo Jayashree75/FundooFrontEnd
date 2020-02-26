@@ -3,10 +3,7 @@ import { NotesService } from '../../Services/noteService/notes.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { EditNoteComponent } from '../../Component/edit-note/edit-note.component'
 import { Router } from '@angular/router';
-export interface DialogData {
-  title: string;
-  description: string;
-}
+
 @Component({
   selector: 'app-display-notes',
   templateUrl: './display-notes.component.html',
@@ -22,18 +19,12 @@ export class DisplayNotesComponent implements OnInit {
   constructor(private route:Router,private noteservice: NotesService, public dialog: MatDialog) { }
   ngOnInit() {
   }
-  openDialog(): void {
-    const dialogRef = this.dialog.open(EditNoteComponent, {
-      width: '400px',
-      height: '200px',
-      data: {
-        title: this.notes.title,
-        description: this.notes.description
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+  
+  UpdateNote(note){
+    console.log(note)
+    this.dialog.open(EditNoteComponent,{      
+      data:note,
+    });   
   }
   noteTrashed()
   {
