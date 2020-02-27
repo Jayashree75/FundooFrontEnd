@@ -1,12 +1,14 @@
-<div style="width: 70%; height: 100%;">
+<div  fxLayout="row wrap">
   <div style="padding-bottom: 10px;"fxLayout="row wrap" >
     <mat-form-field appearance="none">
-      <input matInput [(ngModel)]="data.title" placeholder="Title">
+      <input  matInput [(ngModel)]="data.title" placeholder="Title">
     </mat-form-field>
   </div>
-  <mat-form-field  appearance="none">
-    <input matInput [(ngModel)]="data.description" placeholder="Description">
-  </mat-form-field>
+  <div fxFlex=100>
+  
+    <textarea rows="15" cols="15" matInput [(ngModel)]="data.description" placeholder="Description"></textarea>
+
+</div>
   <div>
       <app-icon></app-icon>
   </div>

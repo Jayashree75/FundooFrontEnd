@@ -17,6 +17,7 @@ export class LabelComponent implements OnInit {
     // let labelid = this.activateroute.snapshot.params.get('labelID')
     this.GetNoteByLabelId();
   }
+
    GetNoteByLabelId() {   
     this.id = this.activateroute.snapshot.paramMap.get('LabelID')
    this.labelservice.GetNoteByLabelid(this.id).subscribe(Response => {

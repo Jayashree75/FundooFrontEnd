@@ -5,12 +5,20 @@
 //  }
 .card{
     margin: 10px;
-    max-width: 240px;
- 
+    width: 220px;
+    max-width:220px !important;
+    flex: unset !important;
 }
 .card:hover{
     box-shadow: 0px 10px 5px 0 gray;
     transform: translateY(-10px);
     transition: box-shadow 0.5s ease-in-out;
     transition: transform 0.5s ease-in-out;
+}
+p{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 10em;
+  word-break: break-all;
 }

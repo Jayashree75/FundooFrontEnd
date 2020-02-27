@@ -20,7 +20,8 @@ import { IconComponent } from './Component/icon/icon.component';
 import{ArchiveComponent} from './Component/archive/archive.component';
 import { RemainderComponent } from './Component/remainder/remainder.component';
 import { LabelComponent } from './Component/label/label.component';
-import { EditNoteComponent } from './Component/edit-note/edit-note.component'
+import { EditNoteComponent } from './Component/edit-note/edit-note.component';
+import { CreateLabelComponent } from './Component/create-label/create-label.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { EditNoteComponent } from './Component/edit-note/edit-note.component'
     ArchiveComponent,
     RemainderComponent,
     LabelComponent,
-    EditNoteComponent
+    EditNoteComponent,
+    CreateLabelComponent
   ],
   imports: [
     BrowserModule,

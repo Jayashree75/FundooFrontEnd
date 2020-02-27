@@ -1,44 +1,42 @@
-<div fxLayout="row" *ngIf="!isTrash" fxLayoutAlign="space-around center" fxFlex=100>  
-    <div fxFlex=14 >        
-            <mat-icon  matTooltip="Remind Me" aria-label="Example icon button">add_alert_outline</mat-icon>
-    </div>   
+<div fxLayout="row" fxLayoutGap='12%' fxLayoutGap.xs=auto fxFlex=100 *ngIf="!isTrash">
     <div fxFlex=14>
-            <mat-icon matTooltip="Collaborator"  aria-label="Example icon button">person_</mat-icon>
+        <img src="../../../assets/Image/Reminder.svg" />
     </div>
     <div fxFlex=14>
-            <mat-icon matTooltip="Change Color" aria-label="Example icon button">color_lens</mat-icon>
+        <img src="../../../assets/Image/Collaborator.svg" />
     </div>
-     <div fxFlex=14 *ngIf="isArchive">
-            <mat-icon aria-label="Example icon button"  matTooltip="Unrchive" (click)="ArchiveNote()">unarchive</mat-icon>
-     </div>
+    <div fxFlex=14>
+        <img src="../../../assets/Image/color.svg" />
+    </div>
+    <div fxFlex=14 *ngIf="isArchive">
+        <mat-icon aria-label="Example icon button" matTooltip="Unrchive" (click)="ArchiveNote()">unarchive
+        </mat-icon>
+    </div>
     <div fxFlex=14 *ngIf="!isArchive">
-     
-            <mat-icon aria-label="Example icon button" matTooltip="Archive" (click)="ArchiveNote()">archive</mat-icon>
+        <img src="../../../assets/Image/Archive.svg" />
     </div>
     <div fxFlex=14>
-  
-            <mat-icon aria-label="Example icon button" matTooltip="Add Image"> insert_photo</mat-icon> 
+        <img src="../../../assets/Image/Insertphoto.svg" />
     </div>
-    <div class="example-button-row">
-        <button mat-icon-button [matMenuTriggerFor]="belowMenu">
+    <div fxFlex=14 class="example-button-row">
+        <mat-icon mat-icon-button [matMenuTriggerFor]="belowMenu">
             <mat-icon matTooltip="More" aria-label="Example icon button">more_vert</mat-icon>
             <mat-menu #belowMenu="matMenu" yPosition="below">
-                <button mat-menu-item  (click)="TrashNote()">Delete Note</button>
+                <button mat-menu-item (click)="TrashNote()">Delete Note</button>
                 <button mat-menu-item>Add label</button>
             </mat-menu>
-        </button>
+        </mat-icon>
     </div>
 </div>
-<div fxLayout="row" *ngIf="isTrash" fxLayoutAlign="space-around center" display="flex" fxFlex.gt-sm="100"
-    fxFlex="100">
+<div fxFlex=14 fxLayout="row" *ngIf="isTrash" fxLayoutAlign="space-around center" display="flex" fxFlex.gt-sm="100" fxFlex="100">
     <div class="example-button-row">
         <button mat-icon-button>
-            <mat-icon aria-label="Example icon button"  (click)="DeleteNote()">delete_forever</mat-icon>
+            <mat-icon aria-label="Example icon button" (click)="DeleteNote()">delete_forever</mat-icon>
         </button>`
     </div>
     <div class="example-button-row">
         <button mat-icon-button>
-            <mat-icon aria-label="Example icon button" (click)="TrashNote()" >restore_from_trash</mat-icon>
+            <mat-icon aria-label="Example icon button" (click)="TrashNote()">restore_from_trash</mat-icon>
         </button>
     </div>
 </div>

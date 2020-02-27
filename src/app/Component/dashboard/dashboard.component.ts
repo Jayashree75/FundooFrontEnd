@@ -4,6 +4,9 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { LabelService } from '../../Services/Label/label.service'
 import { ActivatedRoute } from '@angular/router'
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import{CreateLabelComponent} from '../../Component/create-label/create-label.component'
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,6 +27,7 @@ export class DashboardComponent implements OnInit {
   private _mobileQueryListener: () => void;
   
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
+    public dialog: MatDialog,
     private route: Router,
     private labelservice: LabelService,
     private activateroute: ActivatedRoute) {
@@ -47,7 +51,7 @@ export class DashboardComponent implements OnInit {
     console.log("Hi" + isAdmin);
     this.mobileQuery.removeListener(this._mobileQueryListener);
     this.getAllLabel();
-    let id = this.activateroute.snapshot.paramMap.get('labelid');
+    
   }
   navigate(value) {
     this.Active = value;
@@ -77,5 +81,12 @@ export class DashboardComponent implements OnInit {
     }, error => {
       console.log(error);
     })
+  }
+  OpenDialog(){
+    console.log()
+    this.dialog.open(CreateLabelComponent,{
+      width:'250px',
+      height:'250px'
+    });   
   }
 }

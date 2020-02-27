@@ -37,7 +37,7 @@
       [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       <mat-nav-list>
         <mat-list-item class="card1" disableRipple="true" [class.isActive]="Active=='notes'" (click)="navigateNotes()"
-          (click)="navigate('notes')">
+          (click)="navigate('Notes')">
           <mat-icon matListIcon>lightbulb_outline</mat-icon>
           <span matLine>Notes</span>
         </mat-list-item>
@@ -49,15 +49,15 @@
         <mat-divider></mat-divider>
 
         <mat-label class="label" fxLayout="row" fxLayoutAlign="start center">LABELS</mat-label>
-        <mat-list-item class="card1" *ngFor="let data of labels"  disableRipple="true"  [class.isActive]="Active=='data.labelName'"
-         (click)="navigate(data.labelName)">
+        <mat-list-item class="card1" *ngFor="let data of labels" disableRipple="true"
+          [class.isActive]="Active=='data.labelName'" (click)="navigate(data.labelName)">
           <mat-icon matListIcon>label_outline</mat-icon>
           <span matLine (click)="navigatenotebylabel(data.labelID)">{{data.labelName}}</span>
         </mat-list-item>
-        <mat-list-item class="card1" disableRipple="true" [class.isActive]="Active=='labels'"
-          (click)="navigate('labels')">
+        <mat-list-item class="card1" click="UpdateNote()" disableRipple="true" [class.isActive]="Active=='labels'"
+          (click)="navigate('labels')"  >
           <mat-icon matListIcon>editoutlinedicon</mat-icon>
-          <span matLine>Edit Labels</span>
+          <span matLine (click)="OpenDialog()">Edit Labels</span>
         </mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item class="card1" disableRipple="true" [class.isActive]="Active=='archive'"
@@ -77,7 +77,10 @@
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-       <router-outlet></router-outlet> 
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

@@ -11,6 +11,7 @@ export class NotesComponent implements OnInit {
   token: string;
   notes = [];
   note = [];
+
   constructor(private noteservice: NotesService) { }
 
   ngOnInit() {

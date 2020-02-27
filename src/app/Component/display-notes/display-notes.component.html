@@ -1,17 +1,37 @@
-<div fxFlexOffset="15" fxFlexOffset.xs="0"  fxFlex="66" fxFlex.xs=100  fxLayout="row" fxLayoutAlign="center center"  fxLayout="row wrap">
-  <mat-card class="card"  *ngFor="let notes of notes"  fxFlex.xs=100 fxLayoutAlign="start center">
-    <div fxLayout="column" >
-      <div class="header"  (click)="UpdateNote(notes)" >
-        <p>{{notes.title}}</p>
+<div fxLayout="row" fxFlex=100>
+<div  fxFlex=15 ></div> 
+  <div  fxFlex=70 fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-card class="card" fxFlex=40 fxLayoutGap=20 *ngFor="let notes of notes" fxFlex.xs=100
+      fxLayoutAlign="start center">
+      <div>
+      <div fxLayout="column" style="max-height: 16em; overflow: hidden; word-break: break-all;">
+        <div (click)="UpdateNote(notes)" style=" margin-bottom:20px;text-overflow: ellipsis;">
+          <span>{{notes.title}}</span>
+        </div>
+        <div style="min-height: 30px;" (click)="UpdateNote(notes)">
+          <span>{{notes.description}}</span>
+        </div>
+     
+        <div *ngFor="let label of notes.labels">
+          <mat-chip  style=" max-width: 200px; padding: 5px 20px;
+          border-radius: 13px;
+          line-height: 3;">
+          {{label.labelName}}
+          </mat-chip>
+        </div>
+        <div *ngFor="let collab of notes.collaborateResponse">
+          <p>
+          {{collab.email}}
+          </p>
+        </div>
       </div>
-      <br>
-      <div class="header"  (click)="UpdateNote(notes)" appearance="none">
-        <p>{{notes.description}}</p>
+        <div style="align-content: space-between;  width: fit-content;margin-top:20px">
+          <app-icon [isTrash]="isTrash" (NoteTrashEvent)="noteTrashed()" (DeleteNoteEvent)="deleteNote()"
+            (NoteArchiveEvent)="noteArchive()" [isArchive]="isArchive" [note]="notes"></app-icon>
+        </div>
+       
       </div>
-      <div fxFlex=100 fxFlexgt-xs=50% fxLayout="row" fxLayoutAlign="space-between center">
-        <app-icon  [isTrash]="isTrash" (NoteTrashEvent)="noteTrashed()" (DeleteNoteEvent)="deleteNote()" (NoteArchiveEvent)="noteArchive()"
-          [isArchive]="isArchive"  [note]="notes"></app-icon>
-      </div>
-    </div>
-  </mat-card>
+    </mat-card>
+  </div>
+  <div  fxFlex=15 ></div>
 </div>
