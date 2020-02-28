@@ -4,6 +4,7 @@
     </div>
     <div fxFlex=14>
         <img src="../../../assets/Image/Collaborator.svg" />
+       
     </div>
     <div fxFlex=14>
         <img src="../../../assets/Image/color.svg" />
@@ -13,7 +14,7 @@
         </mat-icon>
     </div>
     <div fxFlex=14 *ngIf="!isArchive">
-        <img src="../../../assets/Image/Archive.svg" />
+        <img src="../../../assets/Image/Archive.svg" (click)="ArchiveNote()" />
     </div>
     <div fxFlex=14>
         <img src="../../../assets/Image/Insertphoto.svg" />

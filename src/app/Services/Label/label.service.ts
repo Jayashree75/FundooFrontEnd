@@ -18,4 +18,17 @@ export class LabelService {
     console.log("options data", httpoption)
     return this.httpservice.get('api/Notes/'+ labelid, true, httpoption)
   }
+  createlabel(data, token: string) {
+    console.log(token);
+    let httpoption=this.httpservice.httpheader(token);
+    return this.httpservice.post('api/Label', data, true, httpoption)
+  }
+  deleteLabel(labelid) {
+    console.log(labelid, "notes id response")
+    var token = localStorage.getItem("token")
+    console.log(token); 
+    let httpoption=this.httpservice.httpheader(token);
+    console.log("options data", httpoption)
+    return this.httpservice.delete('api/Label/' + labelid, true, httpoption)
+  }
 }

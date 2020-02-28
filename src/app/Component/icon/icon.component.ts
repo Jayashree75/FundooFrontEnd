@@ -1,6 +1,6 @@
 import { Component, OnInit, Input,Output,EventEmitter } from '@angular/core';
 import { NotesService } from 'src/app/Services/noteService/notes.service';
-
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 @Component({
   selector: 'app-icon',
   templateUrl: './icon.component.html',
@@ -14,7 +14,8 @@ export class IconComponent implements OnInit {
   @Output() NoteTrashEvent=new EventEmitter<any>();
   @Output() NoteArchiveEvent=new EventEmitter<any>();
   @Output() DeleteNoteEvent=new EventEmitter<any>();
-  constructor(private noteservice: NotesService) { }
+  status = false;
+  constructor( public dialog: MatDialog,private noteservice: NotesService) { }
 
   ngOnInit() {
   }

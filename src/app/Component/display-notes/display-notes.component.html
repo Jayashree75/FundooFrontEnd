@@ -5,13 +5,12 @@
       fxLayoutAlign="start center">
       <div>
       <div fxLayout="column" style="max-height: 16em; overflow: hidden; word-break: break-all;">
-        <div (click)="UpdateNote(notes)" style=" margin-bottom:20px;text-overflow: ellipsis;">
+        <div style=" margin-bottom:20px;text-overflow: ellipsis;">
           <span>{{notes.title}}</span>
         </div>
         <div style="min-height: 30px;" (click)="UpdateNote(notes)">
           <span>{{notes.description}}</span>
         </div>
-     
         <div *ngFor="let label of notes.labels">
           <mat-chip  style=" max-width: 200px; padding: 5px 20px;
           border-radius: 13px;
@@ -20,16 +19,15 @@
           </mat-chip>
         </div>
         <div *ngFor="let collab of notes.collaborateResponse">
-          <p>
-          {{collab.email}}
-          </p>
+          <button mat-mini-fab color="primary">
+          {{collab.email[0] | uppercase}}
+        </button>
         </div>
       </div>
-        <div style="align-content: space-between;  width: fit-content;margin-top:20px">
+        <div class="Icon" style="align-content: space-between;  width: fit-content;margin-top:20px">
           <app-icon [isTrash]="isTrash" (NoteTrashEvent)="noteTrashed()" (DeleteNoteEvent)="deleteNote()"
             (NoteArchiveEvent)="noteArchive()" [isArchive]="isArchive" [note]="notes"></app-icon>
-        </div>
-       
+        </div>    
       </div>
     </mat-card>
   </div>

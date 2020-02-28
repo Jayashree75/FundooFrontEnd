@@ -51,7 +51,6 @@ export class DashboardComponent implements OnInit {
     console.log("Hi" + isAdmin);
     this.mobileQuery.removeListener(this._mobileQueryListener);
     this.getAllLabel();
-    
   }
   navigate(value) {
     this.Active = value;
@@ -85,8 +84,7 @@ export class DashboardComponent implements OnInit {
   OpenDialog(){
     console.log()
     this.dialog.open(CreateLabelComponent,{
-      width:'250px',
-      height:'250px'
+      data:this.labels,
     });   
   }
 }

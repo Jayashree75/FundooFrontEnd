@@ -1,0 +1,30 @@
+*{
+    margin: 0px;
+    padding: 5px 0px;
+    color: black;
+    font-size: 17px;
+    overflow:hidden;
+}
+
+.label .show{
+    display: block;
+}
+.label .hide{
+    display: none;
+}
+.label:hover .hide{
+    display: block;
+}
+.label:hover .show{
+    display: none;
+}
+.hide{
+    font-size: 20px;
+}
+.show{
+    font-size: 18px;
+    color: gray;
+}
+mat-divider{
+    color: black;
+}

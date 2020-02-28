@@ -52,7 +52,7 @@ import { CreateLabelComponent } from './Component/create-label/create-label.comp
     MatIconModule,
     MatListModule,
   ],
-  entryComponents: [EditNoteComponent],
+  entryComponents: [EditNoteComponent,CreateLabelComponent],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
 })

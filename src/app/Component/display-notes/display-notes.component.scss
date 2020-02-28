@@ -16,9 +16,16 @@
     transition: transform 0.5s ease-in-out;
 }
 p{
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: 10em;
   word-break: break-all;
+}
+.Icon{
+  visibility: hidden;
+  opacity: 0;
+}
+.card:hover .Icon {
+  visibility: visible;
+  opacity: 1;
 }

@@ -13,12 +13,24 @@ export class DisplayNotesComponent implements OnInit {
   @Input() notes;
   @Input() isTrash;
   @Input() isArchive;
+  UserId: number;
+  email: string;
   @Output() NoteTrash=new EventEmitter<any>();
   @Output() NoteArchive=new EventEmitter<any>();
   @Output() DeleteNote=new EventEmitter<any>();
   constructor(private route:Router,private noteservice: NotesService, public dialog: MatDialog) { }
   ngOnInit() {
+    let loggetUserToken = localStorage.getItem('token');
+    let loggedinUserData = loggetUserToken.split('.')[1];
+    let loggeUserjsondata = window.atob(loggedinUserData);
+    let loggedUserdecodedata = JSON.parse(loggeUserjsondata);
+    let isAdmin = loggedUserdecodedata.userClaims;
+    this.UserId = loggedUserdecodedata.UserId;
+    this.email = loggedUserdecodedata.Email;
+    console.log(this.email[0]);
+    console.log("Hi" + isAdmin);
   }
+
   
   UpdateNote(note){
     console.log(note)
