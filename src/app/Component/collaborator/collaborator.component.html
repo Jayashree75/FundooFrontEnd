@@ -1,0 +1,21 @@
+<div class="collab">
+  <h1 mat-dialog-title>Collaborator</h1>
+  <mat-divider></mat-divider>
+  <div fxLayout="row">
+    <div *ngIf="ownerProfile != null">
+      <img src="{{ownerProfile}}" class="imageAvtar">
+      <span style="font-size: 14px;font-weight: bold;">{{ownerEmail}}(Owner)</span>
+    </div>
+  </div>
+  <div fxLayout="row">
+    <div class="Icon">
+      <mat-icon class="mat">person_add</mat-icon>
+    </div>
+    <input matInput placeholder="Person or email to share with">
+    <mat-icon class="mat">done</mat-icon>
+  </div>
+  <div fxLayoutAlign="end end" style="background-color: rgba(0,0,0,0.07);">
+    <button mat-button>Cancel</button>
+    <button mat-button>Save</button>
+  </div>
+</div>

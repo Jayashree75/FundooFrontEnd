@@ -12,24 +12,28 @@ export class HttpService {
   constructor(private httpClient: HttpClient) { }
 
   post(url, data, tokenRequired: boolean = false, headerOption = null): Observable<any> {
-
+    let httpoption=this.httpheader();
     console.log(tokenRequired && headerOption);
-    return this.httpClient.post(this.baseUrl + url, data, tokenRequired && headerOption);
+    return this.httpClient.post(this.baseUrl + url, data, tokenRequired && httpoption);
   }
   get(url, tokenRequired: boolean = false, headerOption = null): Observable<any> {
-
+    let httpoption=this.httpheader();
     console.log(tokenRequired && headerOption);
-    return this.httpClient.get(this.baseUrl + url, tokenRequired && headerOption)
+    return this.httpClient.get(this.baseUrl + url, tokenRequired && httpoption)
   }
   put(url, data, tokenRequired: boolean = false, headerOption = null): Observable<any> {
+    let httpoption=this.httpheader();
     console.log(tokenRequired && headerOption);
-    return this.httpClient.put(this.baseUrl + url, data, tokenRequired && headerOption)
+    return this.httpClient.put(this.baseUrl + url, data, tokenRequired && httpoption)
+   
   }
   delete(url, tokenRequired: boolean = false, headerOption = null): Observable<any> {
+    let httpoption=this.httpheader();
     console.log(tokenRequired && headerOption);
-    return this.httpClient.delete(this.baseUrl + url, tokenRequired && headerOption)
+    return this.httpClient.delete(this.baseUrl + url, tokenRequired && httpoption)
   }
-  httpheader(token: string) {
+  httpheader() {
+    var token = localStorage.getItem("token")
     const options = {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + token,

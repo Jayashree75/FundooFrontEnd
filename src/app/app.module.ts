@@ -21,7 +21,8 @@ import{ArchiveComponent} from './Component/archive/archive.component';
 import { RemainderComponent } from './Component/remainder/remainder.component';
 import { LabelComponent } from './Component/label/label.component';
 import { EditNoteComponent } from './Component/edit-note/edit-note.component';
-import { CreateLabelComponent } from './Component/create-label/create-label.component'
+import { CreateLabelComponent } from './Component/create-label/create-label.component';
+import { CollaboratorComponent } from './Component/collaborator/collaborator.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { CreateLabelComponent } from './Component/create-label/create-label.comp
     RemainderComponent,
     LabelComponent,
     EditNoteComponent,
-    CreateLabelComponent
+    CreateLabelComponent,
+    CollaboratorComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,7 @@ import { CreateLabelComponent } from './Component/create-label/create-label.comp
     MatIconModule,
     MatListModule,
   ],
-  entryComponents: [EditNoteComponent,CreateLabelComponent],
+  entryComponents: [EditNoteComponent,CreateLabelComponent,CollaboratorComponent],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
 })

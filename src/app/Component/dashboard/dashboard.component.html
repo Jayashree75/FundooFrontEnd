@@ -19,15 +19,32 @@
         <div>
           <mat-icon fxLayoutAlign="center center">refresh</mat-icon>
         </div>
-        <div>
-          <mat-icon fxLayoutAlign="center center">view_agenda</mat-icon>
-        </div>
+        <button mat-icon-button style="margin-top:10px;margin-left: 10px; outline: none;">
+          <img src={{this.src}} class={{viewClass}} (click)=changeView(this.src) matTooltip={{this.viewToolTip}}>
+        </button>
         <div>
           <mat-icon fxLayoutAlign="end center">settings</mat-icon>
         </div>
-        <div class="example-button-row">
-          <button mat-mini-fab color="primary">{{Email[0] | uppercase}}</button>
-        </div>
+        <button class="buttonAvtar" mat-icon-button [matMenuTriggerFor]="beforeMenu">
+          <mat-menu #beforeMenu="matMenu" xPosition="before">
+            <div class="mat-menu-div" fxLayoutAlign="center center" style="width: 250px; height: 200px;">
+              <div>
+                <div fxLayoutAlign="center center">
+                  <img mat-card-avatar src="{{this.userProfilePic}}" class="avtar-in-menu" (click)="file.click(file)"
+                    matTooltip="Change Profile Picture">
+                  <input type="file" #file style="display:none;" name="file"(change)="changeProfilePicture(file.files)">
+                </div>
+                <div style="text-align: center;">
+                  <p>{{this.userName}}</p>
+                  <p>{{this.userEmail}}</p>
+                <button mat-raised-button (click)=logout()>Logout</button>
+              </div>
+              </div>
+            </div>
+          </mat-menu>
+          <img mat-card-avatar src="{{this.userProfilePic}}" class="imageAvtar">
+        </button>
+
       </div>
     </mat-toolbar>
   </div>
@@ -55,7 +72,7 @@
           <span matLine (click)="navigatenotebylabel(data.labelID)">{{data.labelName}}</span>
         </mat-list-item>
         <mat-list-item class="card1" click="UpdateNote()" disableRipple="true" [class.isActive]="Active=='labels'"
-          (click)="navigate('labels')"  >
+          (click)="navigate('labels')">
           <mat-icon matListIcon>editoutlinedicon</mat-icon>
           <span matLine (click)="OpenDialog()">Edit Labels</span>
         </mat-list-item>
@@ -69,10 +86,6 @@
           (click)="navigate('delete')">
           <mat-icon matListIcon>delete</mat-icon>
           <span matLine>Trash</span>
-        </mat-list-item>
-        <mat-divider></mat-divider>
-        <mat-list-item>
-          <span matLine (click)=logout()>Logout</span>
         </mat-list-item>
       </mat-nav-list>
     </mat-sidenav>

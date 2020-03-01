@@ -19,7 +19,7 @@ export class RemainderComponent implements OnInit {
   getAllRemainder()
   {
     var token=localStorage.getItem("token")
-    this.noteservice.getAllRemainder(token).subscribe(Response => {
+    this.noteservice.getAllRemainder().subscribe(Response => {
       console.log("note response", Response);
       this.notes=Response['notesDBs'];
       console.log("response trash",this.notes)

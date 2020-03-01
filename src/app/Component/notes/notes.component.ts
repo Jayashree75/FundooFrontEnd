@@ -19,7 +19,7 @@ export class NotesComponent implements OnInit {
   }
   GetAllNotes() {
     var token = localStorage.getItem("token")
-    this.noteservice.getAllNotes(token).subscribe(Response => {
+    this.noteservice.getAllNotes().subscribe(Response => {
       console.log("note response", Response);
       this.notes = Response['notesDBs'];
       this.note = this.notes.filter(linq => linq.isTrash == false && linq.isArchive == false);

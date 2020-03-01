@@ -9,60 +9,45 @@ export class NotesService {
   constructor(private httpservice: HttpService) { }
   createnote(data, token: string) {
     console.log(token);
-    let httpoption=this.httpservice.httpheader(token);
-    return this.httpservice.post('api/Notes', data, true, httpoption)
+    return this.httpservice.post('api/Notes', data, true)
   }
   
   TrashNote(noteid) {
     console.log(noteid, "notes id response")
-    var token = localStorage.getItem("token");
-    let httpoption=this.httpservice.httpheader(token);
-    console.log("options data", httpoption)
-    return this.httpservice.put('api/Notes/' + noteid + '/Trash',{value:true}, true, httpoption)
+    return this.httpservice.put('api/Notes/' + noteid + '/Trash',{value:true}, true)
   }
   ArchiveNote(noteid) {
-    console.log(noteid, "notes id response")
-    var token = localStorage.getItem("token")
-    console.log(token);
-    let httpoption=this.httpservice.httpheader(token);
-    console.log("options data", httpoption)
-    return this.httpservice.put('api/Notes/' + noteid + '/Archive',{value:true}, true, httpoption)
+    return this.httpservice.put('api/Notes/' + noteid + '/Archive',{value:true}, true)
   }
-  getAllNotes(token: string) {
-    console.log(token);
-    let httpoption=this.httpservice.httpheader(token);
-    return this.httpservice.get('api/Notes', true, httpoption)
+  getAllNotes() {
+    return this.httpservice.get('api/Notes', true)
   }
-  getAllTrash(token: string) {
-    console.log(token)
-    let httpoption=this.httpservice.httpheader(token);
-    return this.httpservice.get('api/Notes/Trash', true, httpoption)
+  getAllTrash() {
+    return this.httpservice.get('api/Notes/Trash', true)
   }
-  getAllArchive(token: string) {
-    console.log(token)
-    let httpoption=this.httpservice.httpheader(token);
-    return this.httpservice.get('api/Notes/Archive', true, httpoption)
+  getAllArchive() {
+    return this.httpservice.get('api/Notes/Archive', true)
   }
   deleteNote(noteid) {
-    console.log(noteid, "notes id response")
-    var token = localStorage.getItem("token")
-    console.log(token); 
-    let httpoption=this.httpservice.httpheader(token);
-    console.log("options data", httpoption)
-    return this.httpservice.delete('api/Notes/' + noteid, true, httpoption)
+    return this.httpservice.delete('api/Notes/' + noteid, true)
   }
-  getAllRemainder(token: string) {
-    console.log(token)
-    let httpoption=this.httpservice.httpheader(token);
-    return this.httpservice.get('api/Notes/Remainder', true, httpoption)
+  getAllRemainder() {
+    return this.httpservice.get('api/Notes/Remainder', true)
   }
   UpdateNote(data,noteid)
   {
-    var token = localStorage.getItem("token");
-    console.log(token);
-    let httpoption=this.httpservice.httpheader(token);
-    console.log("options data", httpoption);
-    return this.httpservice.put('api/Notes/' + noteid,data,true, httpoption)
+    return this.httpservice.put('api/Notes/' + noteid,data,true)
   }
-  
+  ChangeColor(noteid,data)
+  {
+    return this.httpservice.put('api/Notes/'+ noteid+'/Color',data,true)
+  }
+  AddImage(data,noteid)
+  {
+    return this.httpservice.put('api/Notes/'+ noteid+'/Image',data,true)
+  }
+  AddCollaborate(data,noteid)
+  {
+    return this.httpservice.post('api/Notes/'+ noteid+'/Collaborate',data,true)
+  }
 }

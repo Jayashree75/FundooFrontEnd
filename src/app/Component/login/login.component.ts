@@ -27,10 +27,16 @@ export class LoginComponent implements OnInit {
   get f() { return this.login.controls; }
 
   loginForm() {
-    console.log('values in login form', this.login.value);
     this.loginService.Login(this.login.value).subscribe(response => {
-      console.log("login response", response['token']);
-      localStorage.setItem("token", response['token']);
+      localStorage.setItem('token', response['token']);
+      console.log(response)
+      localStorage.setItem('userId', response.data.userId);
+      localStorage.setItem('firstName', response.data.firstName);
+      localStorage.setItem('fullName', response.data.firstName+" "+ response.data.lastName);
+      localStorage.setItem('email', response.data.email);
+       localStorage.setItem('type', response.data.type);
+       localStorage.setItem('Profile', response.data.priofilepic);
+   
       this.snackbar.open("User Logged in Successfully", '', {
         duration: 2000,
       });
@@ -41,11 +47,9 @@ export class LoginComponent implements OnInit {
     })
   }
   navigate() {
-    console.log("navigate")
     this.router.navigate(['/Registration'])
   }
   navigatepage() {
-    console.log("navigatepage")
     this.router.navigate(['/ForgetPassword'])
   }
 }

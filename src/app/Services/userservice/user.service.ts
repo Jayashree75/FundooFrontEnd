@@ -31,4 +31,8 @@ export class UserService {
     };
     return this.httpservice.post('api/UserAccount/ResetPassword',data,true,options)
   }
+  ChangeProfile(data)
+  {
+    return this.httpservice.post('api/UserAccount/Image',data)
+  }
 }

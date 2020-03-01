@@ -3,11 +3,7 @@ import { Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NotesService } from '../../Services/noteService/notes.service';
 import { ActivatedRoute } from "@angular/router";
-// export interface DialogData {
-//   noteID: number;
-//   title: string;
-//   description: string;
-// }
+
 @Component({
   selector: 'app-edit-note',
   templateUrl: './edit-note.component.html',

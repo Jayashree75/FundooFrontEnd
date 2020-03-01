@@ -6,6 +6,8 @@ import { LabelService } from '../../Services/Label/label.service'
 import { ActivatedRoute } from '@angular/router'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import{CreateLabelComponent} from '../../Component/create-label/create-label.component'
+import{DataOneService} from '../../Services/dataservice.service'
+import{UserService} from '../../Services/userservice/user.service'
 import { from } from 'rxjs';
 
 @Component({
@@ -22,6 +24,12 @@ export class DashboardComponent implements OnInit {
   UserId: number;
   Email: string;
   labels: [any];
+  viewToolTip ="List View";
+  viewClass = "listView";
+  src ="../../../assets/Image/Grid.svg";
+  userName = localStorage.getItem('fullName');
+  userEmail = localStorage.getItem('email');
+  userProfilePic = localStorage.getItem('Profile');
   fillerNav = Array.from({ length: 50 }, (_, i) => `Nav Item ${i + 1}`);
 
   private _mobileQueryListener: () => void;
@@ -30,7 +38,9 @@ export class DashboardComponent implements OnInit {
     public dialog: MatDialog,
     private route: Router,
     private labelservice: LabelService,
-    private activateroute: ActivatedRoute) {
+    private userservice: UserService,
+    private activateroute: ActivatedRoute,
+    private dataOneService: DataOneService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -38,6 +48,20 @@ export class DashboardComponent implements OnInit {
   logout() {
     localStorage.removeItem("token");
     this.route.navigate(["login"]);
+  }
+  changeView(src){
+    if(src == "../../../assets/Image/list.svg"){
+      this.src="../../../assets/Image/Grid.svg";
+      this.viewToolTip="List View";
+      this.viewClass = "listView"
+    }else{
+      this.src="../../../assets/Image/list.svg";
+      this.viewToolTip="Grid View";
+      this.viewClass = "gridView"
+    }
+    this.dataOneService.changeMessage({
+      type:this.viewClass
+    })
   }
   ngOnInit(): void {
     let loggetUserToken = localStorage.getItem('token');
@@ -74,7 +98,7 @@ export class DashboardComponent implements OnInit {
   }
   getAllLabel() {
     console.log()
-    this.labelservice.getAllLabel(this.token).subscribe(data => {
+    this.labelservice.getAllLabel().subscribe(data => {
       this.labels = data['labelmodel']
       console.log(this.labels)
     }, error => {
@@ -86,5 +110,17 @@ export class DashboardComponent implements OnInit {
     this.dialog.open(CreateLabelComponent,{
       data:this.labels,
     });   
+  }
+  changeProfilePicture(files: FileList){
+    let fileToUpload = <File>files[0];
+      const formData: FormData = new FormData();
+      formData.append('file', fileToUpload);
+      console.log( formData);
+      return this.userservice.ChangeProfile(formData).subscribe(response=>{
+        localStorage.setItem('profilePicture',response.data.userProfilePic)
+        console.log('response',response);
+      },error=>{
+        console.log('error',error);
+      })
   }
 }

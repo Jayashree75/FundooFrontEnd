@@ -18,7 +18,7 @@ export class TrashComponent implements OnInit {
   GetAllTrash()
   {
     var token=localStorage.getItem("token")
-    this.noteservice.getAllTrash(token).subscribe(Response => {
+    this.noteservice.getAllTrash().subscribe(Response => {
       console.log("note response", Response);
       this.notes=Response['notesDBs'];
       console.log("response trash",this.notes)

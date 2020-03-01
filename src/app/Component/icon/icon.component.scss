@@ -5,3 +5,18 @@
     color: grey;
     font-size: 18px;
 }
+.mat-mini-fab{
+    width: 30px;
+    height: 30px;
+   margin: 5px;
+}
+.mat-menu{
+    visibility: hidden;
+    opacity: 0;
+}
+
+.Colorchange:hover .palet {
+    visibility: visible;
+    opacity: 1;
+  }
+  

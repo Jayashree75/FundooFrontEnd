@@ -28,15 +28,21 @@ export class CreateLabelComponent implements OnInit {
     var labelcreate: Labels = {
       LabelName: this.labelName,
     }
-    var token = localStorage.getItem("token")
-    this.labelservice.createlabel(labelcreate, token).subscribe(Response => {
+    this.labelservice.createlabel(labelcreate).subscribe(Response => {
       console.log("label response", Response);
     }, error => { console.log("label response", error) });
   }
-  DeleteLabel(labelid) {
-    var token = localStorage.getItem("token")
-    this.labelservice.createlabel(labelid, token).subscribe(Response => {
+  DeleteLabel(labelID) {
+    this.labelservice.deleteLabel(labelID).subscribe(Response => {
       console.log("label response", Response);
+    }, error => { console.log("label response", error) });
+  }
+  UpdateLabel(labelID) {
+    var labelUpdate: Labels = {
+      LabelName: this.labelName,
+    }
+    this.labelservice.UpdateLabels(labelUpdate, labelID).subscribe(Response => {
+      console.log("LABEL Response", Response);
     }, error => { console.log("label response", error) });
   }
 }

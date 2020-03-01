@@ -11,10 +11,10 @@
   </div>
   <div class="label" *ngFor="let items of data" style="font-family: Roboto,Arial,sans-serif;">
     <div fxLayout="row">   
-    <mat-icon class="hide" matListIcon (click)="DeleteLabel(labelid)">delete</mat-icon>  
+    <mat-icon class="hide" matListIcon (click)="DeleteLabel(items.labelID)">delete</mat-icon>  
     <mat-icon class="show" matListIcon>label</mat-icon>
       <input matInput [(ngModel)]="items.labelName">
-    <mat-icon  matListIcon>editoutlinedicon</mat-icon>
+    <mat-icon  matListIcon (click)="UpdateLabel(items.labelID)">editoutlinedicon</mat-icon>
   </div> 
   </div>
 <mat-divider></mat-divider>

@@ -1,14 +1,24 @@
 <div fxLayout="row" fxLayoutGap='12%' fxLayoutGap.xs=auto fxFlex=100 *ngIf="!isTrash">
     <div fxFlex=14>
-        <img src="../../../assets/Image/Reminder.svg" />
+        <img src="../../../assets/Image/Reminder.svg"/>
     </div>
     <div fxFlex=14>
-        <img src="../../../assets/Image/Collaborator.svg" />
-       
+        <img src="../../../assets/Image/Collaborator.svg" (click)="openDialog()" />
+
     </div>
-    <div fxFlex=14>
-        <img src="../../../assets/Image/color.svg" />
+    <div class="Colorchange" fxFlex=14>
+        <mat-icon mat-button [matMenuTriggerFor]="colorPicker">
+            <img src="../../../assets/Image/color.svg" />
+        </mat-icon>
+        <mat-menu #colorPicker="matMenu"  yPosition="above" fxLayoutAlign="center center">
+            <div fxLayoutGap=4px class="colormenu" style="width: 160px;">
+                <button mat-mini-fab *ngFor="let colors of color" [style.backgroundColor]='colors'
+                    (click)="ChangeColor(colors)">
+                </button>
+            </div>
+        </mat-menu>
     </div>
+
     <div fxFlex=14 *ngIf="isArchive">
         <mat-icon aria-label="Example icon button" matTooltip="Unrchive" (click)="ArchiveNote()">unarchive
         </mat-icon>
@@ -29,7 +39,8 @@
         </mat-icon>
     </div>
 </div>
-<div fxFlex=14 fxLayout="row" *ngIf="isTrash" fxLayoutAlign="space-around center" display="flex" fxFlex.gt-sm="100" fxFlex="100">
+<div fxFlex=14 fxLayout="row" *ngIf="isTrash" fxLayoutAlign="space-around center" display="flex" fxFlex.gt-sm="100"
+    fxFlex="100">
     <div class="example-button-row">
         <button mat-icon-button>
             <mat-icon aria-label="Example icon button" (click)="DeleteNote()">delete_forever</mat-icon>
