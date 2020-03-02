@@ -2,23 +2,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MatSelectModule} from '@angular/material/select';
-import { MatCardModule} from '@angular/material/card';
-import { MatButtonModule} from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule,MatInputModule  } from '@angular/material';
-import { MatIconModule  } from '@angular/material/icon';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatChipsModule } from '@angular/material/chips';
+import { ImageCropperModule } from 'ngx-image-cropper';
+
 @NgModule({
     declarations: [
-     
+
     ],
     imports: [
         BrowserModule,
@@ -30,10 +32,11 @@ import {MatChipsModule} from '@angular/material/chips';
         MatButtonModule,
         FlexLayoutModule,
         BrowserAnimationsModule,
-        MatFormFieldModule,MatInputModule,MatIconModule,MatButtonToggleModule,MatSidenavModule,MatSnackBarModule,MatMenuModule
-        ,MatDialogModule,
+        MatFormFieldModule, MatInputModule, MatIconModule, MatButtonToggleModule, MatSidenavModule, MatSnackBarModule, MatMenuModule
+        , MatDialogModule,
         MatTooltipModule,
-        MatChipsModule
+        MatChipsModule,
+        ImageCropperModule
     ],
     exports: [
         BrowserModule,
@@ -44,8 +47,9 @@ import {MatChipsModule} from '@angular/material/chips';
         MatSelectModule,
         MatButtonModule,
         FlexLayoutModule,
-        BrowserAnimationsModule,MatFormFieldModule,MatInputModule,MatIconModule,MatButtonToggleModule,MatSidenavModule,MatSnackBarModule,MatMenuModule,
-        MatDialogModule,MatTooltipModule,MatChipsModule
+        BrowserAnimationsModule, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonToggleModule, MatSidenavModule, MatSnackBarModule, MatMenuModule,
+        MatDialogModule, MatTooltipModule, MatChipsModule,
+        ImageCropperModule
     ],
 })
 export class materialModule { }

@@ -10,19 +10,20 @@ import { ResetpasswordComponent } from './Component/resetpassword/resetpassword.
 import { DashboardComponent } from './Component/dashboard/dashboard.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
-import { AuthGuard} from './Services/AuthGuard/auth.guard';
+import { AuthGuard } from './Services/AuthGuard/auth.guard';
 import { NotesComponent } from './Component/notes/notes.component';
 import { CreateNotesComponent } from './Component/create-notes/create-notes.component';
 import { DisplayNotesComponent } from './Component/display-notes/display-notes.component';
 import { from } from 'rxjs';
 import { TrashComponent } from './Component/trash/trash.component';
 import { IconComponent } from './Component/icon/icon.component';
-import{ArchiveComponent} from './Component/archive/archive.component';
+import { ArchiveComponent } from './Component/archive/archive.component';
 import { RemainderComponent } from './Component/remainder/remainder.component';
 import { LabelComponent } from './Component/label/label.component';
 import { EditNoteComponent } from './Component/edit-note/edit-note.component';
 import { CreateLabelComponent } from './Component/create-label/create-label.component';
-import { CollaboratorComponent } from './Component/collaborator/collaborator.component'
+import { CollaboratorComponent } from './Component/collaborator/collaborator.component';
+import{DataService} from './Services/Data_Service/data-service.service'
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,8 +55,8 @@ import { CollaboratorComponent } from './Component/collaborator/collaborator.com
     MatIconModule,
     MatListModule,
   ],
-  entryComponents: [EditNoteComponent,CreateLabelComponent,CollaboratorComponent],
-  providers: [AuthGuard],
+  entryComponents: [EditNoteComponent, CreateLabelComponent, CollaboratorComponent],
+  providers: [AuthGuard,DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

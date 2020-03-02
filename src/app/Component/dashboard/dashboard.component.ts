@@ -5,10 +5,11 @@ import { Router } from '@angular/router';
 import { LabelService } from '../../Services/Label/label.service'
 import { ActivatedRoute } from '@angular/router'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import{CreateLabelComponent} from '../../Component/create-label/create-label.component'
-import{DataOneService} from '../../Services/dataservice.service'
-import{UserService} from '../../Services/userservice/user.service'
+import { CreateLabelComponent } from '../../Component/create-label/create-label.component'
+import { UserService } from '../../Services/userservice/user.service';
+import { DataService } from '../../Services/Data_Service/data-service.service'
 import { from } from 'rxjs';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -24,23 +25,23 @@ export class DashboardComponent implements OnInit {
   UserId: number;
   Email: string;
   labels: [any];
-  viewToolTip ="List View";
+  viewToolTip = "List View";
   viewClass = "listView";
-  src ="../../../assets/Image/Grid.svg";
+  src = "../../../assets/Image/Grid.svg";
   userName = localStorage.getItem('fullName');
   userEmail = localStorage.getItem('email');
   userProfilePic = localStorage.getItem('Profile');
   fillerNav = Array.from({ length: 50 }, (_, i) => `Nav Item ${i + 1}`);
 
   private _mobileQueryListener: () => void;
-  
+
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
     public dialog: MatDialog,
     private route: Router,
+    private dataservice: DataService,
     private labelservice: LabelService,
     private userservice: UserService,
-    private activateroute: ActivatedRoute,
-    private dataOneService: DataOneService) {
+    private activateroute: ActivatedRoute) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -49,19 +50,16 @@ export class DashboardComponent implements OnInit {
     localStorage.removeItem("token");
     this.route.navigate(["login"]);
   }
-  changeView(src){
-    if(src == "../../../assets/Image/list.svg"){
-      this.src="../../../assets/Image/Grid.svg";
-      this.viewToolTip="List View";
+  changeView(src) {
+    if (src == "../../../assets/Image/list.svg") {
+      this.src = "../../../assets/Image/Grid.svg";
+      this.viewToolTip = "List View";
       this.viewClass = "listView"
-    }else{
-      this.src="../../../assets/Image/list.svg";
-      this.viewToolTip="Grid View";
+    } else {
+      this.src = "../../../assets/Image/list.svg";
+      this.viewToolTip = "Grid View";
       this.viewClass = "gridView"
     }
-    this.dataOneService.changeMessage({
-      type:this.viewClass
-    })
   }
   ngOnInit(): void {
     let loggetUserToken = localStorage.getItem('token');
@@ -75,6 +73,13 @@ export class DashboardComponent implements OnInit {
     console.log("Hi" + isAdmin);
     this.mobileQuery.removeListener(this._mobileQueryListener);
     this.getAllLabel();
+    this.dataservice.labelMessage.subscribe(data => {
+    if(data.type=='LabelDelete' || data.type=='LabelUpdate' ||data.type=='LabelAdd')
+    {
+      this.getAllLabel();
+    }
+    })
+
   }
   navigate(value) {
     this.Active = value;
@@ -105,22 +110,25 @@ export class DashboardComponent implements OnInit {
       console.log(error);
     })
   }
-  OpenDialog(){
+  OpenDialog() {
     console.log()
-    this.dialog.open(CreateLabelComponent,{
-      data:this.labels,
-    });   
+    this.dialog.open(CreateLabelComponent, {
+      data: this.labels,
+      
+    });
   }
-  changeProfilePicture(files: FileList){
+  onNoClick(): void {
+    this.dialog.closeAll();
+  }
+  changeProfilePicture(files: File) {
     let fileToUpload = <File>files[0];
-      const formData: FormData = new FormData();
-      formData.append('file', fileToUpload);
-      console.log( formData);
-      return this.userservice.ChangeProfile(formData).subscribe(response=>{
-        localStorage.setItem('profilePicture',response.data.userProfilePic)
-        console.log('response',response);
-      },error=>{
-        console.log('error',error);
-      })
+    const formData: FormData = new FormData();
+    formData.append('Image', fileToUpload);
+    return this.userservice.ChangeProfile(formData).subscribe(response => {
+      localStorage.setItem('Profile', response.imageUrl)
+      console.log('response', response.imageUrl);
+    }, error => {
+      console.log('error', error);
+    })
   }
 }

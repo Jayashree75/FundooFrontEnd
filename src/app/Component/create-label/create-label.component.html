@@ -9,7 +9,7 @@
     </div>
      <!-- // <mat-icon>check</mat-icon> -->
   </div>
-  <div class="label" *ngFor="let items of data" style="font-family: Roboto,Arial,sans-serif;">
+  <div class="label" *ngFor="let items of getallLabels" style="font-family: Roboto,Arial,sans-serif;">
     <div fxLayout="row">   
     <mat-icon class="hide" matListIcon (click)="DeleteLabel(items.labelID)">delete</mat-icon>  
     <mat-icon class="show" matListIcon>label</mat-icon>
@@ -19,6 +19,6 @@
   </div>
 <mat-divider></mat-divider>
   <div fxLayout="row" fxLayoutAlign="end end">
-    <button mat-button (click)="createLabel()">Done</button>
+    <button mat-button (click)="createLabel()" (click)="onNoClick()">Done</button>
   </div>
 </div>

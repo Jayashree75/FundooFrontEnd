@@ -19,7 +19,7 @@
         <div>
           <mat-icon fxLayoutAlign="center center">refresh</mat-icon>
         </div>
-        <button mat-icon-button style="margin-top:10px;margin-left: 10px; outline: none;">
+        <button mat-icon-button style="margin-left: 10px; outline: none;">
           <img src={{this.src}} class={{viewClass}} (click)=changeView(this.src) matTooltip={{this.viewToolTip}}>
         </button>
         <div>
@@ -30,21 +30,21 @@
             <div class="mat-menu-div" fxLayoutAlign="center center" style="width: 250px; height: 200px;">
               <div>
                 <div fxLayoutAlign="center center">
-                  <img mat-card-avatar src="{{this.userProfilePic}}" class="avtar-in-menu" (click)="file.click(file)"
+                  <img mat-card-avatar src={{userProfilePic}} class="avtar-in-menu" (click)="file.click(file)"
                     matTooltip="Change Profile Picture">
-                  <input type="file" #file style="display:none;" name="file"(change)="changeProfilePicture(file.files)">
+                  <input type="file" #file style="display:none;" name="file"
+                    (change)="changeProfilePicture(file.files)">
                 </div>
                 <div style="text-align: center;">
                   <p>{{this.userName}}</p>
                   <p>{{this.userEmail}}</p>
-                <button mat-raised-button (click)=logout()>Logout</button>
-              </div>
+                  <button mat-raised-button (click)=logout()>Logout</button>
+                </div>
               </div>
             </div>
           </mat-menu>
-          <img mat-card-avatar src="{{this.userProfilePic}}" class="imageAvtar">
+          <img mat-card-avatar src={{userProfilePic}} class="imageAvtar">
         </button>
-
       </div>
     </mat-toolbar>
   </div>
@@ -53,7 +53,7 @@
     <mat-sidenav class="sidenav" #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
       [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       <mat-nav-list>
-        <mat-list-item class="card1" disableRipple="true" [class.isActive]="Active=='notes'" (click)="navigateNotes()"
+        <mat-list-item class="card1" disableRipple="true" [class.isActive]="Active=='Notes'" (click)="navigateNotes()"
           (click)="navigate('Notes')">
           <mat-icon matListIcon>lightbulb_outline</mat-icon>
           <span matLine>Notes</span>

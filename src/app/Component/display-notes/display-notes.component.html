@@ -1,38 +1,43 @@
 <div fxLayout="row" fxFlex=100>
-<div  fxFlex=15 ></div> 
-  <div  fxFlex=70 fxLayout="row wrap" fxLayoutAlign="center center">
-    <mat-card class="card" fxFlex=40 fxLayoutGap=20 *ngFor="let notes of notes"  [style.background-color]=notes.color fxFlex.xs=100
-      fxLayoutAlign="start center">
+  <div fxFlex=15></div>
+  <div fxFlex=70 fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-card class="card" fxFlex=40 fxLayoutGap=20 *ngFor="let notes of notes" [style.background-color]=notes.color
+      fxFlex.xs=100 fxLayoutAlign="start center">
       <div>
-      <div fxLayout="column" style="max-height: 16em; overflow: hidden; word-break: break-all;">
-        <div style=" margin-bottom:20px;text-overflow: ellipsis;" (click)="UpdateNote(notes)">
-          <span>{{notes.title}}</span>
-        </div>
-        <div style="min-height: 30px;" (click)="UpdateNote(notes)">
-          <span>{{notes.description}}</span>
-        </div>
-        <div >
-        <div *ngFor="let label of notes.labels" >
-          <mat-chip  style=" max-width: 200px; padding: 2px 9px; border-radius: 13px;
+      <div fxLayout="column" *ngIf="notes.image!=null">
+        <img style="width: 190px;height: 150px;"src="{{notes.image}}">
+      </div>
+      <div>
+        <div fxLayout="column" style="max-height: 16em; overflow: hidden; word-break: break-all;">
+          <div style=" margin-bottom:20px;text-overflow: ellipsis;" (click)="UpdateNote(notes)">
+            <span>{{notes.title}}</span>
+          </div>
+          <div style="min-height: 30px;" (click)="UpdateNote(notes)">
+            <span>{{notes.description}}</span>
+          </div>
+          <div>
+            <div *ngFor="let label of notes.labels">
+              <mat-chip style=" max-width: 200px; padding: 2px 9px; border-radius: 13px;
           line-height: 3;">
-          {{label.labelName}}
-          </mat-chip>
+                {{label.labelName}}
+              </mat-chip>
+            </div>
+          </div>
+          <div fxLayout="row">
+            <div *ngFor="let collab of notes.collaborateResponse">
+              <button mat-mini-fab color="primary" style="width: 30px; height: 30px;">
+                {{collab.email[0] | uppercase}}
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-        <div fxLayout="row">
-        <div *ngFor="let collab of notes.collaborateResponse">
-          <button mat-mini-fab color="primary" style="width: 30px; height: 30px;">
-          {{collab.email[0] | uppercase}}
-        </button>
-        </div>
-      </div>
-      </div>
         <div class="Icon" style="align-content: space-between;  width: fit-content;margin-top:20px">
           <app-icon [isTrash]="isTrash" (NoteTrashEvent)="noteTrashed()" (DeleteNoteEvent)="deleteNote()"
-            (NoteArchiveEvent)="noteArchive()"  [isArchive]="isArchive" [note]="notes"></app-icon>
-        </div>    
+            (NoteArchiveEvent)="noteArchive()" [isArchive]="isArchive" [note]="notes"></app-icon>
+        </div>
+      </div>
       </div>
     </mat-card>
   </div>
-  <div  fxFlex=15 ></div>
+  <div fxFlex=15></div>
 </div>

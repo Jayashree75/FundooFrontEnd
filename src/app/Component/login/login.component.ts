@@ -32,11 +32,10 @@ export class LoginComponent implements OnInit {
       console.log(response)
       localStorage.setItem('userId', response.data.userId);
       localStorage.setItem('firstName', response.data.firstName);
-      localStorage.setItem('fullName', response.data.firstName+" "+ response.data.lastName);
+      localStorage.setItem('fullName', response.data.firstName + " " + response.data.lastName);
       localStorage.setItem('email', response.data.email);
-       localStorage.setItem('type', response.data.type);
-       localStorage.setItem('Profile', response.data.priofilepic);
-   
+      localStorage.setItem('type', response.data.type);
+      localStorage.setItem('Profile', response.data.priofilepic);
       this.snackbar.open("User Logged in Successfully", '', {
         duration: 2000,
       });

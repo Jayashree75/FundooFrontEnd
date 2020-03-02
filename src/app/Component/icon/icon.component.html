@@ -27,7 +27,9 @@
         <img src="../../../assets/Image/Archive.svg" (click)="ArchiveNote()" />
     </div>
     <div fxFlex=14>
-        <img src="../../../assets/Image/Insertphoto.svg" />
+        <img src="../../../assets/Image/Insertphoto.svg" (click)="file.click(file)" />
+        <input type="file" #file style="display:none;" name="file"
+        (change)="AddImageToNotes(file.files)">
     </div>
     <div fxFlex=14 class="example-button-row">
         <mat-icon mat-icon-button [matMenuTriggerFor]="belowMenu">

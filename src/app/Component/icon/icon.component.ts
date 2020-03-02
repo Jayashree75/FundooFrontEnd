@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NotesService } from 'src/app/Services/noteService/notes.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import{CollaboratorComponent} from '../../Component/collaborator/collaborator.component'
+import { CollaboratorComponent } from '../../Component/collaborator/collaborator.component'
 
 @Component({
   selector: 'app-icon',
@@ -48,24 +48,37 @@ export class IconComponent implements OnInit {
   }
   ChangeColor(Colour) {
     console.log(this.note.noteID)
-    this.note.color=Colour;
+    this.note.color = Colour;
     console.log(Colour)
-    let data={
-      'color':Colour
+    let data = {
+      'color': Colour
     }
     console.log(data);
     this.noteservice.ChangeColor(this.note.noteID, data).subscribe(Response => {
       console.log("color response", Response);
     }, error => { console.log("color response", error) })
   }
-  openDialog(){
+  openDialog() {
     console.log()
-    const dialogRef =this.dialog.open(CollaboratorComponent,{
-      width:'500px',
-      height:'auto'
-    });  
+    const dialogRef = this.dialog.open(CollaboratorComponent, {
+      width: '500px',
+      height: 'auto',
+      panelClass: "Collaborate"
+    });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-    }); 
+    });
+  }
+  AddImageToNotes(files: File) {
+    let fileToUpload = <File>files[0];
+    const formData: FormData = new FormData();
+    formData.append('Image', fileToUpload);
+    return this.noteservice.AddImage(formData, this.note.noteID).subscribe(response => {
+      console.log(response)
+      this.note.image = response.imageUrl;
+      console.log('response', response.imageUrl);
+    }, error => {
+      console.log('error', error);
+    })
   }
 }

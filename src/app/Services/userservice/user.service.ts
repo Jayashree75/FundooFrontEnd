@@ -33,6 +33,6 @@ export class UserService {
   }
   ChangeProfile(data)
   {
-    return this.httpservice.post('api/UserAccount/Image',data)
+    return this.httpservice.postImage('api/UserAccount/Image',data)
   }
 }

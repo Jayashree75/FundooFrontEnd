@@ -32,12 +32,26 @@ export class HttpService {
     console.log(tokenRequired && headerOption);
     return this.httpClient.delete(this.baseUrl + url, tokenRequired && httpoption)
   }
+
+  postImage(url, data, tokenRequired: boolean = false, headerOption = null): Observable<any> {
+    var token = localStorage.getItem("token")
+    const options = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + token,
+        //'content-Type': 'application/x-www-form-urlencoded',
+        //"Accept":'*/*'
+      })
+    }
+    console.log(tokenRequired && headerOption);
+    return this.httpClient.post(this.baseUrl + url, data, options);
+  }
   httpheader() {
     var token = localStorage.getItem("token")
     const options = {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + token,
-        'content-Type': 'application/json'
+        'content-Type': 'application/json',
+       
       })
     };
     return options;

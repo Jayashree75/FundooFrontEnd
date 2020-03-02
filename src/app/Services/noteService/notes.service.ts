@@ -44,7 +44,7 @@ export class NotesService {
   }
   AddImage(data,noteid)
   {
-    return this.httpservice.put('api/Notes/'+ noteid+'/Image',data,true)
+    return this.httpservice.postImage('api/Notes/'+ noteid+'/Image',data,true)
   }
   AddCollaborate(data,noteid)
   {
