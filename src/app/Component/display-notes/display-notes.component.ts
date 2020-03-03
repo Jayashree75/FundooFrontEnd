@@ -44,6 +44,12 @@ export class DisplayNotesComponent implements OnInit {
       this.PinNotes.emit();
     }, error => { console.log("notes response", error) })
   }
+  UnPinNote(noteId) {
+    this.noteservice.Unpin(noteId).subscribe(Response => {
+      console.log("note response", Response);
+      this.PinNotes.emit();
+    }, error => { console.log("notes response", error) })
+  }
   noteTrashed()
   {
   this.NoteTrash.emit();

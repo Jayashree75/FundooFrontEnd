@@ -54,6 +54,10 @@ export class NotesService {
   {
     return this.httpservice.put('api/Notes/'+ noteid+'/Pin',{value:true},true)
   }
+  Unpin(noteid)
+  {
+    return this.httpservice.put('api/Notes/'+ noteid+'/Pin',{value:false},true)
+  }
   getAllPin() {
     return this.httpservice.get('api/Notes/Pin', true)
   }
