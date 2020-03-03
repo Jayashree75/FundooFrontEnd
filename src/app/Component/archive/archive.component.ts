@@ -8,7 +8,7 @@ import { NotesService } from '../../Services/noteService/notes.service';
 export class ArchiveComponent implements OnInit {
   token: string;
   notes = [];
-  iaArchive: boolean;
+  isArchive: boolean;
   constructor(private noteservice: NotesService) { }
 
   ngOnInit() {

@@ -20,6 +20,7 @@ export class LabelService {
   }
   UpdateLabels(data,labelid)
   {
+    console.log(data,labelid)
     return this.httpservice.put('api/Label/' + labelid,data,true)
   }
 }

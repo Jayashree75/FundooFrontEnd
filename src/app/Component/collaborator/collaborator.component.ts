@@ -9,9 +9,13 @@ import { Inject } from '@angular/core';
   styleUrls: ['./collaborator.component.scss']
 })
 export class CollaboratorComponent implements OnInit {
-
+ showhide:boolean=false;
+ items:string;
   constructor(public dialogRef: MatDialogRef<CollaboratorComponent>,
-    @Inject(MAT_DIALOG_DATA) public data) { }
+
+    @Inject(MAT_DIALOG_DATA) public data) {
+      
+     }
 
   filteredUsers: Observable<string[]>;
   ownerId = localStorage.getItem('userId');
@@ -26,5 +30,7 @@ export class CollaboratorComponent implements OnInit {
   AddCollaborator() {
 
   }
-
+  changeShowStatus(){
+    this.showhide = !this.showhide;
+  }
 }

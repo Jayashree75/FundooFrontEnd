@@ -10,12 +10,14 @@ import { CollaboratorComponent } from '../../Component/collaborator/collaborator
 })
 export class IconComponent implements OnInit {
   token: string;
+  colors: string;
   @Input() isTrash;
   @Input() note;
   @Input() isArchive;
   @Output() NoteTrashEvent = new EventEmitter<any>();
   @Output() NoteArchiveEvent = new EventEmitter<any>();
   @Output() DeleteNoteEvent = new EventEmitter<any>();
+  @Output() ColorEvent = new EventEmitter<any>();
   status = false;
   color = ['#d7aefb', '#fdcfe8', '#e6c9a8', '#e8eaed',
     '#ccff90', '#a7ffeb', '#cbf0f8', '#aecbfa',
@@ -32,6 +34,7 @@ export class IconComponent implements OnInit {
       this.NoteTrashEvent.emit();
     }, error => { console.log("notes response", error) })
   }
+
   DeleteNote() {
     console.log(this.note.noteID)
     this.noteservice.deleteNote(this.note.noteID).subscribe(Response => {
@@ -47,17 +50,24 @@ export class IconComponent implements OnInit {
     }, error => { console.log("notes response", error) })
   }
   ChangeColor(Colour) {
-    console.log(this.note.noteID)
-    this.note.color = Colour;
-    console.log(Colour)
-    let data = {
-      'color': Colour
+    if (this.note == undefined) {
+      this.colors = Colour;
+      this.ColorEvent.emit(this.colors);
     }
-    console.log(data);
-    this.noteservice.ChangeColor(this.note.noteID, data).subscribe(Response => {
-      console.log("color response", Response);
-    }, error => { console.log("color response", error) })
+    else {
+      console.log(this.note.noteID)
+      this.note.color = Colour;
+      console.log(Colour)
+      let data = {
+        'color': Colour
+      }
+      console.log(data);
+      this.noteservice.ChangeColor(this.note.noteID, data).subscribe(Response => {
+        console.log("color response", Response);
+      }, error => { console.log("color response", error) })
+    }
   }
+
   openDialog() {
     console.log()
     const dialogRef = this.dialog.open(CollaboratorComponent, {

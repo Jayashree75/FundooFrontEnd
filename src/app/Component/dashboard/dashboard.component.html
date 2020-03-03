@@ -34,6 +34,7 @@
                     matTooltip="Change Profile Picture">
                   <input type="file" #file style="display:none;" name="file"
                     (change)="changeProfilePicture(file.files)">
+                  <img [src]="croppedImage" [style.border]="croppedImage ? '2px solid black' : 'none'" />
                 </div>
                 <div style="text-align: center;">
                   <p>{{this.userName}}</p>

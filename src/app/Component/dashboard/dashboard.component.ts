@@ -8,7 +8,10 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CreateLabelComponent } from '../../Component/create-label/create-label.component'
 import { UserService } from '../../Services/userservice/user.service';
 import { DataService } from '../../Services/Data_Service/data-service.service'
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+import{ImageCropperComponent } from '../../Component/image-cropper/image-cropper.component'
 import { from } from 'rxjs';
+
 
 
 @Component({
@@ -25,6 +28,10 @@ export class DashboardComponent implements OnInit {
   UserId: number;
   Email: string;
   labels: [any];
+ 
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+
   viewToolTip = "List View";
   viewClass = "listView";
   src = "../../../assets/Image/Grid.svg";
@@ -81,6 +88,7 @@ export class DashboardComponent implements OnInit {
     })
 
   }
+ 
   navigate(value) {
     this.Active = value;
     this.title = value;
@@ -114,9 +122,17 @@ export class DashboardComponent implements OnInit {
     console.log()
     this.dialog.open(CreateLabelComponent, {
       data: this.labels,
-      
     });
   }
+  
+  openDialogForImage() {
+    const dialogRef = this.dialog.open(ImageCropperComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+
   onNoClick(): void {
     this.dialog.closeAll();
   }

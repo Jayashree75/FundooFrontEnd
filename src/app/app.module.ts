@@ -24,6 +24,8 @@ import { EditNoteComponent } from './Component/edit-note/edit-note.component';
 import { CreateLabelComponent } from './Component/create-label/create-label.component';
 import { CollaboratorComponent } from './Component/collaborator/collaborator.component';
 import{DataService} from './Services/Data_Service/data-service.service'
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { ImageCropperComponent } from './Component/image-cropper/image-cropper.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +44,8 @@ import{DataService} from './Services/Data_Service/data-service.service'
     LabelComponent,
     EditNoteComponent,
     CreateLabelComponent,
-    CollaboratorComponent
+    CollaboratorComponent,
+    ImageCropperComponent
   ],
   imports: [
     BrowserModule,
@@ -54,8 +57,9 @@ import{DataService} from './Services/Data_Service/data-service.service'
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    ImageCropperModule
   ],
-  entryComponents: [EditNoteComponent, CreateLabelComponent, CollaboratorComponent],
+  entryComponents: [EditNoteComponent, CreateLabelComponent, CollaboratorComponent,ImageCropperComponent],
   providers: [AuthGuard,DataService],
   bootstrap: [AppComponent]
 })

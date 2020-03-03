@@ -1,2 +1,2 @@
 <app-create-notes (addNoteEvent)="addNoteEvent($event)"></app-create-notes>
-<app-display-notes style="margin-top: 20px;" [notes]="note" (NoteTrash)="GetAllNotes()" (NoteArchive)="GetAllNotes()"></app-display-notes>
+<app-display-notes style="margin-top: 20px;" [notes]="note" [isPin]=true (NoteTrash)="GetAllNotes()" (NoteArchive)="GetAllNotes()"></app-display-notes>

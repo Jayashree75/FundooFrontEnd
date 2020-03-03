@@ -13,6 +13,7 @@ export class CreateNotesComponent implements OnInit {
   notes: FormGroup;
   status = false;
   token: string;
+  public color:string;
   @Output() addNoteEvent = new EventEmitter<any>();
   constructor(private noteservice: NotesService,
     private router: Router,
@@ -30,14 +31,22 @@ export class CreateNotesComponent implements OnInit {
   get f() {
     return this.notes.controls;
   }
-
+  Colorchange(event)
+  {
+    this.color=event;
+  }
   createNote() {
     this.status = false;
-    var token = localStorage.getItem("token")
-    console.log('values in notes', this.notes.value);
-    this.noteservice.createnote(this.notes.value, token).subscribe(Response => {
-      console.log("note response", Response);
-      this.addNoteEvent.emit();
-    }, error => { console.log("notes response", error) })
-  }
+    if(this.notes.controls['title'].value ||this.notes.controls['description'].value )
+    {  
+      var token = localStorage.getItem("token")
+      console.log('values in notes', this.notes.value);
+      this.noteservice.createnote(this.notes.value, token).subscribe(Response => {
+        this.color=''
+        console.log("note response", Response);
+        this.addNoteEvent.emit();
+      }, error => { console.log("notes response", error) })
+    }
+    }
+    
 }

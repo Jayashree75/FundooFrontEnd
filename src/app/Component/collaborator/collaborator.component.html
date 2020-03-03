@@ -11,9 +11,9 @@
     <div class="Icon">
       <mat-icon class="mat">person_add</mat-icon>
     </div>
-    <div style="padding: 12px;" fxLayout="row" fxLayoutAlign="space-between center">
-    <input matInput placeholder="Person or email to share with">
-    <mat-icon class="matmaterialicon">done</mat-icon>
+    <div style="padding: 12px; width: 100%;" fxLayout="row" fxLayoutAlign="space-between center">
+    <input matInput placeholder="Person or email to share with" [(ngModel)]="items">
+    <mat-icon matSuffix *ngIf="items" class="matmaterialicon">done</mat-icon>
   </div>
   </div>
   <div fxLayoutAlign="end end" style="background-color: rgba(0,0,0,0.07); padding: 10px 15px;">

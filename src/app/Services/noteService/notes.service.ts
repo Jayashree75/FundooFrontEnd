@@ -50,4 +50,11 @@ export class NotesService {
   {
     return this.httpservice.post('api/Notes/'+ noteid+'/Collaborate',data,true)
   }
+  AddPin(noteid)
+  {
+    return this.httpservice.put('api/Notes/'+ noteid+'/Pin',{value:true},true)
+  }
+  getAllPin() {
+    return this.httpservice.get('api/Notes/Pin', true)
+  }
 }

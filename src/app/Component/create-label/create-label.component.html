@@ -1,23 +1,23 @@
 <div>
+<div style=" max-height: 392px;overflow-y: auto;padding: 15px;">
   <h1 mat-dialog-title>Edit Label</h1>
-  <div fxLayout="row">
-    <div>
-      <mat-icon class="hide">add</mat-icon>
-    </div>
-    <div>
+  <div fxLayout="row"> 
+      <mat-icon  matPrefix  *ngIf="!labelName">add</mat-icon>
+      <mat-icon  matPrefix *ngIf="labelName">clear</mat-icon>
       <input matInput placeholder="Create new label" [(ngModel)]="labelName">
-    </div>
-     <!-- // <mat-icon>check</mat-icon> -->
+      <mat-icon matSuffix *ngIf="labelName" class="matmaterialicon">done</mat-icon>
+    <!-- // <mat-icon>check</mat-icon> -->
   </div>
   <div class="label" *ngFor="let items of getallLabels" style="font-family: Roboto,Arial,sans-serif;">
-    <div fxLayout="row">   
-    <mat-icon class="hide" matListIcon (click)="DeleteLabel(items.labelID)">delete</mat-icon>  
-    <mat-icon class="show" matListIcon>label</mat-icon>
+    <div fxLayout="row">
+      <mat-icon class="hide" matListIcon (click)="DeleteLabel(items.labelID)">delete</mat-icon>
+      <mat-icon class="show" matListIcon>label</mat-icon>
       <input matInput [(ngModel)]="items.labelName">
-    <mat-icon  matListIcon (click)="UpdateLabel(items.labelID)">editoutlinedicon</mat-icon>
-  </div> 
+      <mat-icon matListIcon (click)="UpdateLabel(items.labelID,items.labelName)">editoutlinedicon</mat-icon>
+    </div>
   </div>
-<mat-divider></mat-divider>
+ </div>
+  <mat-divider></mat-divider>
   <div fxLayout="row" fxLayoutAlign="end end">
     <button mat-button (click)="createLabel()" (click)="onNoClick()">Done</button>
   </div>

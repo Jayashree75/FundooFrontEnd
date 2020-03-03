@@ -18,7 +18,7 @@ export class CreateLabelComponent implements OnInit {
   public labelName: string;
   constructor(private labelservice: LabelService,
     private dataservice: DataService,
-    public dialogRef: MatDialogRef<CreateLabelComponent>,
+   public dialogRef: MatDialogRef<CreateLabelComponent>,
     @Inject(MAT_DIALOG_DATA) public data) {
     console.log(data);
     this.getallLabels=data;
@@ -35,21 +35,20 @@ export class CreateLabelComponent implements OnInit {
     }
     this.getallLabels.push(labelcreate);
     this.labelservice.createlabel(labelcreate).subscribe(Response => {
-      console.log("label response", Response);
       this.labelAdd(Response);
     }, error => { console.log("label response", error) });
   }
   DeleteLabel(labelID) {
     this.labelservice.deleteLabel(labelID).subscribe(Response => {
-      console.log("label response", Response);
        this.sendMessage(Response);
     }, error => { console.log("label response", error) });
   }
-  UpdateLabel(labelID) {
+  UpdateLabel(labelID,labelname) {
     var labelUpdate: Labels = {
-      LabelName: this.labelName,
+      LabelName: labelname,
     }
-    this.labelservice.UpdateLabels(labelUpdate, labelID).subscribe(Response => {
+    console.log(labelUpdate);
+    this.labelservice.UpdateLabels(labelUpdate,labelID).subscribe(Response => {
       console.log("LABEL Response", Response);
       this.LabelUpdate(Response);
     }, error => { console.log("label response", error) });

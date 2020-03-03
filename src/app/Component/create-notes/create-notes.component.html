@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="center center" fxLayout.xs="column" display=flex>
-  <mat-card class="card" fxFlexAlign="stretch" fxFlex="40%" flex-wrap: wrap>
+  <mat-card class="card" fxFlexAlign="stretch" fxFlex="40%" flex-wrap: wrap [style.background-color]='color'>
     <div *ngIf="!status" (click)="status=!status" style="margin: 0px; padding: 0px; height: 15px;">
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <div class="header" appearance="none">
@@ -38,9 +38,9 @@
           </div>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
-          <app-icon></app-icon>
+          <app-icon (ColorEvent)="Colorchange($event)"></app-icon>
 
-          <button mat-button (click)="createNote()">Close</button>
+          <button mat-button (click)="createNote()" >Close</button>
         </div>
       </form>
     </div>
