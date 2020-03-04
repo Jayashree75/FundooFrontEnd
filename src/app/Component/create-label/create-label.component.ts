@@ -30,6 +30,7 @@ export class CreateLabelComponent implements OnInit {
     this.dialogRef.close();
   }
   createLabel() {
+    
     var labelcreate: Labels = {
       LabelName: this.labelName,
     }

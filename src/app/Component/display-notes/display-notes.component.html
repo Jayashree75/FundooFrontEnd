@@ -1,33 +1,42 @@
-<div fxLayout="row" fxFlex=100>
-  <div fxFlex=15></div>
-  <div fxFlex=70 fxLayout="row wrap" fxLayoutAlign="start start">
-    <mat-card class="card" fxFlex=40 fxLayoutGap=20 *ngFor="let notes of notes" [style.background-color]=notes.color
-      fxFlex.xs=100 fxLayoutAlign="start center" >
+<!-- <div></div> -->
+<div style="margin-left: 24%;" fxFlex=70>
+<ngx-masonry>
+<div fxLayout="row" fxFlex=100 fxLayoutAlign="center">
+    <div fxFlex=70 fxLayout="row wrap" fxLayoutAlign="start center">
+    <mat-card  ngxMasonryItem  class="card"  fxLayoutGap=20 *ngFor="let notes of notes" [style.background-color]=notes.color
+      fxFlex.xs=100 fxLayoutAlign="start center">
       <div style="min-width: 200px;">
-        <div fxLayout="row" *ngIf="notes.image!=null"  >
+        <div fxLayout="row" *ngIf="notes.image!=null">
           <div fxLayout="column" fxFlex=80>
             <img style="width: 220px;height: 150px; border-radius: 8px; border-bottom-left-radius: 0px;
             border-bottom-right-radius: 0px;" src="{{notes.image}}">
           </div>
-          <div fxFlex=5>
-            <img style="width: 20px;" src="../../../assets/Image/Pin.svg" *ngIf="!notes.isPin"
+          <div fxFlex=5 *ngIf="notes.image!=null">
+            <img style="width: 20px;" src="../../../assets/Image/Unpin.svg" *ngIf="!notes.isPin"
               (click)="PinNote(notes.noteID)" />
-            <img style="width: 20px;" src="../../../assets/Image/Unpin.svg" *ngIf="notes.isPin"
+
+
+            <img style="width: 20px;" *ngIf="notes.isPin" src="../../../assets/Image/Pin.svg"
               (click)="UnPinNote(notes.noteID)" />
           </div>
         </div>
         <div>
-          <div fxLayout="column" style="max-height: 16em;padding: 8px;max-width: 190px; overflow: hidden; word-break: break-all;">
+          <div fxLayout="column"
+            style="max-height: 16em;padding: 8px;max-width: 190px; overflow: hidden; word-break: break-all;">
             <div fxLayout="row">
               <div style=" margin-bottom:20px;text-overflow: ellipsis;" (click)="UpdateNote(notes)">
                 <span fxFlex=150px>{{notes.title}}</span>
               </div>
-              <div *ngIf="notes.image==null">
-                <div fxFlex=5>
-                  <img style="width: 20px;" src="../../../assets/Image/Pin.svg" *ngIf="!notes.isPin"
+              <div>
+                <div fxFlex=5 *ngIf="notes.image==null">
+
+                  <img style="width: 20px;" src="../../../assets/Image/Unpin.svg" *ngIf="!notes.isPin"
                     (click)="PinNote(notes.noteID)" />
-                  <img style="width: 20px;" src="../../../assets/Image/Unpin.svg" *ngIf="notes.isPin"
-                    (click)="PinNote(notes.noteID)" />
+
+
+                  <img style="width: 20px;" *ngIf="notes.isPin" src="../../../assets/Image/Pin.svg"
+                    (click)="UnPinNote(notes.noteID)" />
+
                 </div>
               </div>
             </div>
@@ -49,7 +58,8 @@
               </div>
             </div>
           </div>
-          <div class="Icon" style="align-content: space-between;  width: fit-content; margin-top: 20px; margin-left: 12px;margin-bottom: 8px;">
+          <div class="Icon"
+            style="align-content: space-between;  width: fit-content; margin-top: 20px; margin-left: 12px;margin-bottom: 8px;">
             <app-icon [isTrash]="isTrash" (NoteTrashEvent)="noteTrashed()" (DeleteNoteEvent)="deleteNote()"
               (NoteArchiveEvent)="noteArchive()" [isArchive]="isArchive" [note]="notes"></app-icon>
           </div>
@@ -57,5 +67,6 @@
       </div>
     </mat-card>
   </div>
-  <div fxFlex=15></div>
+</div>
+</ngx-masonry>
 </div>

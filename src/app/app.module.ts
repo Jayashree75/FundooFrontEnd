@@ -26,6 +26,8 @@ import { CollaboratorComponent } from './Component/collaborator/collaborator.com
 import{DataService} from './Services/Data_Service/data-service.service'
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ImageCropperComponent } from './Component/image-cropper/image-cropper.component';
+import { SearchComponent } from './Component/search/search.component';
+import { NgxMasonryModule } from 'ngx-masonry';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,10 +47,13 @@ import { ImageCropperComponent } from './Component/image-cropper/image-cropper.c
     EditNoteComponent,
     CreateLabelComponent,
     CollaboratorComponent,
-    ImageCropperComponent
+    ImageCropperComponent,
+    SearchComponent
+    
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,    NgxMasonryModule,
+
     AppRoutingModule,
     materialModule,
     LayoutModule,

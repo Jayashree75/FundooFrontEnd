@@ -12,18 +12,28 @@ export class NotesComponent implements OnInit {
   token: string;
   notes = [];
   note = [];
-  isPin:boolean;
-  constructor(private noteservice: NotesService) { }
+  isPin: boolean;
+  constructor(private noteService: NotesService) { }
 
   ngOnInit() {
+    this.getAllPinNotes()
     this.GetAllNotes();
   }
+  pinnedNotes = [];
+
+  getAllPinNotes() {
+    this.noteService.getAllPin().subscribe(Response => {
+      console.log("note response", Response);
+      this.pinnedNotes = Response['notesDBs'];
+      this.note = this.notes.filter(linq => linq.isTrash == false && linq.isArchive == false && linq.isPin == true);
+      console.log("response", this.note)
+    }, error => { console.log("notes response", error) })
+  }
   GetAllNotes() {
-    var token = localStorage.getItem("token")
-    this.noteservice.getAllNotes().subscribe(Response => {
+    this.noteService.getAllNotes().subscribe(Response => {
       console.log("note response", Response);
       this.notes = Response['notesDBs'];
-      this.note = this.notes.filter(linq => linq.isTrash == false && linq.isArchive == false);  
+      this.note = this.notes.filter(linq => linq.isTrash == false && linq.isArchive == false && linq.isPin == false);
       console.log("response", this.note)
     }, error => { console.log("notes response", error) })
   }
@@ -31,7 +41,5 @@ export class NotesComponent implements OnInit {
     console.log("event from add note", event);
     this.GetAllNotes();
   }
- 
- 
 }
 

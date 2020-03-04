@@ -61,4 +61,8 @@ export class NotesService {
   getAllPin() {
     return this.httpservice.get('api/Notes/Pin', true)
   }
+  SearchNotes(key)
+  {
+    return this.httpservice.get('api/Notes?keyword='+key,true )
+  }
 }

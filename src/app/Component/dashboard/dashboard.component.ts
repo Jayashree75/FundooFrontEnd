@@ -105,6 +105,15 @@ export class DashboardComponent implements OnInit {
   navigateRemainder() {
     this.route.navigate(['/Remainder'])
   }
+ searchNotes(event:any) {
+    console.log("search element")
+    this.route.navigate(['/Search'])
+    let searchKeyword=event.target.value;
+    this.dataservice.labelModifiedMessage({
+      data:searchKeyword,
+      type:'search'
+    })
+  }
   navigatenotebylabel(LabelID) {
     console.log(LabelID)
     this.route.navigate(['/Label/' + LabelID])
@@ -127,7 +136,6 @@ export class DashboardComponent implements OnInit {
   
   openDialogForImage() {
     const dialogRef = this.dialog.open(ImageCropperComponent);
-
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });

@@ -11,7 +11,7 @@
       <div class="search" fxLayoutAlign="start center" fxFlex="60%" fxHide.xs="true">
         <mat-form-field [style.fontSize.px]="12" appearance=none class="searchInput">
           <mat-icon matPrefix style="margin-left: 10px;">search</mat-icon>
-          <input matInput type="text" #val placeholder="search" style="font-size: 18px;">
+          <input matInput type="text" placeholder="search" (keyup)=searchNotes($event) style="font-size: 18px;">
         </mat-form-field>
       </div>
       <div class="spacer"></div>

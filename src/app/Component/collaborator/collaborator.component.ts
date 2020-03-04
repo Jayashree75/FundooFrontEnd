@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Inject } from '@angular/core';
+import{ NotesService} from '../../Services/noteService/notes.service'
 
 @Component({
   selector: 'app-collaborator',
@@ -12,6 +13,7 @@ export class CollaboratorComponent implements OnInit {
  showhide:boolean=false;
  items:string;
   constructor(public dialogRef: MatDialogRef<CollaboratorComponent>,
+    private noteservice:NotesService,
 
     @Inject(MAT_DIALOG_DATA) public data) {
       

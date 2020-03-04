@@ -14,6 +14,11 @@ export class LabelComponent implements OnInit {
   constructor(private labelservice: LabelService, private route: Router, private activateroute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.activateroute.params.subscribe(urlId=>{
+      alert(urlId);
+      this.id=urlId.id;
+      this.GetNoteByLabelId();
+    })
     // let labelid = this.activateroute.snapshot.params.get('labelID')
     this.GetNoteByLabelId();
   }

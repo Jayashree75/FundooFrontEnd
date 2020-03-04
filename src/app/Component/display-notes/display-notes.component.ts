@@ -19,7 +19,7 @@ export class DisplayNotesComponent implements OnInit {
   @Output() NoteTrash=new EventEmitter<any>();
   @Output() NoteArchive=new EventEmitter<any>();
   @Output() DeleteNote=new EventEmitter<any>();
-  @Output() PinNotes=new EventEmitter<any>();
+  @Output() NotesPin=new EventEmitter<any>();
   constructor(private route:Router,private noteservice: NotesService, public dialog: MatDialog) { }
   ngOnInit() {
     let loggetUserToken = localStorage.getItem('token');
@@ -41,13 +41,13 @@ export class DisplayNotesComponent implements OnInit {
   PinNote(noteId) {
     this.noteservice.AddPin(noteId).subscribe(Response => {
       console.log("note response", Response);
-      this.PinNotes.emit();
+      this.NotesPin.emit();
     }, error => { console.log("notes response", error) })
   }
   UnPinNote(noteId) {
     this.noteservice.Unpin(noteId).subscribe(Response => {
       console.log("note response", Response);
-      this.PinNotes.emit();
+      this.NotesPin.emit();
     }, error => { console.log("notes response", error) })
   }
   noteTrashed()
