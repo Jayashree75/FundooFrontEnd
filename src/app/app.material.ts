@@ -17,6 +17,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
     declarations: [
@@ -36,7 +38,9 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         , MatDialogModule,
         MatTooltipModule,
         MatChipsModule,
-        ImageCropperModule
+        ImageCropperModule,
+        MatAutocompleteModule,
+        MatCheckboxModule
     ],
     exports: [
         BrowserModule,
@@ -49,7 +53,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         FlexLayoutModule,
         BrowserAnimationsModule, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonToggleModule, MatSidenavModule, MatSnackBarModule, MatMenuModule,
         MatDialogModule, MatTooltipModule, MatChipsModule,
-        ImageCropperModule
+        ImageCropperModule,
+        MatAutocompleteModule,MatCheckboxModule
     ],
 })
 export class materialModule { }

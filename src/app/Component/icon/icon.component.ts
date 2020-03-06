@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NotesService } from 'src/app/Services/noteService/notes.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CollaboratorComponent } from '../../Component/collaborator/collaborator.component'
-
+import { DataService } from '../../Services/Data_Service/data-service.service'
 @Component({
   selector: 'app-icon',
   templateUrl: './icon.component.html',
@@ -11,6 +11,7 @@ import { CollaboratorComponent } from '../../Component/collaborator/collaborator
 export class IconComponent implements OnInit {
   token: string;
   colors: string;
+  labels=[];
   @Input() isTrash;
   @Input() note;
   @Input() isArchive;
@@ -23,9 +24,20 @@ export class IconComponent implements OnInit {
     '#ccff90', '#a7ffeb', '#cbf0f8', '#aecbfa',
     '#f28b82', '#fbbc04', '#fff475', '#fff'
   ]
-  constructor(public dialog: MatDialog, private noteservice: NotesService) { }
+  constructor(public dialog: MatDialog, private noteservice: NotesService,
+    private dataservice: DataService) { 
+      this.dataservice.labelMessage.subscribe(data => {
+        if (data.type == 'GetAllLabel') {
+        
+          this.labels=data.data['labelmodel']
+          console.log("labelsrray",this.labels)
+        }
+      })
+    
+    }
 
   ngOnInit() {
+  
   }
   TrashNote() {
     console.log(this.note.noteID)
@@ -34,7 +46,8 @@ export class IconComponent implements OnInit {
       this.NoteTrashEvent.emit();
     }, error => { console.log("notes response", error) })
   }
-
+  
+  
   DeleteNote() {
     console.log(this.note.noteID)
     this.noteservice.deleteNote(this.note.noteID).subscribe(Response => {
@@ -71,6 +84,7 @@ export class IconComponent implements OnInit {
   openDialog() {
     console.log()
     const dialogRef = this.dialog.open(CollaboratorComponent, {
+      data: this.note,
       width: '500px',
       height: 'auto',
       panelClass: "Collaborate"

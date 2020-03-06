@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject ,Output,EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Inject, Output, EventEmitter } from '@angular/core';
 import { NotesService } from '../../Services/noteService/notes.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { EditNoteComponent } from '../../Component/edit-note/edit-note.component'
@@ -16,11 +16,13 @@ export class DisplayNotesComponent implements OnInit {
   @Input() isPin;
   UserId: number;
   email: string;
-  @Output() NoteTrash=new EventEmitter<any>();
-  @Output() NoteArchive=new EventEmitter<any>();
-  @Output() DeleteNote=new EventEmitter<any>();
-  @Output() NotesPin=new EventEmitter<any>();
-  constructor(private route:Router,private noteservice: NotesService, public dialog: MatDialog) { }
+  @Output() NoteTrash = new EventEmitter<any>();
+  @Output() NoteArchive = new EventEmitter<any>();
+  @Output() DeleteNote = new EventEmitter<any>();
+  @Output() NotesPin = new EventEmitter<any>();
+
+
+  constructor(private route: Router, private noteservice: NotesService, public dialog: MatDialog) { }
   ngOnInit() {
     let loggetUserToken = localStorage.getItem('token');
     let loggedinUserData = loggetUserToken.split('.')[1];
@@ -32,11 +34,12 @@ export class DisplayNotesComponent implements OnInit {
     console.log(this.email[0]);
     console.log("Hi" + isAdmin);
   }
-  UpdateNote(note){
+  UpdateNote(note) {
     console.log(note)
-    this.dialog.open(EditNoteComponent,{      
-      data:note,
-    });   
+    this.dialog.open(EditNoteComponent, {
+      data: note,
+      panelClass:'EditNote'
+     });
   }
   PinNote(noteId) {
     this.noteservice.AddPin(noteId).subscribe(Response => {
@@ -50,16 +53,13 @@ export class DisplayNotesComponent implements OnInit {
       this.NotesPin.emit();
     }, error => { console.log("notes response", error) })
   }
-  noteTrashed()
-  {
-  this.NoteTrash.emit();
+  noteTrashed() {
+    this.NoteTrash.emit();
   }
-  noteArchive()
-  {
+  noteArchive() {
     this.NoteArchive.emit();
   }
-  deleteNote()
-  {
+  deleteNote() {
     this.DeleteNote.emit();
-  } 
+  }
 }

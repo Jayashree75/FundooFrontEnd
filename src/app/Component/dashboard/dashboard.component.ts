@@ -9,7 +9,7 @@ import { CreateLabelComponent } from '../../Component/create-label/create-label.
 import { UserService } from '../../Services/userservice/user.service';
 import { DataService } from '../../Services/Data_Service/data-service.service'
 import { ImageCroppedEvent } from 'ngx-image-cropper';
-import{ImageCropperComponent } from '../../Component/image-cropper/image-cropper.component'
+import { ImageCropperComponent } from '../../Component/image-cropper/image-cropper.component'
 import { from } from 'rxjs';
 
 
@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
   UserId: number;
   Email: string;
   labels: [any];
- 
+
   imageChangedEvent: any = '';
   croppedImage: any = '';
 
@@ -81,14 +81,13 @@ export class DashboardComponent implements OnInit {
     this.mobileQuery.removeListener(this._mobileQueryListener);
     this.getAllLabel();
     this.dataservice.labelMessage.subscribe(data => {
-    if(data.type=='LabelDelete' || data.type=='LabelUpdate' ||data.type=='LabelAdd')
-    {
-      this.getAllLabel();
-    }
+      if (data.type == 'LabelDelete' || data.type == 'LabelUpdate' || data.type == 'LabelAdd') {
+        this.getAllLabel();
+      }
     })
 
   }
- 
+
   navigate(value) {
     this.Active = value;
     this.title = value;
@@ -105,13 +104,13 @@ export class DashboardComponent implements OnInit {
   navigateRemainder() {
     this.route.navigate(['/Remainder'])
   }
- searchNotes(event:any) {
+  searchNotes(event: any) {
     console.log("search element")
     this.route.navigate(['/Search'])
-    let searchKeyword=event.target.value;
+    let searchKeyword = event.target.value;
     this.dataservice.labelModifiedMessage({
-      data:searchKeyword,
-      type:'search'
+      data: searchKeyword,
+      type: 'search'
     })
   }
   navigatenotebylabel(LabelID) {
@@ -123,17 +122,18 @@ export class DashboardComponent implements OnInit {
     this.labelservice.getAllLabel().subscribe(data => {
       this.labels = data['labelmodel']
       console.log(this.labels)
+      this.dataservice.labelModifiedMessage({type:'GetAllLabel', data:data})
     }, error => {
-      console.log(error);
+      console.log(error); 
     })
   }
   OpenDialog() {
     console.log()
     this.dialog.open(CreateLabelComponent, {
-      data: this.labels,
+      data: this.labels
     });
   }
-  
+ 
   openDialogForImage() {
     const dialogRef = this.dialog.open(ImageCropperComponent);
     dialogRef.afterClosed().subscribe(result => {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Host } from '@angular/core';
+import { Component, OnInit, Input, Inject ,Output,EventEmitter } from '@angular/core';
 import { NotesService } from '../../Services/noteService/notes.service';
 import { ISO8601_DATE_REGEX } from '@angular/common/src/i18n/format_date';
 
@@ -18,9 +18,9 @@ export class NotesComponent implements OnInit {
   ngOnInit() {
     this.getAllPinNotes()
     this.GetAllNotes();
+    
   }
   pinnedNotes = [];
-
   getAllPinNotes() {
     this.noteService.getAllPin().subscribe(Response => {
       console.log("note response", Response);

@@ -34,10 +34,17 @@
     <div fxFlex=14 class="example-button-row">
         <mat-icon mat-icon-button [matMenuTriggerFor]="belowMenu">
             <mat-icon matTooltip="More" aria-label="Example icon button">more_vert</mat-icon>
-            <mat-menu #belowMenu="matMenu" yPosition="below">
+            <mat-menu #belowMenu="matMenu" yPosition="below" >
                 <button mat-menu-item (click)="TrashNote()">Delete Note</button>
-                <button mat-menu-item>Add label</button>
+                <button mat-menu-item [matMenuTriggerFor]="addlabel">Add label</button>
             </mat-menu>
+                <mat-menu #addlabel="matMenu"  >
+                    <p style="padding: 7px;">Label note</p>
+                    <button mat-menu-item *ngFor="let label of labels" style="width: 208px;padding: 7px;">
+                    <mat-checkbox></mat-checkbox>
+                    {{label.labelName}}
+                    </button>
+                </mat-menu>
         </mat-icon>
     </div>
 </div>

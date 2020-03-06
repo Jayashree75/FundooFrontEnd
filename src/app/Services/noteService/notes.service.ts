@@ -11,7 +11,6 @@ export class NotesService {
     console.log(token);
     return this.httpservice.post('api/Notes', data, true)
   }
-  
   TrashNote(noteid) {
     console.log(noteid, "notes id response")
     return this.httpservice.put('api/Notes/' + noteid + '/Trash',{value:true}, true)
@@ -64,5 +63,9 @@ export class NotesService {
   SearchNotes(key)
   {
     return this.httpservice.get('api/Notes?keyword='+key,true )
+  }
+  GetAllUser(key)
+  {
+    return this.httpservice.get('api/Notes/GetallUser?keyword='+key,true )
   }
 }

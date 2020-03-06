@@ -24,5 +24,4 @@ export class TrashComponent implements OnInit {
       console.log("response trash",this.notes)
     }, error => { console.log("notes response", error) })
   }  
-
 }
