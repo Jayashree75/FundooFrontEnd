@@ -11,6 +11,7 @@ import { DataService } from '../../Services/Data_Service/data-service.service'
 export class IconComponent implements OnInit {
   token: string;
   colors: string;
+  status = false;
   labels=[];
   @Input() isTrash;
   @Input() note;
@@ -19,7 +20,7 @@ export class IconComponent implements OnInit {
   @Output() NoteArchiveEvent = new EventEmitter<any>();
   @Output() DeleteNoteEvent = new EventEmitter<any>();
   @Output() ColorEvent = new EventEmitter<any>();
-  status = false;
+ 
   color = ['#d7aefb', '#fdcfe8', '#e6c9a8', '#e8eaed',
     '#ccff90', '#a7ffeb', '#cbf0f8', '#aecbfa',
     '#f28b82', '#fbbc04', '#fff475', '#fff'

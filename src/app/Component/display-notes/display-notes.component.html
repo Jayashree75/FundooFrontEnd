@@ -34,8 +34,16 @@
                 </div>
                 <div>
                   <div *ngFor="let label of notes.labels">
-                    <mat-chip style=" max-width: 200px; padding: 2px 9px; border-radius: 13px;line-height: 3;">
+                    <mat-chip style=" max-width: 200px; padding: 2px 9px; border-radius: 13px;line-height: 4;">
                       {{label.labelName}}
+                    </mat-chip>
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <mat-chip style=" max-width: 200px; padding: 2px 9px; border-radius: 13px;line-height: 3;">
+                      <img src="../../../assets/Image/datetime.svg" style="margin-left: 12px;"/>
+                     {{notes.reminder | date :'dd MMM yy h:mm a'}}
                     </mat-chip>
                   </div>
                 </div>

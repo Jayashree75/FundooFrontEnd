@@ -1,16 +1,29 @@
 <div fxLayout="row" fxLayoutGap='12%' fxLayoutGap.xs=auto fxFlex=100 *ngIf="!isTrash">
-    <div fxFlex=14>  
-        <img src="../../../assets/Image/Reminder.svg"/>
+    <div fxFlex=14>
+        <mat-icon mat-icon-button [matMenuTriggerFor]="appmenu">
+            <img src="../../../assets/Image/Reminder.svg" />
+        </mat-icon>
+        <mat-menu #appmenu="matMenu" yPosition="below">
+            <div style="width: 250px;height: 246px; padding: 5px;">
+                <button mat-menu-item>Remainder:</button>
+                <button mat-menu-item>Later Today</button>
+                <button mat-menu-item>Tomorrow</button>
+                <button mat-menu-item>Next Week</button>
+                <div fxLayout="row">
+                    <img src="../../../assets/Image/datetime.svg" style="margin-left: 12px;"/>
+                    <button mat-menu-item>Select Date and Time</button>
+                </div>
+            </div>
+        </mat-menu>
     </div>
     <div fxFlex=14>
         <img src="../../../assets/Image/Collaborator.svg" (click)="openDialog()" />
-
     </div>
     <div class="Colorchange" fxFlex=14>
         <mat-icon mat-button [matMenuTriggerFor]="colorPicker">
             <img src="../../../assets/Image/color.svg" />
         </mat-icon>
-        <mat-menu #colorPicker="matMenu"  yPosition="above" fxLayoutAlign="center center">
+        <mat-menu #colorPicker="matMenu" yPosition="above" fxLayoutAlign="center center">
             <div fxLayoutGap=4px class="colormenu" style="width: 160px;">
                 <button mat-mini-fab *ngFor="let colors of color" [style.backgroundColor]='colors'
                     (click)="ChangeColor(colors)">
@@ -28,23 +41,26 @@
     </div>
     <div fxFlex=14>
         <img src="../../../assets/Image/Insertphoto.svg" (click)="file.click(file)" />
-        <input type="file" #file style="display:none;" name="file"
-        (change)="AddImageToNotes(file.files)">
+        <input type="file" #file style="display:none;" name="file" (change)="AddImageToNotes(file.files)">
     </div>
     <div fxFlex=14 class="example-button-row">
         <mat-icon mat-icon-button [matMenuTriggerFor]="belowMenu">
             <mat-icon matTooltip="More" aria-label="Example icon button">more_vert</mat-icon>
-            <mat-menu #belowMenu="matMenu" yPosition="below" >
+            <mat-menu #belowMenu="matMenu" yPosition="below">
                 <button mat-menu-item (click)="TrashNote()">Delete Note</button>
                 <button mat-menu-item [matMenuTriggerFor]="addlabel">Add label</button>
             </mat-menu>
-                <mat-menu #addlabel="matMenu"  >
-                    <p style="padding: 7px;">Label note</p>
-                    <button mat-menu-item *ngFor="let label of labels" style="width: 208px;padding: 7px;">
-                    <mat-checkbox></mat-checkbox>
-                    {{label.labelName}}
-                    </button>
-                </mat-menu>
+            <mat-menu #addlabel="matMenu">
+                <p style=" margin-left: 12px;">Label note</p>
+                <div fxLayoutAlign="space-evenly center" fxLayout="row">
+                    <div>
+                        <button mat-menu-item *ngFor="let label of labels" style="width: 208px;margin-left: 8px;">
+                            <mat-checkbox></mat-checkbox>
+                            {{label.labelName}}
+                        </button>
+                    </div>
+                </div>
+            </mat-menu>
         </mat-icon>
     </div>
 </div>
