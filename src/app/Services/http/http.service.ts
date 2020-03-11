@@ -14,7 +14,7 @@ export class HttpService {
   post(url, data, tokenRequired: boolean = false, headerOption = null): Observable<any> {
     let httpoption=this.httpheader();
     console.log(tokenRequired && headerOption);
-    return this.httpClient.post(this.baseUrl + url, data, tokenRequired && httpoption);
+    return this.httpClient.post(this.baseUrl + url, data, httpoption);
   }
   get(url, tokenRequired: boolean = false, headerOption = null): Observable<any> {
     let httpoption=this.httpheader();

@@ -19,8 +19,11 @@
         <div>
           <mat-icon fxLayoutAlign="center center">refresh</mat-icon>
         </div>
-        <button mat-icon-button style="margin-left: 10px; outline: none;">
-          <img src={{this.src}} class={{viewClass}} (click)=changeView(this.src) matTooltip={{this.viewToolTip}}>
+        <button mat-icon-button style="margin-left: 10px; outline: none;" *ngIf="!changeview">
+          <img src='../../../assets/Image/list.svg'  (click)=changeView()>
+        </button>
+        <button mat-icon-button style="margin-left: 10px; outline: none;" *ngIf="changeview" >
+          <img src='../../../assets/Image/Grid.svg'  (click)=changeView() >
         </button>
         <div>
           <mat-icon fxLayoutAlign="end center">settings</mat-icon>

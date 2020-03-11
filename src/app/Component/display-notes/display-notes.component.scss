@@ -46,5 +46,20 @@ mat-chip{
   font-size: 12px;
 }
 mat-mini-fab{
-  size: 10px;
+  size: 6px;
+}
+.mat-mini-fab .mat-button-wrapper {
+  padding: 0px 0;
+}
+.clear{
+  size: 0px;
+}
+.Gridlist{
+  width: 80%;
+  height: auto;
+  flex-direction: column;
+}
+.GridView{
+  width: 70%;
+  margin-left: 24%;
 }

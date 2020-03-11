@@ -68,4 +68,12 @@ export class NotesService {
   {
     return this.httpservice.get('api/Notes/GetallUser?keyword='+key,true )
   }
+  AddLabeltoNotes(noteid,labelid)
+  {
+    return this.httpservice.post('api/Notes/Note/'+noteid+'/Label/'+labelid,true)
+  }
+  RemoveLabelFromNotes(noteid,labelid)
+  {
+    return this.httpservice.delete('api/Notes/Note/'+noteid+'/Label/'+labelid,true) 
+  }
 }

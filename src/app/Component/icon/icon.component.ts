@@ -12,7 +12,8 @@ export class IconComponent implements OnInit {
   token: string;
   colors: string;
   status = false;
-  labels=[];
+  disabled: boolean=false;
+  labels = [];
   @Input() isTrash;
   @Input() note;
   @Input() isArchive;
@@ -20,25 +21,22 @@ export class IconComponent implements OnInit {
   @Output() NoteArchiveEvent = new EventEmitter<any>();
   @Output() DeleteNoteEvent = new EventEmitter<any>();
   @Output() ColorEvent = new EventEmitter<any>();
- 
+
   color = ['#d7aefb', '#fdcfe8', '#e6c9a8', '#e8eaed',
     '#ccff90', '#a7ffeb', '#cbf0f8', '#aecbfa',
     '#f28b82', '#fbbc04', '#fff475', '#fff'
   ]
   constructor(public dialog: MatDialog, private noteservice: NotesService,
-    private dataservice: DataService) { 
-      this.dataservice.labelMessage.subscribe(data => {
-        if (data.type == 'GetAllLabel') {
-        
-          this.labels=data.data['labelmodel']
-          console.log("labelsrray",this.labels)
-        }
-      })
-    
-    }
-
+    private dataservice: DataService) {
+    this.dataservice.labelMessage.subscribe(data => {
+      if (data.type == 'GetAllLabel') {
+        this.labels = data.data['labelmodel']
+        console.log("labelsrray", this.labels)
+      }
+    })
+  }
   ngOnInit() {
-  
+    console.log(this.note.labels)
   }
   TrashNote() {
     console.log(this.note.noteID)
@@ -47,8 +45,11 @@ export class IconComponent implements OnInit {
       this.NoteTrashEvent.emit();
     }, error => { console.log("notes response", error) })
   }
-  
-  
+
+  AddLabelToNotes(label) {
+    this.noteservice.AddLabeltoNotes(this.note.noteID, label.labelID).subscribe(Response => {
+    }, error => { console.log("notes label response", error) })
+  }
   DeleteNote() {
     console.log(this.note.noteID)
     this.noteservice.deleteNote(this.note.noteID).subscribe(Response => {
@@ -81,7 +82,6 @@ export class IconComponent implements OnInit {
       }, error => { console.log("color response", error) })
     }
   }
-
   openDialog() {
     console.log()
     const dialogRef = this.dialog.open(CollaboratorComponent, {
@@ -99,11 +99,26 @@ export class IconComponent implements OnInit {
     const formData: FormData = new FormData();
     formData.append('Image', fileToUpload);
     return this.noteservice.AddImage(formData, this.note.noteID).subscribe(response => {
-      console.log(response)
       this.note.image = response.imageUrl;
-      console.log('response', response.imageUrl);
     }, error => {
-      console.log('error', error);
+    })
+  }
+  getallLabels = [];
+
+  Checklabel(labelId: number): boolean {
+    this.getallLabels = this.note.labels;
+    for (var label = 0; label < this.getallLabels.length; label++) {
+      if (this.getallLabels[label].labelID == labelId) {
+        return true;
+      }
+    }
+    return false;
+  }
+  RemoveLabels(label)
+  {
+  this.noteservice.RemoveLabelFromNotes(this.note.noteID,label.labelID).subscribe(response=>
+    {
+      console.log(response);
     })
   }
 }

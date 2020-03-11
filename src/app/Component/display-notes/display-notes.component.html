@@ -1,5 +1,5 @@
 <!-- <div></div> -->
-<div style="margin-left: 24%;" fxFlex=70>
+<div class="GridView">
   <ngx-masonry>
     <div fxLayout="row" fxFlex=100 fxLayoutAlign="center">
       <div fxFlex=70 fxLayout="row wrap" fxLayoutAlign="start center">
@@ -18,40 +18,46 @@
                  border-bottom-right-radius: 0px;" src="{{notes.image}}">
               </div>
             </div>
-          
+
             <div>
-              <div fxLayout="column"
-                style="max-height: 16em;padding: 16px;max-width: 208px; overflow: hidden; word-break: break-all;">
-                <div fxLayout="row">
-                  <div style=" margin-bottom:20px;text-overflow: ellipsis;" (click)="UpdateNote(notes)">
-                    <span fxFlex=150px>{{notes.title}}</span>
+              <div>
+                <div fxLayout="column"
+                  style="max-height: 16.7em;padding: 16px;max-width: 208px; overflow: hidden; word-break: break-all;">
+                  <div fxLayout="row">
+                    <div style=" margin-bottom:20px;text-overflow: ellipsis;" (click)="UpdateNote(notes)">
+                      <span fxFlex=150px>{{notes.title}}</span>
+                    </div>
+                    <div>
+                    </div>
                   </div>
-                  <div>
+                  <div style="min-height: 30px;" (click)="UpdateNote(notes)">
+                    <span>{{notes.description}}</span>
                   </div>
                 </div>
-                <div style="min-height: 30px;" (click)="UpdateNote(notes)">
-                  <span>{{notes.description}}</span>
-                </div>
-                <div>
-                  <div *ngFor="let label of notes.labels">
-                    <mat-chip style=" max-width: 200px; padding: 2px 9px; border-radius: 13px;line-height: 4;">
+                <div fxLayout="row wrap" style="margin-left: 10px;" >
+                  <div *ngFor="let label of notes.labels" >
+                    <mat-chip style=" max-width: 200px; border-radius: 13px;line-height: 4; padding: 6px;">
                       {{label.labelName}}
                     </mat-chip>
+                    
                   </div>
                 </div>
                 <div>
-                  <div>
-                    <mat-chip style=" max-width: 200px; padding: 2px 9px; border-radius: 13px;line-height: 3;">
-                      <img src="../../../assets/Image/datetime.svg" style="margin-left: 12px;"/>
-                     {{notes.reminder | date :'dd MMM yy h:mm a'}}
+                  <div style="margin-left: 10px;" >
+                    <mat-chip *ngIf="notes.reminder!=null"
+                      style="max-width: 200px; padding: 4px; border-radius: 13px;line-height: 3; opacity: .50;">
+                      <img src="../../../assets/Image/datetime.svg" style="margin-left: 6px;" />
+                      {{notes.reminder | date :'dd MMM yy h:mm a'}}
                     </mat-chip>
                   </div>
                 </div>
-                <div fxLayout="row">
-                  <div *ngFor="let collab of notes.collaborateResponse">
-                    <button mat-mini-fab color="primary" style="width: 30px; height: 30px;">
-                      {{collab.email[0] | uppercase}}
-                    </button>
+                <div fxLayout="row"   style="margin-left: 12px;"  >
+                  <div *ngFor="let collab of notes.collaborateResponse" >
+                    <div style="width: 25px; height: 25px;line-height: 25px;border-radius: 50%;background-color:gray;">
+                      <span style="margin-left: 7px;">
+                        {{collab.email[0] | uppercase}}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>

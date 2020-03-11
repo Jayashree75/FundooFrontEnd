@@ -11,6 +11,7 @@ import { DataService } from '../../Services/Data_Service/data-service.service'
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { ImageCropperComponent } from '../../Component/image-cropper/image-cropper.component'
 import { from } from 'rxjs';
+import { ThrowStmt } from '@angular/compiler';
 
 
 
@@ -28,6 +29,7 @@ export class DashboardComponent implements OnInit {
   UserId: number;
   Email: string;
   labels: [any];
+  changeview:boolean;
 
   imageChangedEvent: any = '';
   croppedImage: any = '';
@@ -57,16 +59,19 @@ export class DashboardComponent implements OnInit {
     localStorage.removeItem("token");
     this.route.navigate(["login"]);
   }
-  changeView(src) {
-    if (src == "../../../assets/Image/list.svg") {
-      this.src = "../../../assets/Image/Grid.svg";
-      this.viewToolTip = "List View";
-      this.viewClass = "listView"
-    } else {
-      this.src = "../../../assets/Image/list.svg";
-      this.viewToolTip = "Grid View";
-      this.viewClass = "gridView"
-    }
+  changeView() {
+   if(this.changeview)
+   {
+     this.changeview=false;
+   }
+   else{
+     this.changeview=true;
+   }
+    this.dataservice.labelModifiedMessage(
+      {
+        type:'ChangeViewlist',
+        data:this.changeview
+    })
   }
   ngOnInit(): void {
     let loggetUserToken = localStorage.getItem('token');

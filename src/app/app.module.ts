@@ -28,6 +28,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { ImageCropperComponent } from './Component/image-cropper/image-cropper.component';
 import { SearchComponent } from './Component/search/search.component';
 import { NgxMasonryModule } from 'ngx-masonry';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,11 +50,10 @@ import { NgxMasonryModule } from 'ngx-masonry';
     CollaboratorComponent,
     ImageCropperComponent,
     SearchComponent
-    
   ],
   imports: [
     BrowserModule,    NgxMasonryModule,
-
+    OwlDateTimeModule, OwlNativeDateTimeModule,
     AppRoutingModule,
     materialModule,
     LayoutModule,
