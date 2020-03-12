@@ -28,6 +28,7 @@ export class CollaboratorComponent implements OnInit {
   ownerEmail = localStorage.getItem('email');
   ownerProfile = localStorage.getItem('Profile');
   ngOnInit() {
+    this.collaborateuser=this.data.collaborateResponse;
   }
   OnDismiss(): void {
     this.dialogRef.close();
@@ -39,7 +40,6 @@ export class CollaboratorComponent implements OnInit {
   searched = [];
   GetAllUser(items) {
     this.noteservice.GetAllUser(items).subscribe(response => {
-      console.log(response);
       this.searched = response['result'];
     })
   }
@@ -57,28 +57,33 @@ export class CollaboratorComponent implements OnInit {
       this.collaborateid.push({
         'userid': this.searched[i]['userid']
       })
-      console.log(this.collaborateid);
+
     }
+
   }
-  cancelCollab(email, userid) {
+  cancelCollab(email) {
     for (var i = 0; i < this.collaborateuser.length; i++) {
       if (this.collaborateuser[i]["email"] == email) {
-        this.collaborateuser.splice(i, 1);
+        this.collaborateuser.splice(i, 0);
+        this.noteservice.RemoveCollaborate(this.data.noteID,this.collaborateuser[i].userId).subscribe(data=>
+          {},error => {
+        })
       }
     }
-    for (var i = 0; i < this.collaborateid.length; i++) {
-      if (this.collaborateid[i]["userid"] == userid) {
-        this.collaborateid.splice(i, 1);
-      }
-    }
+    // for (var i = 0; i < this.collaborateid.length; i++) {
+    //   if (this.collaborateid[i]["userid"] == userid) {
+    //     this.collaborateid.splice(i, 1);
+    //     this.noteservice.RemoveCollaborate(this.data.noteID,this.collaborateuser[i].userId).subscribe(data=>{
+
+    //     })
+    //   }
+    // }
   }
   AddCollaborate() {
     var user = new collaboratorlist();
     user.collaborates = this.collaborateid;
     this.noteservice.AddCollaborate(user, this.data.noteID).subscribe(data => {
-      console.log(data)
     }, error => {
-      console.log(error)
     })
   }
 

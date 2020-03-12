@@ -3,7 +3,10 @@ import { NotesService } from '../../Services/noteService/notes.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { EditNoteComponent } from '../../Component/edit-note/edit-note.component'
 import { Router } from '@angular/router';
-import{DataService} from '../../Services/Data_Service/data-service.service'
+import { DataService } from '../../Services/Data_Service/data-service.service'
+import { Labels } from 'src/app/Model/labelModel';
+import { LabelService } from 'src/app/Services/Label/label.service';
+import { Notes } from 'src/app/Model/NotesModel';
 @Component({
   selector: 'app-display-notes',
   templateUrl: './display-notes.component.html',
@@ -14,9 +17,13 @@ export class DisplayNotesComponent implements OnInit {
   @Input() isTrash;
   @Input() isArchive;
   @Input() isPin;
-  changeview:any;
+  labelArr=[];
+  changeview: any;
   UserId: number;
   email: string;
+  flag: boolean;
+  selectable = true;
+  removable = true;
   mainDivLayout;
   @Output() NoteTrash = new EventEmitter<any>();
   @Output() NoteArchive = new EventEmitter<any>();
@@ -24,9 +31,11 @@ export class DisplayNotesComponent implements OnInit {
   @Output() NotesPin = new EventEmitter<any>();
 
 
-  constructor(private route: Router, private dataservice:DataService,
-    private noteservice: NotesService, public dialog: MatDialog) { }
+  constructor(private route: Router, private dataservice: DataService,
+    private noteservice: NotesService, public dialog: MatDialog) {  
+     }
   ngOnInit() {
+    this.labelArr=this.notes.labels;
     let loggetUserToken = localStorage.getItem('token');
     let loggedinUserData = loggetUserToken.split('.')[1];
     let loggeUserjsondata = window.atob(loggedinUserData);
@@ -36,34 +45,39 @@ export class DisplayNotesComponent implements OnInit {
     this.email = loggedUserdecodedata.Email;
     console.log(this.email[0]);
     console.log("Hi" + isAdmin);
-    this.dataservice.labelMessage.subscribe(response=>
-      {
-        if(response.type=='ChangeViewlist')
-        {
-         this.changeview=response.data;
-         console.log(this.changeview)
-        }
+    this.dataservice.labelMessage.subscribe(response => {
+      if (response.type == 'ChangeViewlist') {
+        this.changeview = response.data;
       }
-    )
+    })
   }
+   
+   remove(noteid,labelid){
+     this.labelArr=this.notes.labels;
+     console.log(this.labelArr)
+     console.log(this.labelArr)
+    const index = this.notes.indexOf(labelid);
+    if (index >= 0) {
+      this.notes.splice(index, 1);
+    }
+   this.noteservice.RemoveLabelFromNotes(noteid,labelid).subscribe()
+ 
+  }
+ 
   UpdateNote(note) {
     console.log(note)
     this.dialog.open(EditNoteComponent, {
       data: note,
-      panelClass:'EditNote'
-     });
+      panelClass: 'EditNote'
+    });
   }
-
-
   PinNote(noteId) {
     this.noteservice.AddPin(noteId).subscribe(Response => {
-      console.log("note response", Response);
       this.NotesPin.emit();
     }, error => { console.log("notes response", error) })
   }
   UnPinNote(noteId) {
     this.noteservice.Unpin(noteId).subscribe(Response => {
-      console.log("note response", Response);
       this.NotesPin.emit();
     }, error => { console.log("notes response", error) })
   }
@@ -75,5 +89,15 @@ export class DisplayNotesComponent implements OnInit {
   }
   deleteNote() {
     this.DeleteNote.emit();
+  }
+  addnotestoarray = [];
+  addtoArray(noteId) {
+    this.addnotestoarray = noteId;
+    for (var i = 0; i < this.addnotestoarray.length; i++) {
+      if (this.addnotestoarray[i].noteID == noteId) {
+        this.flag = true;
+        break;
+      }
+    }
   }
 }

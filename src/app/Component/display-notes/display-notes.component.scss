@@ -63,3 +63,16 @@ mat-mini-fab{
   width: 70%;
   margin-left: 24%;
 }
+.select{
+ 
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  transform: translate(-10px,-10px);
+  z-index: 1;
+  display: none;
+  cursor: pointer;
+}
+.card:hover .select{
+  display: block;
+}

@@ -48,9 +48,7 @@ export class CreateLabelComponent implements OnInit {
     var labelUpdate: Labels = {
       LabelName: labelname,
     }
-    console.log(labelUpdate);
     this.labelservice.UpdateLabels(labelUpdate,labelID).subscribe(Response => {
-      console.log("LABEL Response", Response);
       this.LabelUpdate(Response);
     }, error => { console.log("label response", error) });
   }

@@ -53,7 +53,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
   ],
   imports: [
     BrowserModule,    NgxMasonryModule,
-    OwlDateTimeModule, OwlNativeDateTimeModule,
+     OwlDateTimeModule, OwlNativeDateTimeModule,
     AppRoutingModule,
     materialModule,
     LayoutModule,

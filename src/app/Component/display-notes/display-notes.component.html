@@ -3,9 +3,14 @@
   <ngx-masonry>
     <div fxLayout="row" fxFlex=100 fxLayoutAlign="center">
       <div fxFlex=70 fxLayout="row wrap" fxLayoutAlign="start center">
+
         <mat-card ngxMasonryItem class="card" fxLayoutGap=20 *ngFor="let notes of notes"
           [style.background-color]=notes.color fxFlex.xs=100 fxLayoutAlign="start center">
+          <div class="select" (click)="addtoArray(notes.noteID)">
+            <img src='../../../assets/Image/select.svg' />
+          </div>
           <div style="min-width: 200px;">
+
             <div class="imagepin" style="position: absolute; margin-top: 7px; margin-left: 180px;">
               <img style="width: 20px;" src="../../../assets/Image/Unpin.svg" *ngIf="!notes.isPin"
                 (click)="PinNote(notes.noteID)" />
@@ -34,16 +39,20 @@
                     <span>{{notes.description}}</span>
                   </div>
                 </div>
-                <div fxLayout="row wrap" style="margin-left: 10px;" >
-                  <div *ngFor="let label of notes.labels" >
-                    <mat-chip style=" max-width: 200px; border-radius: 13px;line-height: 4; padding: 6px;">
+                <div fxLayout="row wrap" style="margin-left: 10px;">
+                  <mat-chip-list #chipList>
+                  <div *ngFor="let label of notes.labels">
+                    <mat-chip [selectable]="selectable"
+                    [removable]="removable" (removed)="remove(notes.noteID,label.labelID)" style=" max-width: 200px; border-radius: 13px;line-height: 4; padding: 6px;">
                       {{label.labelName}}
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                     </mat-chip>
-                    
+
                   </div>
+                </mat-chip-list>
                 </div>
                 <div>
-                  <div style="margin-left: 10px;" >
+                  <div style="margin-left: 10px;">
                     <mat-chip *ngIf="notes.reminder!=null"
                       style="max-width: 200px; padding: 4px; border-radius: 13px;line-height: 3; opacity: .50;">
                       <img src="../../../assets/Image/datetime.svg" style="margin-left: 6px;" />
@@ -51,8 +60,8 @@
                     </mat-chip>
                   </div>
                 </div>
-                <div fxLayout="row"   style="margin-left: 12px;"  >
-                  <div *ngFor="let collab of notes.collaborateResponse" >
+                <div fxLayout="row" style="margin-left: 12px;">
+                  <div *ngFor="let collab of notes.collaborateResponse">
                     <div style="width: 25px; height: 25px;line-height: 25px;border-radius: 50%;background-color:gray;">
                       <span style="margin-left: 7px;">
                         {{collab.email[0] | uppercase}}

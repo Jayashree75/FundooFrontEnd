@@ -12,7 +12,10 @@ export class IconComponent implements OnInit {
   token: string;
   colors: string;
   status = false;
-  disabled: boolean=false;
+  disabled: boolean = false;
+  checked: Boolean = false;
+  getallLabels = [];
+
   labels = [];
   @Input() isTrash;
   @Input() note;
@@ -31,36 +34,54 @@ export class IconComponent implements OnInit {
     this.dataservice.labelMessage.subscribe(data => {
       if (data.type == 'GetAllLabel') {
         this.labels = data.data['labelmodel']
-        console.log("labelsrray", this.labels)
       }
     })
   }
   ngOnInit() {
-    console.log(this.note.labels)
   }
   TrashNote() {
-    console.log(this.note.noteID)
     this.noteservice.TrashNote(this.note.noteID).subscribe(Response => {
-      console.log("note response", Response);
       this.NoteTrashEvent.emit();
     }, error => { console.log("notes response", error) })
   }
 
+
+  Checklabel(labelId: number): boolean {
+    this.getallLabels = this.note.labels;
+    for (var label = 0; label < this.getallLabels.length; label++) {
+      if (this.getallLabels[label].labelID == labelId) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   AddLabelToNotes(label) {
-    this.noteservice.AddLabeltoNotes(this.note.noteID, label.labelID).subscribe(Response => {
-    }, error => { console.log("notes label response", error) })
+   
+    if (this.Checklabel(label.labelID) == false) {
+      console.log("add label call",label);
+      this.noteservice.AddLabeltoNotes(this.note.noteID, label.labelID).subscribe(Response => {
+        console.log(" label added successfully ");
+        
+    
+      }, error => { console.log("notes label response", error) })
+    }
+    else {
+      console.log("remove label call",label)
+      this.noteservice.RemoveLabelFromNotes(this.note.noteID, label.labelID).subscribe(response => {
+        console.log(" label removed successfully  ",response);
+        
+      })
+    }
   }
   DeleteNote() {
-    console.log(this.note.noteID)
     this.noteservice.deleteNote(this.note.noteID).subscribe(Response => {
-      console.log("note response", Response);
       this.DeleteNoteEvent.emit();
     }, error => { console.log("notes response", error) })
   }
   ArchiveNote() {
     console.log(this.note.noteID)
     this.noteservice.ArchiveNote(this.note.noteID).subscribe(Response => {
-      console.log("note response", Response);
       this.NoteArchiveEvent.emit();
     }, error => { console.log("notes response", error) })
   }
@@ -72,13 +93,11 @@ export class IconComponent implements OnInit {
     else {
       console.log(this.note.noteID)
       this.note.color = Colour;
-      console.log(Colour)
       let data = {
         'color': Colour
       }
       console.log(data);
       this.noteservice.ChangeColor(this.note.noteID, data).subscribe(Response => {
-        console.log("color response", Response);
       }, error => { console.log("color response", error) })
     }
   }
@@ -91,7 +110,6 @@ export class IconComponent implements OnInit {
       panelClass: "Collaborate"
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
     });
   }
   AddImageToNotes(files: File) {
@@ -103,22 +121,11 @@ export class IconComponent implements OnInit {
     }, error => {
     })
   }
-  getallLabels = [];
 
-  Checklabel(labelId: number): boolean {
-    this.getallLabels = this.note.labels;
-    for (var label = 0; label < this.getallLabels.length; label++) {
-      if (this.getallLabels[label].labelID == labelId) {
-        return true;
-      }
-    }
-    return false;
-  }
-  RemoveLabels(label)
-  {
-  this.noteservice.RemoveLabelFromNotes(this.note.noteID,label.labelID).subscribe(response=>
-    {
-      console.log(response);
-    })
-  }
+  // RemoveLabels(label)
+  // {
+  // this.noteservice.RemoveLabelFromNotes(this.note.noteID,label.labelID).subscribe(response=>
+  //   {
+  //   })
+  // }
 }

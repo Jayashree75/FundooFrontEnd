@@ -15,11 +15,8 @@ export class ArchiveComponent implements OnInit {
     this.GetAllArchive();
   }
   GetAllArchive() {
-    var token = localStorage.getItem("token")
     this.noteservice.getAllArchive().subscribe(Response => {
-      console.log("note response", Response);
       this.notes = Response['notesDBs'];
-      console.log("response trash", this.notes)
     }, error => { console.log("notes response", error) })
   }
   

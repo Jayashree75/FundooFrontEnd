@@ -40,10 +40,8 @@ export class CreateNotesComponent implements OnInit {
     if(this.notes.controls['title'].value ||this.notes.controls['description'].value )
     {  
       var token = localStorage.getItem("token")
-      console.log('values in notes', this.notes.value);
       this.noteservice.createnote(this.notes.value, token).subscribe(Response => {
         this.color=''
-        console.log("note response", Response);
         this.addNoteEvent.emit();
       }, error => { console.log("notes response", error) })
     }

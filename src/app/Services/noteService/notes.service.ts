@@ -76,4 +76,8 @@ export class NotesService {
   {
     return this.httpservice.delete('api/Notes/Note/'+noteid+'/Label/'+labelid,true) 
   }
+  RemoveCollaborate(noteid,userid)
+  {
+    return this.httpservice.delete('/api/Notes/'+noteid+'/CollaborateRemove/'+userid,true) 
+  }
 }
