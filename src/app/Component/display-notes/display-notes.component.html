@@ -6,9 +6,9 @@
 
         <mat-card ngxMasonryItem class="card" fxLayoutGap=20 *ngFor="let notes of notes"
           [style.background-color]=notes.color fxFlex.xs=100 fxLayoutAlign="start center">
-          <div class="select" (click)="addtoArray(notes.noteID)">
+          <!-- <div class="select" (click)="addtoArray(notes.noteID)">
             <img src='../../../assets/Image/select.svg' />
-          </div>
+          </div> -->
           <div style="min-width: 200px;">
 
             <div class="imagepin" style="position: absolute; margin-top: 7px; margin-left: 180px;">
@@ -42,10 +42,10 @@
                 <div fxLayout="row wrap" style="margin-left: 10px;">
                   <mat-chip-list #chipList>
                   <div *ngFor="let label of notes.labels">
-                    <mat-chip [selectable]="selectable"
-                    [removable]="removable" (removed)="remove(notes.noteID,label.labelID)" style=" max-width: 200px; border-radius: 13px;line-height: 4; padding: 6px;">
+                    <mat-chip class="show" [selectable]="selectable"
+                    [removable]="removable" (removed)="remove(notes.noteID,label.labelID,notes)" style=" max-width: 200px; border-radius: 13px;line-height: 4; padding: 6px;min-height: 25px;margin: 1px;">
                       {{label.labelName}}
-                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      <mat-icon class="hide" matChipRemove *ngIf="removable">cancel</mat-icon>
                     </mat-chip>
 
                   </div>
@@ -54,7 +54,7 @@
                 <div>
                   <div style="margin-left: 10px;">
                     <mat-chip *ngIf="notes.reminder!=null"
-                      style="max-width: 200px; padding: 4px; border-radius: 13px;line-height: 3; opacity: .50;">
+                      style="max-width: 200px; margin-top: 13px; padding: 4px; border-radius: 13px;line-height: 3; opacity: .50;">
                       <img src="../../../assets/Image/datetime.svg" style="margin-left: 6px;" />
                       {{notes.reminder | date :'dd MMM yy h:mm a'}}
                     </mat-chip>
@@ -72,7 +72,7 @@
               </div>
               <div class="Icon"
                 style="align-content: space-between;  width: fit-content; margin-top: 20px; margin-left: 12px;margin-bottom: 8px;">
-                <app-icon [isTrash]="isTrash" (NoteTrashEvent)="noteTrashed()" (DeleteNoteEvent)="deleteNote()"
+                <app-icon [accessdisplay]="accessfrom" [isTrash]="isTrash" (NoteTrashEvent)="noteTrashed()" (DeleteNoteEvent)="deleteNote()"
                   (NoteArchiveEvent)="noteArchive()" [isArchive]="isArchive" [note]="notes"></app-icon>
               </div>
             </div>

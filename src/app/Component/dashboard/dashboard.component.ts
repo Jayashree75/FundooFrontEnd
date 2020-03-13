@@ -119,7 +119,6 @@ export class DashboardComponent implements OnInit {
     })
   }
   navigatenotebylabel(LabelID) {
-    console.log(LabelID)
     this.route.navigate(['/Label/' + LabelID])
   }
   getAllLabel() {

@@ -25,6 +25,7 @@ export class DisplayNotesComponent implements OnInit {
   selectable = true;
   removable = true;
   mainDivLayout;
+  accessfrom:string;
   @Output() NoteTrash = new EventEmitter<any>();
   @Output() NoteArchive = new EventEmitter<any>();
   @Output() DeleteNote = new EventEmitter<any>();
@@ -35,6 +36,7 @@ export class DisplayNotesComponent implements OnInit {
     private noteservice: NotesService, public dialog: MatDialog) {  
      }
   ngOnInit() {
+    this.accessfrom="Display Note"
     this.labelArr=this.notes.labels;
     let loggetUserToken = localStorage.getItem('token');
     let loggedinUserData = loggetUserToken.split('.')[1];
@@ -52,16 +54,23 @@ export class DisplayNotesComponent implements OnInit {
     })
   }
    
-   remove(noteid,labelid){
-     this.labelArr=this.notes.labels;
-     console.log(this.labelArr)
-     console.log(this.labelArr)
-    const index = this.notes.indexOf(labelid);
-    if (index >= 0) {
-      this.notes.splice(index, 1);
-    }
-   this.noteservice.RemoveLabelFromNotes(noteid,labelid).subscribe()
- 
+   remove(noteid,labelid,mynotes){
+      this.labelArr=this.notes;
+
+   console.log(this.labelArr)
+    // const index = this.labelArr.indexOf(labelid);
+    // if (index >= 0) {
+    //   this.notes.splice(index, 1);
+    // }
+    // console.log(this.notes.labels)
+   this.noteservice.RemoveLabelFromNotes(noteid,labelid).subscribe(data=>
+    {
+      console.log(data)
+       mynotes.labels=data['status']
+      // const index = this.labelArr.indexOf(labelid);
+      // this.labelArr.splice(labelid, 1);
+      // console.log(data);
+    })
   }
  
   UpdateNote(note) {

@@ -1,33 +1,33 @@
 <div fxLayout="row" fxLayoutAlign="center center" fxLayout.xs="column" display=flex>
   <mat-card class="card" fxFlexAlign="stretch" fxFlex="40%" flex-wrap: wrap [style.background-color]='color'>
     <div *ngIf="!status" (click)="status=!status" style="margin: 0px; padding: 0px; height: 15px;">
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <div class="header" appearance="none">
-            <p>
-              Take a note...
-            </p>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="header" appearance="none">
+          <p>
+            Take a note...
+          </p>
+        </div>
+        <div fxLayoutAlign="space-around center" display="flex" style="margin-bottom: 14px;">
+          <div class="example-button-row1">
+            <button mat-icon-button>
+              <img src='../../../assets/Image/NewList.svg' />
+            </button>
           </div>
-          <div fxLayoutAlign="space-around center" display="flex" style="margin-bottom: 14px;">
-            <div class="example-button-row1">
-              <button mat-icon-button>
-               <img src='../../../assets/Image/NewList.svg'/>
-              </button>
-            </div>
-            <div class="example-button-row5">
-              <button mat-icon-button>
-                <img src='../../../assets/Image/Drawing.svg'/>
-              </button>
-            </div>
-            <div class="example-button-row2">
-              <button mat-icon-button>
-                <img src='../../../assets/Image/Insertphoto.svg' style="width: 25px;"/>
-              </button>
-            </div>
+          <div class="example-button-row5">
+            <button mat-icon-button>
+              <img src='../../../assets/Image/Drawing.svg' />
+            </button>
+          </div>
+          <div class="example-button-row2">
+            <button mat-icon-button>
+              <img src='../../../assets/Image/Insertphoto.svg' style="width: 25px;" />
+            </button>
           </div>
         </div>
+      </div>
     </div>
     <div *ngIf="status">
-      <form [formGroup]="notes" >
+      <form [formGroup]="notes">
         <div>
           <div class="header" fxLayout="row" appearance="none">
             <input matInput placeholder="Title" formControlName="title">
@@ -37,10 +37,22 @@
             <input matInput placeholder="Take a note..." formControlName="description">
           </div>
         </div>
+        <div fxLayout="row wrap" style="margin-left: 10px;">
+          <mat-chip-list #chipList>
+          <div *ngFor="let label of getalllabels">
+            <mat-chip  [selectable]="selectable"
+            *ngIf="label" [removable]="removable" style=" max-width: 200px; border-radius: 13px;line-height: 4; padding: 6px;min-height: 25px;margin: 1px;">
+              {{label.labelName}}
+              <mat-icon  matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </div>
+        </mat-chip-list>
+        </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
-          <app-icon (ColorEvent)="Colorchange($event)"></app-icon>
+          <app-icon [accessingFrom]="accessFrom" (ColorEvent)="Colorchange($event)"
+            (AddLabelEvent)="AddNoteLabel($event)"></app-icon>
 
-          <button mat-button (click)="createNote()" >Close</button>
+          <button mat-button (click)="createNote()">Close</button>
         </div>
       </form>
     </div>

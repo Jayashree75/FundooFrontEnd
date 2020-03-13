@@ -12,15 +12,14 @@
                 <div fxLayout="row">
                     <img src="../../../assets/Image/datetime.svg" style="margin-left: 12px;" />
                     <button mat-menu-item [matMenuTriggerFor]="calendermenu">Select Date and Time</button>
-                </div>
-
+                </div>                
             </div>
         </mat-menu>
-        <mat-menu #calendermenu="matMenu">
+        <mat-menu #calendermenu="matMenu" >
             <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date Time">
             <owl-date-time #dt1></owl-date-time>
+            <button mat-menu-item>Save</button>
         </mat-menu>
-
     </div>
     <div fxFlex=14>
         <img src="../../../assets/Image/Collaborator.svg" (click)="openDialog()" />
@@ -61,9 +60,9 @@
                 <div fxLayoutAlign="space-evenly center" fxLayout="row">
                     <div>
                         <button mat-menu-item *ngFor="let label of labels" style="width: 208px;margin-left: 8px;">
-                            <mat-checkbox [checked]="Checklabel(label.labelID)" (change)="AddLabelToNotes(label)"
+                         <mat-checkbox [checked]="Checklabel(label.labelID)" (change)="AddLabelToNotes(label)"
                                 (click)="$event.stopPropagation()"></mat-checkbox>
-                            {{label.labelName}}
+                            {{label.labelName}}  
                         </button>
                     </div>
                 </div>

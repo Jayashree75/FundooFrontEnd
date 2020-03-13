@@ -12,12 +12,14 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class EditNoteComponent implements OnInit {
 @Input() note;
+accessfrom:string;
   constructor(private activateroute: ActivatedRoute, private noteservice: NotesService, public dialogRef: MatDialogRef<EditNoteComponent>,
     @Inject(MAT_DIALOG_DATA) public data) { 
       console.log(data);
     }
 
   ngOnInit() {
+    this.accessfrom="Edit Note"
     // this.dialogRef.updateSize('50%', 'auto');
   }
   onNoClick(): void {

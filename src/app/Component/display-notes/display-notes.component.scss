@@ -76,3 +76,16 @@ mat-mini-fab{
 .card:hover .select{
   display: block;
 }
+.hide{
+  visibility: hidden;
+}
+.show:hover .hide{
+  visibility:visible;
+
+}
+.imagepin{
+  visibility: hidden;
+}
+.card:hover .imagepin{
+  visibility: visible;
+}

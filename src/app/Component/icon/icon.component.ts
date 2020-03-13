@@ -12,7 +12,6 @@ export class IconComponent implements OnInit {
   token: string;
   colors: string;
   status = false;
-  disabled: boolean = false;
   checked: Boolean = false;
   getallLabels = [];
 
@@ -20,10 +19,14 @@ export class IconComponent implements OnInit {
   @Input() isTrash;
   @Input() note;
   @Input() isArchive;
+  @Input() accessingFrom;
+  @Input() accessdisplay;
+  @Input() accessEdit;
   @Output() NoteTrashEvent = new EventEmitter<any>();
   @Output() NoteArchiveEvent = new EventEmitter<any>();
   @Output() DeleteNoteEvent = new EventEmitter<any>();
   @Output() ColorEvent = new EventEmitter<any>();
+  @Output() AddLabelEvent =new EventEmitter<any>();
 
   color = ['#d7aefb', '#fdcfe8', '#e6c9a8', '#e8eaed',
     '#ccff90', '#a7ffeb', '#cbf0f8', '#aecbfa',
@@ -44,36 +47,48 @@ export class IconComponent implements OnInit {
       this.NoteTrashEvent.emit();
     }, error => { console.log("notes response", error) })
   }
-
-
   Checklabel(labelId: number): boolean {
-    this.getallLabels = this.note.labels;
-    for (var label = 0; label < this.getallLabels.length; label++) {
-      if (this.getallLabels[label].labelID == labelId) {
-        return true;
+    if (this.accessdisplay == "Display Note" || this.accessEdit == "Edit Note") {
+      this.getallLabels = this.note.labels;
+      for (var label = 0; label < this.getallLabels.length; label++) {
+        if (this.getallLabels[label].labelID == labelId) {
+          return true;
+        }
       }
+      return false;
     }
+    else if (this.accessingFrom == "create note")
+      for (var label = 0; label < this.getallLabels.length; label++) {
+        if (this.getallLabels[label].labelID == labelId) {
+          return true;
+        }
+      }
     return false;
   }
 
   AddLabelToNotes(label) {
-   
+    if(this.note==undefined)
+    {
+      this.AddLabelEvent.emit(label);
+    }
+    else{
     if (this.Checklabel(label.labelID) == false) {
-      console.log("add label call",label);
-      this.noteservice.AddLabeltoNotes(this.note.noteID, label.labelID).subscribe(Response => {
+      console.log("add label call", label);
+      this.noteservice.AddLabeltoNotes(this.note.noteID, label.labelID).subscribe(response => {
         console.log(" label added successfully ");
-        
-    
+        this.note.labels = response['status'];
+     
       }, error => { console.log("notes label response", error) })
     }
     else {
-      console.log("remove label call",label)
+      console.log("remove label call", label)
       this.noteservice.RemoveLabelFromNotes(this.note.noteID, label.labelID).subscribe(response => {
-        console.log(" label removed successfully  ",response);
-        
+        console.log(" label removed successfully  ", response);
+        this.note.labels = response['status'];
       })
     }
   }
+}
   DeleteNote() {
     this.noteservice.deleteNote(this.note.noteID).subscribe(Response => {
       this.DeleteNoteEvent.emit();
