@@ -23,9 +23,8 @@ import { LabelComponent } from './Component/label/label.component';
 import { EditNoteComponent } from './Component/edit-note/edit-note.component';
 import { CreateLabelComponent } from './Component/create-label/create-label.component';
 import { CollaboratorComponent } from './Component/collaborator/collaborator.component';
-import{DataService} from './Services/Data_Service/data-service.service'
+import { DataService} from './Services/Data_Service/data-service.service'
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { ImageCropperComponent } from './Component/image-cropper/image-cropper.component';
 import { SearchComponent } from './Component/search/search.component';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
@@ -48,12 +47,13 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     EditNoteComponent,
     CreateLabelComponent,
     CollaboratorComponent,
-    ImageCropperComponent,
     SearchComponent
   ],
   imports: [
-    BrowserModule,    NgxMasonryModule,
-     OwlDateTimeModule, OwlNativeDateTimeModule,
+    BrowserModule,    
+    NgxMasonryModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
     AppRoutingModule,
     materialModule,
     LayoutModule,
@@ -64,7 +64,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     MatListModule,
     ImageCropperModule
   ],
-  entryComponents: [EditNoteComponent, CreateLabelComponent, CollaboratorComponent,ImageCropperComponent],
+  entryComponents: [EditNoteComponent, CreateLabelComponent, CollaboratorComponent],
   providers: [AuthGuard,DataService],
   bootstrap: [AppComponent]
 })

@@ -11,15 +11,15 @@ import { ThrowStmt } from '@angular/compiler';
   styleUrls: ['./edit-note.component.scss']
 })
 export class EditNoteComponent implements OnInit {
-@Input() note;
-accessfrom:string;
+  @Input() note;
+  accessfrom: string;
   constructor(private activateroute: ActivatedRoute, private noteservice: NotesService, public dialogRef: MatDialogRef<EditNoteComponent>,
-    @Inject(MAT_DIALOG_DATA) public data) { 
-      console.log(data);
-    }
+    @Inject(MAT_DIALOG_DATA) public data) {
+    console.log(data);
+  }
 
   ngOnInit() {
-    this.accessfrom="Edit Note"
+    this.accessfrom = "Edit Note"
     // this.dialogRef.updateSize('50%', 'auto');
   }
   onNoClick(): void {
@@ -27,11 +27,11 @@ accessfrom:string;
   }
 
   updateNote() {
-    let updatedata={
-      Title:this.data.title,
-      Description:this.data.description,
-      image:this.data.image,
-      color:this.data.color 
+    let updatedata = {
+      Title: this.data.title,
+      Description: this.data.description,
+      image: this.data.image,
+      color: this.data.color
     }
     this.noteservice.UpdateNote(updatedata, this.data.noteID).subscribe(response => {
       console.log(response);

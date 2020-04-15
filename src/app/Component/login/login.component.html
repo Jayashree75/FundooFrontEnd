@@ -23,10 +23,10 @@
           <input matInput placeholder="Email" formControlName="email" class="form-control"
             [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
           <mat-icon matSuffix>email</mat-icon>
-          <mat-error *ngIf="login.hasError('required', 'email')">
+          <mat-error *ngIf="login.hasError('required', ['email'])">
             Email is required
           </mat-error>
-          <mat-error *ngIf="login.hasError('email', 'email')">
+          <mat-error *ngIf="login.hasError('email', ['email'])">
             Enter valid email
           </mat-error>
         </mat-form-field>

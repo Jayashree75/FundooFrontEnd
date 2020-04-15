@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../Services/userservice/user.service';
 
 @Component({
@@ -9,18 +9,20 @@ import { UserService } from '../../Services/userservice/user.service';
   styleUrls: ['./resetpassword.component.scss']
 })
 export class ResetpasswordComponent implements OnInit {
- resetForm:FormGroup;
- hide=true;
- token:string;
+  submitted;
+  password;
+  resetForm: FormGroup;
+  hide = true;
+  token: string;
 
-  constructor( private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private resetpasswordservice: UserService ) { }
+    private resetpasswordservice: UserService) { }
 
-  
+
   ngOnInit() {
-    this.token=this.route.snapshot.params['token'];
+    this.token = this.route.snapshot.params['token'];
     console.log(this.token);
     this.resetForm = this.formBuilder.group({
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -28,10 +30,10 @@ export class ResetpasswordComponent implements OnInit {
 
   }
   get f() { return this.resetForm.controls; }
- 
+
   reset() {
     console.log('values in login form', this.resetForm.value);
-    this.resetpasswordservice.Reset(this.resetForm.value,this.token).subscribe(response => {
+    this.resetpasswordservice.Reset(this.resetForm.value, this.token).subscribe(response => {
       console.log("reset response", response);
       this.router.navigate(['/login'])
     }, error => {

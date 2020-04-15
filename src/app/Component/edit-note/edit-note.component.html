@@ -1,36 +1,36 @@
 <div [style.background-color]=data.color>
-<div fxLayout="row"   >
-  <div fxLayout="column" fxFlex=100 *ngIf="data.image!=null">
-    <img src="{{data.image}}">
-  </div>
-</div>
-<div fxLayout="row wrap" style="padding-left: 10px;" >
-  <div style="padding-bottom: 10px;" fxLayout="row wrap">
-    <mat-form-field appearance="none">
-      <input matInput [(ngModel)]="data.title" placeholder="Title">
-    </mat-form-field>
-  </div>
-  <div fxFlex=100>
-    <textarea matInput [(ngModel)]="data.description" placeholder="Description"></textarea>
-  </div>
-  <div>
-    <div *ngFor="let label of data.labels">
-      <mat-chip style=" max-width: 200px; padding: 2px 9px; border-radius: 13px;line-height: 3;">
-        {{label.labelName}}
-      </mat-chip>
-    </div>
-  </div>
   <div fxLayout="row">
-    <div *ngFor="let collab of data.collaborateResponse">
-      <button mat-mini-fab color="primary" style="width: 30px; height: 30px;margin-bottom: 10px;">
-        {{collab.email[0] | uppercase}}
-      </button>
+    <div fxLayout="column" fxFlex=100 *ngIf="data.image!=null">
+      <img src="{{data.image}}">
     </div>
   </div>
-</div>
+  <div fxLayout="row wrap" style="padding-left: 10px;">
+    <div style="padding-bottom: 10px;" fxLayout="row wrap">
+      <mat-form-field appearance="none">
+        <input matInput [(ngModel)]="data.title" placeholder="Title">
+      </mat-form-field>
+    </div>
+    <div fxFlex=100>
+      <textarea matInput [(ngModel)]="data.description" placeholder="Description"></textarea>
+    </div>
+    <div>
+      <div *ngFor="let label of data.labels">
+        <mat-chip style=" max-width: 200px; padding: 2px 9px; border-radius: 13px;line-height: 3;">
+          {{label.labelName}}
+        </mat-chip>
+      </div>
+    </div>
+    <div fxLayout="row">
+      <div *ngFor="let collab of data.collaborateResponse">
+        <button mat-mini-fab color="primary" style="width: 30px; height: 30px;margin-bottom: 10px;">
+          {{collab.email[0] | uppercase}}
+        </button>
+      </div>
+    </div>
+  </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center" style="padding-left: 10px;">
-  <app-icon  [accessEdit]="accessfrom" [note]=data ></app-icon>
-  <button mat-button style="margin-left: 50%;" (click)="updateNote()">Close</button>
-</div>
+  <div fxLayout="row" fxLayoutAlign="space-between center" style="padding-left: 10px;">
+    <app-icon [accessEdit]="accessfrom" [note]=data></app-icon>
+    <button mat-button style="margin-left: 50%;" (click)="updateNote()">Close</button>
+  </div>
 </div>

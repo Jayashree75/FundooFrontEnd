@@ -9,19 +9,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
+  hide;
   registration: FormGroup;
   submitted = false;
   constructor(private formBuilder: FormBuilder,
     private registrationService: UserService,
-    private router:Router) { }
+    private router: Router) { }
 
   ngOnInit() {
     this.registration = this.formBuilder.group({
-      firstName:['',[Validators.required,Validators.minLength(3)]],
-      lastName:['',[Validators.required,Validators.minLength(3)]],
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      type:['',[Validators.required]]
+      type: ['', [Validators.required]]
     });
   }
   get f() { return this.registration.controls; }
@@ -34,8 +35,7 @@ export class RegistrationComponent implements OnInit {
       console.log("Registration response", error);
     })
   }
-  navigate()
-  {
+  navigate() {
     console.log("navigate")
     this.router.navigate(['/login'])
   }

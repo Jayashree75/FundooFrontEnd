@@ -1,3 +1,3 @@
 export interface Labels {
-    LabelName:string;
-  }
+  LabelName: string;
+}

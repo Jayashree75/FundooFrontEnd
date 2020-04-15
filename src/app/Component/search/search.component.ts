@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit {
     })
   }
   searched = [];
-  
+
   searchNotes(val) {
     this.noteservice.SearchNotes(val).subscribe(response => {
       console.log(response);

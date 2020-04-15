@@ -17,62 +17,71 @@ export class DisplayNotesComponent implements OnInit {
   @Input() isTrash;
   @Input() isArchive;
   @Input() isPin;
-  labelArr=[];
+  @Input() getChildMessage: any;
+  labelArr = [];
   changeview: any;
   UserId: number;
   email: string;
   flag: boolean;
+  value = '2'
   selectable = true;
   removable = true;
-  mainDivLayout;
-  accessfrom:string;
+  accessfrom: string;
   @Output() NoteTrash = new EventEmitter<any>();
   @Output() NoteArchive = new EventEmitter<any>();
   @Output() DeleteNote = new EventEmitter<any>();
-  @Output() NotesPin = new EventEmitter<any>();
-
 
   constructor(private route: Router, private dataservice: DataService,
-    private noteservice: NotesService, public dialog: MatDialog) {  
-     }
+    private noteservice: NotesService, public dialog: MatDialog) {
+  }
   ngOnInit() {
-    this.accessfrom="Display Note"
-    this.labelArr=this.notes.labels;
+    this.accessfrom = "Display Note"
+    if (this.notes) {
+      this.labelArr = this.notes.labels;
+    }
+
     let loggetUserToken = localStorage.getItem('token');
-    let loggedinUserData = loggetUserToken.split('.')[1];
-    let loggeUserjsondata = window.atob(loggedinUserData);
-    let loggedUserdecodedata = JSON.parse(loggeUserjsondata);
-    let isAdmin = loggedUserdecodedata.userClaims;
-    this.UserId = loggedUserdecodedata.UserId;
-    this.email = loggedUserdecodedata.Email;
-    console.log(this.email[0]);
-    console.log("Hi" + isAdmin);
-    this.dataservice.labelMessage.subscribe(response => {
+    if (loggetUserToken != null) {
+      let loggedinUserData = loggetUserToken.split('.')[1];
+      let loggeUserjsondata = window.atob(loggedinUserData);
+      let loggedUserdecodedata = JSON.parse(loggeUserjsondata);
+      let isAdmin = loggedUserdecodedata.userClaims;
+      this.UserId = loggedUserdecodedata.UserId;
+      this.email = loggedUserdecodedata.Email;
+      console.log(this.email[0]);
+      console.log("Hi" + isAdmin);
+
+    } this.dataservice.labelMessage.subscribe(response => {
       if (response.type == 'ChangeViewlist') {
-        this.changeview = response.data;
+        this.value = response.data;
       }
     })
   }
-   
-   remove(noteid,labelid,mynotes){
-      this.labelArr=this.notes;
-
-   console.log(this.labelArr)
-    // const index = this.labelArr.indexOf(labelid);
-    // if (index >= 0) {
-    //   this.notes.splice(index, 1);
-    // }
-    // console.log(this.notes.labels)
-   this.noteservice.RemoveLabelFromNotes(noteid,labelid).subscribe(data=>
-    {
-      console.log(data)
-       mynotes.labels=data['status']
-      // const index = this.labelArr.indexOf(labelid);
-      // this.labelArr.splice(labelid, 1);
-      // console.log(data);
+  removeRemainder(value) {
+    let data = {
+      id: value,
+      Reminder: null
+    }
+    this.noteservice.addReminder(data, data.id).subscribe(response => {
+      console.log(response);
+      this.dataservice.labelModifiedMessage({
+        type: 'removeReminder'
+      })
+    }, error => {
+      console.log(error)
     })
   }
- 
+
+  remove(noteid, labelid, mynotes) {
+    this.labelArr = this.notes;
+
+    console.log(this.labelArr)
+    this.noteservice.RemoveLabelFromNotes(noteid, labelid).subscribe(data => {
+      console.log(data)
+      mynotes.labels = data['status']
+    })
+  }
+
   UpdateNote(note) {
     console.log(note)
     this.dialog.open(EditNoteComponent, {
@@ -82,12 +91,18 @@ export class DisplayNotesComponent implements OnInit {
   }
   PinNote(noteId) {
     this.noteservice.AddPin(noteId).subscribe(Response => {
-      this.NotesPin.emit();
+      this.dataservice.labelModifiedMessage({
+        data: noteId,
+        type: 'pin'
+      })
     }, error => { console.log("notes response", error) })
   }
   UnPinNote(noteId) {
     this.noteservice.Unpin(noteId).subscribe(Response => {
-      this.NotesPin.emit();
+      this.dataservice.labelModifiedMessage({
+        data: noteId,
+        type: 'Unpin'
+      })
     }, error => { console.log("notes response", error) })
   }
   noteTrashed() {

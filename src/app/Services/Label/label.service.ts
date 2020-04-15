@@ -10,7 +10,7 @@ export class LabelService {
     return this.httpservice.get('api/Label', true)
   }
   GetNoteByLabelid(labelid) {
-    return this.httpservice.get('api/Notes/'+ labelid, true)
+    return this.httpservice.get('api/Notes/' + labelid, true)
   }
   createlabel(data) {
     return this.httpservice.post('api/Label', data, true)
@@ -18,9 +18,8 @@ export class LabelService {
   deleteLabel(labelid) {
     return this.httpservice.delete('api/Label/' + labelid, true)
   }
-  UpdateLabels(data,labelid)
-  {
-    console.log(data,labelid)
-    return this.httpservice.put('api/Label/' + labelid,data,true)
+  UpdateLabels(data, labelid) {
+    console.log(data, labelid)
+    return this.httpservice.put('api/Label/' + labelid, data, true)
   }
 }

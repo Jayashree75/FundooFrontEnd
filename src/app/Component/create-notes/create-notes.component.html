@@ -39,19 +39,18 @@
         </div>
         <div fxLayout="row wrap" style="margin-left: 10px;">
           <mat-chip-list #chipList>
-          <div *ngFor="let label of getalllabels">
-            <mat-chip  [selectable]="selectable"
-            *ngIf="label" [removable]="removable" style=" max-width: 200px; border-radius: 13px;line-height: 4; padding: 6px;min-height: 25px;margin: 1px;">
-              {{label.labelName}}
-              <mat-icon  matChipRemove>cancel</mat-icon>
-            </mat-chip>
-          </div>
-        </mat-chip-list>
+            <div *ngFor="let label of getalllabels">
+              <mat-chip [selectable]="selectable" *ngIf="label" [removable]="removable"
+                style=" max-width: 200px; border-radius: 13px;line-height: 4; padding: 6px;min-height: 25px;margin: 1px;">
+                {{label.labelName}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip>
+            </div>
+          </mat-chip-list>
         </div>
         <div fxLayout="row" fxLayoutAlign="space-between center">
           <app-icon [accessingFrom]="accessFrom" (ColorEvent)="Colorchange($event)"
             (AddLabelEvent)="AddNoteLabel($event)"></app-icon>
-
           <button mat-button (click)="createNote()">Close</button>
         </div>
       </form>

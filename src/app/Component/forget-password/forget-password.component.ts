@@ -11,6 +11,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./forget-password.component.scss']
 })
 export class ForgetPasswordComponent implements OnInit {
+  submitted;
+  email;
   forgetForm: FormGroup;
   hide = true;
 

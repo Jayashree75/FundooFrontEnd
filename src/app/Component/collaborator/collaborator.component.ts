@@ -28,12 +28,12 @@ export class CollaboratorComponent implements OnInit {
   ownerEmail = localStorage.getItem('email');
   ownerProfile = localStorage.getItem('Profile');
   ngOnInit() {
-    this.collaborateuser=this.data.collaborateResponse;
+    this.collaborateuser = this.data.collaborateResponse;
   }
   OnDismiss(): void {
     this.dialogRef.close();
   }
- 
+
   changeShowStatus() {
     this.showhide = !this.showhide;
   }
@@ -57,17 +57,14 @@ export class CollaboratorComponent implements OnInit {
       this.collaborateid.push({
         'userid': this.searched[i]['userid']
       })
-
     }
-
   }
   cancelCollab(email) {
     for (var i = 0; i < this.collaborateuser.length; i++) {
       if (this.collaborateuser[i]["email"] == email) {
         this.collaborateuser.splice(i, 0);
-        this.noteservice.RemoveCollaborate(this.data.noteID,this.collaborateuser[i].userId).subscribe(data=>
-          {
-          },error => {
+        this.noteservice.RemoveCollaborate(this.data.noteID, this.collaborateuser[i].userId).subscribe(data => {
+        }, error => {
         })
       }
     }
@@ -84,7 +81,7 @@ export class CollaboratorComponent implements OnInit {
     var user = new collaboratorlist();
     user.collaborates = this.collaborateid;
     this.noteservice.AddCollaborate(user, this.data.noteID).subscribe(data => {
-      this.note.collaborateResponse=data['notesDB']
+      this.note.collaborateResponse = data['notesDB']
     }, error => {
     })
   }

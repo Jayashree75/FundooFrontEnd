@@ -1,38 +1,34 @@
 import { Injectable } from '@angular/core';
-import{HttpService} from '../http/http.service';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpService } from '../http/http.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { from } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private httpservice:HttpService) { }
-  Login(data)
-  {
-    return this.httpservice.post('api/UserAccount/Login',data)
+  constructor(private httpservice: HttpService) { }
+  Login(data) {
+    return this.httpservice.post('api/UserAccount/Login', data)
   }
-  Registration(data)
-  {
-    return this.httpservice.post('api/UserAccount/Registration',data)
+  Registration(data) {
+    return this.httpservice.post('api/UserAccount/Registration', data)
   }
-  ForgetPassword(data)
-  {
-    return this.httpservice.post('api/UserAccount/ForgetPassword',data)
+  ForgetPassword(data) {
+    return this.httpservice.post('api/UserAccount/ForgetPassword', data)
   }
-  Reset(data,token:string)
-  {
+  Reset(data, token: string) {
     console.log(token);
     const options = {
       headers: new HttpHeaders({
-       'Authorization': 'Bearer ' + token,
+        'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json'
       })
     };
-    return this.httpservice.post('api/UserAccount/ResetPassword',data,true,options)
+    return this.httpservice.post('api/UserAccount/ResetPassword', data, true, options)
   }
-  ChangeProfile(data)
-  {
-    return this.httpservice.postImage('api/UserAccount/Image',data)
+  ChangeProfile(data) {
+    return this.httpservice.postImage('api/UserAccount/Image', data)
   }
 }

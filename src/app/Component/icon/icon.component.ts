@@ -3,6 +3,7 @@ import { NotesService } from 'src/app/Services/noteService/notes.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CollaboratorComponent } from '../../Component/collaborator/collaborator.component'
 import { DataService } from '../../Services/Data_Service/data-service.service'
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-icon',
   templateUrl: './icon.component.html',
@@ -14,9 +15,10 @@ export class IconComponent implements OnInit {
   status = false;
   checked: Boolean = false;
   getallLabels = [];
-
+  @Output() onDatePicked: EventEmitter<any> = new EventEmitter<any>();
+  reminder;
   labels = [];
-  @Input() isTrash;
+  @Input() isTrash: boolean;
   @Input() note;
   @Input() isArchive;
   @Input() accessingFrom;
@@ -26,13 +28,13 @@ export class IconComponent implements OnInit {
   @Output() NoteArchiveEvent = new EventEmitter<any>();
   @Output() DeleteNoteEvent = new EventEmitter<any>();
   @Output() ColorEvent = new EventEmitter<any>();
-  @Output() AddLabelEvent =new EventEmitter<any>();
+  @Output() AddLabelEvent = new EventEmitter<any>();
 
   color = ['#d7aefb', '#fdcfe8', '#e6c9a8', '#e8eaed',
     '#ccff90', '#a7ffeb', '#cbf0f8', '#aecbfa',
     '#f28b82', '#fbbc04', '#fff475', '#fff'
   ]
-  constructor(public dialog: MatDialog, private noteservice: NotesService,
+  constructor(public dialog: MatDialog, private noteservice: NotesService, private snackbar: MatSnackBar,
     private dataservice: DataService) {
     this.dataservice.labelMessage.subscribe(data => {
       if (data.type == 'GetAllLabel') {
@@ -67,28 +69,26 @@ export class IconComponent implements OnInit {
   }
 
   AddLabelToNotes(label) {
-    if(this.note==undefined)
-    {
+    if (this.note == undefined) {
       this.AddLabelEvent.emit(label);
     }
-    else{
-    if (this.Checklabel(label.labelID) == false) {
-      console.log("add label call", label);
-      this.noteservice.AddLabeltoNotes(this.note.noteID, label.labelID).subscribe(response => {
-        console.log(" label added successfully ");
-        this.note.labels = response['status'];
-     
-      }, error => { console.log("notes label response", error) })
-    }
     else {
-      console.log("remove label call", label)
-      this.noteservice.RemoveLabelFromNotes(this.note.noteID, label.labelID).subscribe(response => {
-        console.log(" label removed successfully  ", response);
-        this.note.labels = response['status'];
-      })
+      if (this.Checklabel(label.labelID) == false) {
+        this.noteservice.AddLabeltoNotes(this.note.noteID, label.labelID).subscribe(response => {
+          console.log(" label added successfully ");
+          this.note.labels = response['status'];
+          console.log(this.note.labels);
+        }, error => { console.log("notes label response", error) })
+      }
+      else {
+        console.log("remove label call", label)
+        this.noteservice.RemoveLabelFromNotes(this.note.noteID, label.labelID).subscribe(response => {
+          console.log(" label removed successfully  ", response);
+          this.note.labels = response['status'];
+        })
+      }
     }
   }
-}
   DeleteNote() {
     this.noteservice.deleteNote(this.note.noteID).subscribe(Response => {
       this.DeleteNoteEvent.emit();
@@ -137,10 +137,42 @@ export class IconComponent implements OnInit {
     })
   }
 
-  // RemoveLabels(label)
-  // {
-  // this.noteservice.RemoveLabelFromNotes(this.note.noteID,label.labelID).subscribe(response=>
-  //   {
-  //   })
-  // }
+  addReminder(value) {
+    if (value == 'today') {
+      const date = new Date().toDateString();
+      this.reminder = date + ' 20:00:00';
+    } else if (value == 'tomorrow') {
+      this.reminder = new Date()
+      var today = new Date()
+      this.reminder.setDate(today.getDate() + 1)
+    } else if (value == null) {
+      this.reminder = null
+    }
+    else {
+      this.reminder = new Date(value).toLocaleString();
+    }
+
+    if (this.note == null || this.note == undefined) {
+      this.reminder.changeMessage({
+        type: 'makeReminder',
+        data: this.reminder
+      })
+    } else {
+
+      let data = {
+        id: this.note.noteID,
+        Reminder: this.reminder
+      }
+      console.log(data)
+      this.noteservice.addReminder(data, data.id).subscribe(response => {
+        this.dataservice.labelModifiedMessage({
+          type: 'addReminder'
+        })
+        console.log(response);
+
+      }, error => {
+        console.log('error', error);
+      })
+    }
+  }
 }

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
@@ -17,8 +18,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 @NgModule({
     declarations: [
@@ -34,27 +36,45 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         MatButtonModule,
         FlexLayoutModule,
         BrowserAnimationsModule,
-        MatFormFieldModule, MatInputModule, MatIconModule, MatButtonToggleModule, MatSidenavModule, MatSnackBarModule, MatMenuModule
-        , MatDialogModule,
+        MatFormFieldModule, 
+        MatInputModule, 
+        MatIconModule, 
+        MatButtonToggleModule, 
+        MatSidenavModule, 
+        MatSnackBarModule, 
+        MatMenuModule,
+        MatDialogModule,
         MatTooltipModule,
         MatChipsModule,
         ImageCropperModule,
         MatAutocompleteModule,
-        MatCheckboxModule
+        MatCheckboxModule, 
+        HttpModule
     ],
     exports: [
         BrowserModule,
         MatCardModule,
         FormsModule,
-        ReactiveFormsModule,
+        ReactiveFormsModule, 
+        HttpModule,
         HttpClientModule,
         MatSelectModule,
         MatButtonModule,
         FlexLayoutModule,
-        BrowserAnimationsModule, MatFormFieldModule, MatInputModule, MatIconModule, MatButtonToggleModule, MatSidenavModule, MatSnackBarModule, MatMenuModule,
-        MatDialogModule, MatTooltipModule, MatChipsModule,
+        BrowserAnimationsModule, 
+        MatFormFieldModule, 
+        MatInputModule, 
+        MatIconModule, 
+        MatButtonToggleModule, 
+        MatSidenavModule, 
+        MatSnackBarModule, 
+        MatMenuModule,
+        MatDialogModule, 
+        MatTooltipModule, 
+        MatChipsModule,
         ImageCropperModule,
-        MatAutocompleteModule,MatCheckboxModule
+        MatAutocompleteModule, 
+        MatCheckboxModule
     ],
 })
 export class materialModule { }

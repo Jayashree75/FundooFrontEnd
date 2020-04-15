@@ -19,12 +19,14 @@
         <div>
           <mat-icon fxLayoutAlign="center center">refresh</mat-icon>
         </div>
-        <button mat-icon-button style="margin-left: 10px; outline: none;" *ngIf="!changeview">
-          <img src='../../../assets/Image/list.svg'  (click)=changeView()>
-        </button>
-        <button mat-icon-button style="margin-left: 10px; outline: none;" *ngIf="changeview" >
-          <img src='../../../assets/Image/Grid.svg'  (click)=changeView() >
-        </button>
+        <div fxHide.xs="true">
+          <button mat-icon-button style="margin-left: 10px; outline: none;" matToolTip="ListView" *ngIf="listView==2">
+            <img src='../../../assets/Image/list.svg' (click)=ChangeView(1)>
+          </button>
+          <button mat-icon-button style="margin-left: 10px; outline: none;" matToolTip="GridView" *ngIf="listView==1">
+            <img src='../../../assets/Image/Grid.svg' (click)=ChangeView(2)>
+          </button>
+        </div>
         <div>
           <mat-icon fxLayoutAlign="end center">settings</mat-icon>
         </div>

@@ -1,4 +1,4 @@
 export interface Notes {
-Title:string;
-Description:string;
+    Title: string;
+    Description: string;
 }

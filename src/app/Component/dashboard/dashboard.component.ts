@@ -8,8 +8,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CreateLabelComponent } from '../../Component/create-label/create-label.component'
 import { UserService } from '../../Services/userservice/user.service';
 import { DataService } from '../../Services/Data_Service/data-service.service'
-import { ImageCroppedEvent } from 'ngx-image-cropper';
-import { ImageCropperComponent } from '../../Component/image-cropper/image-cropper.component'
+
 import { from } from 'rxjs';
 import { ThrowStmt } from '@angular/compiler';
 
@@ -25,18 +24,16 @@ export class DashboardComponent implements OnInit {
   token: string = localStorage.getItem('token');
   mobileQuery: MediaQueryList;
   title: string = 'Notes'
+  value = '';
+  listView = 2;
   Active: string;
   UserId: number;
   Email: string;
   labels: [any];
-  changeview:boolean;
-
+  changeview: boolean;
+  mainDivLayout = "row wrap";
   imageChangedEvent: any = '';
   croppedImage: any = '';
-
-  viewToolTip = "List View";
-  viewClass = "listView";
-  src = "../../../assets/Image/Grid.svg";
   userName = localStorage.getItem('fullName');
   userEmail = localStorage.getItem('email');
   userProfilePic = localStorage.getItem('Profile');
@@ -59,30 +56,27 @@ export class DashboardComponent implements OnInit {
     localStorage.removeItem("token");
     this.route.navigate(["login"]);
   }
-  changeView() {
-   if(this.changeview)
-   {
-     this.changeview=false;
-   }
-   else{
-     this.changeview=true;
-   }
+  ChangeView(value) {
+    this.listView = value;
     this.dataservice.labelModifiedMessage(
       {
-        type:'ChangeViewlist',
-        data:this.changeview
-    })
+        type: 'ChangeViewlist',
+        data: value,
+      })
   }
   ngOnInit(): void {
+
     let loggetUserToken = localStorage.getItem('token');
-    let loggedinUserData = loggetUserToken.split('.')[1];
-    let loggeUserjsondata = window.atob(loggedinUserData);
-    let loggedUserdecodedata = JSON.parse(loggeUserjsondata);
-    let isAdmin = loggedUserdecodedata.userClaims;
-    this.UserId = loggedUserdecodedata.UserId;
-    this.Email = loggedUserdecodedata.Email;
-    console.log(this.Email[0]);
-    console.log("Hi" + isAdmin);
+    if (loggetUserToken != null) {
+      let loggedinUserData = loggetUserToken.split('.')[1];
+      let loggeUserjsondata = window.atob(loggedinUserData);
+      let loggedUserdecodedata = JSON.parse(loggeUserjsondata);
+      let isAdmin = loggedUserdecodedata.userClaims;
+      this.UserId = loggedUserdecodedata.UserId;
+      this.Email = loggedUserdecodedata.Email;
+      console.log(this.Email[0]);
+      console.log("Hi" + isAdmin);
+    }
     this.mobileQuery.removeListener(this._mobileQueryListener);
     this.getAllLabel();
     this.dataservice.labelMessage.subscribe(data => {
@@ -126,9 +120,9 @@ export class DashboardComponent implements OnInit {
     this.labelservice.getAllLabel().subscribe(data => {
       this.labels = data['labelmodel']
       console.log(this.labels)
-      this.dataservice.labelModifiedMessage({type:'GetAllLabel', data:data})
+      this.dataservice.labelModifiedMessage({ type: 'GetAllLabel', data: data })
     }, error => {
-      console.log(error); 
+      console.log(error);
     })
   }
   OpenDialog() {
@@ -137,13 +131,13 @@ export class DashboardComponent implements OnInit {
       data: this.labels
     });
   }
- 
-  openDialogForImage() {
-    const dialogRef = this.dialog.open(ImageCropperComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
+
+  // openDialogForImage() {
+  //   const dialogRef = this.dialog.open(ImageCropperComponent);
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log(`Dialog result: ${result}`);
+  //   });
+  // }
 
   onNoClick(): void {
     this.dialog.closeAll();
@@ -154,6 +148,7 @@ export class DashboardComponent implements OnInit {
     formData.append('Image', fileToUpload);
     return this.userservice.ChangeProfile(formData).subscribe(response => {
       localStorage.setItem('Profile', response.imageUrl)
+      this.userProfilePic = response.imageUrl;
       console.log('response', response.imageUrl);
     }, error => {
       console.log('error', error);

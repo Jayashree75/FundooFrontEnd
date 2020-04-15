@@ -2,12 +2,13 @@
 <div style="margin: 25px 0px 35px 350px; font-size: 15px;">
     PINNED
 </div>
-<div id="pinnedNotes" style="margin-top: 20px;"  >
-    <app-display-notes  [notes]="pinnedNotes" (NotesPin)="getAllPinNotes()"  [isPin]=true (NoteArchive)="GetAllNotes()"></app-display-notes>
-</div> 
+<div id="pinnedNotes" style="margin-top: 20px;">
+    <app-display-notes [notes]="pinnedNotes" (NoteArchive)="GetAllNotes()"></app-display-notes>
+</div>
 <div style="margin: 25px 0px 35px 350px; font-size: 15px;">
     OTHERS
 </div>
 <div id="unpinNotes" style="margin-top: 15px;">
-<app-display-notes style="margin-top: 20px;" [notes]="note" (NotesPin)="GetAllNotes()" [isPin]=false (NoteTrash)="GetAllNotes()" (NoteArchive)="GetAllNotes()"></app-display-notes>
+    <app-display-notes style="margin-top: 20px;" [notes]="unpinnedNotes" (NoteTrash)="GetAllNotes()"
+        (NoteArchive)="GetAllNotes()"></app-display-notes>
 </div>

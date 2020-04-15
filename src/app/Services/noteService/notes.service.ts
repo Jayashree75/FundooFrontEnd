@@ -13,10 +13,10 @@ export class NotesService {
   }
   TrashNote(noteid) {
     console.log(noteid, "notes id response")
-    return this.httpservice.put('api/Notes/' + noteid + '/Trash',{value:true}, true)
+    return this.httpservice.put('api/Notes/' + noteid + '/Trash', { value: true }, true)
   }
   ArchiveNote(noteid) {
-    return this.httpservice.put('api/Notes/' + noteid + '/Archive',{value:true}, true)
+    return this.httpservice.put('api/Notes/' + noteid + '/Archive', { value: true }, true)
   }
   getAllNotes() {
     return this.httpservice.get('api/Notes', true)
@@ -33,51 +33,44 @@ export class NotesService {
   getAllRemainder() {
     return this.httpservice.get('api/Notes/Remainder', true)
   }
-  UpdateNote(data,noteid)
-  {
-    return this.httpservice.put('api/Notes/' + noteid,data,true)
+  UpdateNote(data, noteid) {
+    return this.httpservice.put('api/Notes/' + noteid, data, true)
   }
-  ChangeColor(noteid,data)
-  {
-    return this.httpservice.put('api/Notes/'+ noteid+'/Color',data,true)
+  ChangeColor(noteid, data) {
+    return this.httpservice.put('api/Notes/' + noteid + '/Color', data, true)
   }
-  AddImage(data,noteid)
-  {
-    return this.httpservice.postImage('api/Notes/'+ noteid+'/Image',data,true)
+  AddImage(data, noteid) {
+    return this.httpservice.postImage('api/Notes/' + noteid + '/Image', data, true)
   }
-  AddCollaborate(data,noteid)
-  {
-    return this.httpservice.post('api/Notes/'+ noteid+'/Collaborate',data,true)
+  AddCollaborate(data, noteid) {
+    return this.httpservice.post('api/Notes/' + noteid + '/Collaborate', data, true)
   }
-  AddPin(noteid)
-  {
-    return this.httpservice.put('api/Notes/'+ noteid+'/Pin',{value:true},true)
+  AddPin(noteid) {
+    return this.httpservice.put('api/Notes/' + noteid + '/Pin', { value: true }, true)
   }
-  Unpin(noteid)
-  {
-    return this.httpservice.put('api/Notes/'+ noteid+'/Pin',{value:false},true)
+  Unpin(noteid) {
+    return this.httpservice.put('api/Notes/' + noteid + '/Pin', { value: false }, true)
   }
   getAllPin() {
     return this.httpservice.get('api/Notes/Pin', true)
   }
-  SearchNotes(key)
-  {
-    return this.httpservice.get('api/Notes?keyword='+key,true )
+  SearchNotes(key) {
+    return this.httpservice.get('api/Notes?keyword=' + key, true)
   }
-  GetAllUser(key)
-  {
-    return this.httpservice.get('api/Notes/GetallUser?keyword='+key,true )
+  GetAllUser(key) {
+    return this.httpservice.get('api/Notes/GetallUser?keyword=' + key, true)
   }
-  AddLabeltoNotes(noteid,labelid)
-  {
-    return this.httpservice.post('api/Notes/Note/'+noteid+'/Label/'+labelid,true)
+  AddLabeltoNotes(noteid, labelid) {
+    return this.httpservice.post('api/Notes/Note/' + noteid + '/Label/' + labelid, true)
   }
-  RemoveLabelFromNotes(noteid,labelid)
-  {
-    return this.httpservice.delete('api/Notes/Note/'+noteid+'/Label/'+labelid,true) 
+  RemoveLabelFromNotes(noteid, labelid) {
+    return this.httpservice.delete('api/Notes/Note/' + noteid + '/Label/' + labelid, true)
   }
-  RemoveCollaborate(noteid,userid)
-  {
-    return this.httpservice.delete('/api/Notes/'+noteid+'/CollaborateRemove/'+userid,true) 
+  RemoveCollaborate(noteid, userid) {
+    return this.httpservice.delete('/api/Notes/' + noteid + '/CollaborateRemove/' + userid, true)
   }
+  addReminder(data, noteid) {
+    return this.httpservice.post('api/Notes/' + noteid + '/Reminder', data)
+  }
+
 }

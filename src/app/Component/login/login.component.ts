@@ -10,13 +10,18 @@ import { Action } from 'rxjs/internal/scheduler/Action';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
+
   login: FormGroup;
+  email;
+  password;
+  hide;
   submitted = false;
   constructor(private formBuilder: FormBuilder,
     private loginService: UserService,
     private router: Router,
-    private snackbar: MatSnackBar) { }
+    private snackbar: MatSnackBar, ) { }
 
   ngOnInit() {
     this.login = this.formBuilder.group({

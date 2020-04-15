@@ -12,8 +12,8 @@ import { Title } from '@angular/platform-browser';
 export class CreateNotesComponent implements OnInit {
   notes: FormGroup;
   status = false;
-  getalllabels=[];
-  createlabel=[];
+  getalllabels = [];
+  createlabel = [];
   token: string;
   public color: string;
   accessFrom: string;
@@ -29,7 +29,8 @@ export class CreateNotesComponent implements OnInit {
     console.log(this.token);
     this.notes = this.formbuilder.group({
       title: ['', [Validators.required]],
-      description: ['', [Validators.required]]
+      description: ['', [Validators.required]],
+
     });
   }
   get f() {
@@ -38,12 +39,11 @@ export class CreateNotesComponent implements OnInit {
   Colorchange(event) {
     this.color = event;
   }
-  AddNoteLabel(label)
-  {
-   this.getalllabels.push(label)
-   console.log("labelSaRRAY",this.getalllabels)
-   this.createlabel.push({labelID:label.labelID})
-   console.log("createLABEL",this.createlabel);
+  AddNoteLabel(label) {
+    this.getalllabels.push(label)
+    console.log("labelSaRRAY", this.getalllabels)
+    this.createlabel.push({ labelID: label.labelID })
+    console.log("createLABEL", this.createlabel);
   }
   createNote() {
     this.status = false;
@@ -55,11 +55,10 @@ export class CreateNotesComponent implements OnInit {
       }, error => { console.log("notes response", error) })
     }
   }
-  remove(noteid,labelid,mynotes){
- this.noteservice.RemoveLabelFromNotes(noteid,labelid).subscribe(data=>
-  {
-    console.log(data)
-     mynotes=data['status']
-  })
-}
+  remove(noteid, labelid, mynotes) {
+    this.noteservice.RemoveLabelFromNotes(noteid, labelid).subscribe(data => {
+      console.log(data)
+      mynotes = data['status']
+    })
+  }
 }

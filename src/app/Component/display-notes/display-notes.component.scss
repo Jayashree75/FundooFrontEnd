@@ -21,6 +21,8 @@
     margin-top: 0px;
     margin-right: 0px 0px 0px 0px;
     min-width: 200px;
+    
+   
 }
 .card:hover{
     box-shadow: 0px 2px 3px 0 gray;
@@ -42,6 +44,10 @@ p{
   visibility: visible;
   opacity: 1;
 }
+.cardList:hover .Icon {
+  visibility: visible;
+  opacity: 1;
+}
 mat-chip{
   font-size: 12px;
 }
@@ -54,15 +60,11 @@ mat-mini-fab{
 .clear{
   size: 0px;
 }
-.Gridlist{
-  width: 80%;
-  height: auto;
-  flex-direction: column;
-}
 .GridView{
   width: 70%;
   margin-left: 24%;
 }
+
 .select{
  
   width: 30px;
@@ -76,16 +78,29 @@ mat-mini-fab{
 .card:hover .select{
   display: block;
 }
+
 .hide{
   visibility: hidden;
 }
 .show:hover .hide{
   visibility:visible;
-
 }
 .imagepin{
   visibility: hidden;
 }
 .card:hover .imagepin{
   visibility: visible;
+}
+.cardList:hover .imagepin{
+  visibility: visible;
+  margin-left: 400px;
+}
+.cardList{
+  width:600PX;
+  margin: 15px 15px 15px 15px;
+  align-self: center; 
+}
+.GridView .cardList{
+
+  margin-left: 8%;
 }

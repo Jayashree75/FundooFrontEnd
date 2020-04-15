@@ -7,7 +7,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./image-cropper.component.scss']
 })
 export class ImageCropperComponent implements OnInit {
-
+file;
   constructor(public dialogRef: MatDialogRef<ImageCropperComponent>,
     @Inject(MAT_DIALOG_DATA) public data) { }
 

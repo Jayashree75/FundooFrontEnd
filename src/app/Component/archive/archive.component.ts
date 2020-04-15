@@ -19,5 +19,4 @@ export class ArchiveComponent implements OnInit {
       this.notes = Response['notesDBs'];
     }, error => { console.log("notes response", error) })
   }
-  
 }

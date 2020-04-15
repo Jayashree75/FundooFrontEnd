@@ -1,3 +1,3 @@
-export class collaborates{
-    userId:number;
+export class collaborates {
+    userId: number;
 }
